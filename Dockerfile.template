@@ -1,10 +1,10 @@
-FROM resin/%%RESIN_MACHINE_NAME%%-node:0.10.22-wheezy
+FROM resin/%%RESIN_MACHINE_NAME%%-node:latest
 
 COPY ./ ./
 
 RUN apt-get update && apt-get install -y libjpeg-dev libavformat-dev libswscale-dev libavcodec-dev
 
-#RUN npm install node-pre-gyp
+RUN npm install node-pre-gyp -g
 RUN npm install node-gyp -g
 RUN npm install
 
