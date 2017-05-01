@@ -5,6 +5,6 @@ COPY . /app
 RUN apt-get update && apt-get install -y libjpeg-dev libavformat-dev libswscale-dev libavcodec-dev
 RUN curl -o- -L https://yarnpkg.com/install.sh | bash
 
-RUN yarn
+RUN npm install
 
 CMD ["node", "app.js"]
