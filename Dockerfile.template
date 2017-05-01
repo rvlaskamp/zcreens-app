@@ -4,8 +4,8 @@ COPY ./ ./
 
 RUN apt-get update && apt-get install -y libjpeg-dev libavformat-dev libswscale-dev libavcodec-dev
 
-RUN npm install node-pre-gyp
-RUN npm install node-gyp
+#RUN npm install node-pre-gyp
+#RUN npm install node-gyp
 RUN npm install
 
 CMD ["node", "app.js"]
