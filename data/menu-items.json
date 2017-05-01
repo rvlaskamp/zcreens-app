@@ -1,0 +1,22 @@
+[
+  {
+    "title": "Televisie",
+    "icon": "tv",
+    "bg": "bg-signage"
+  },
+  {
+    "title": "Radio",
+    "icon": "radio",
+    "bg": "bg-signage"
+  },
+  {
+    "title": "Digital Signage",
+    "icon": "signage",
+    "bg": "bg-signage"
+  },
+  {
+    "title": "Instellingen",
+    "icon": "settings",
+    "bg": "bg-signage"
+  }
+]
