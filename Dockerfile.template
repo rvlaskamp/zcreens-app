@@ -6,4 +6,4 @@ RUN apt-get update && apt-get install -y libjpeg-dev libavformat-dev libswscale-
 
 RUN npm install
 
-CMD ["node", "/app/app.js"]
+CMD ["node", "app.js"]
