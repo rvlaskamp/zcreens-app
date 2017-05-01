@@ -1,10 +1,10 @@
 FROM resin/%%RESIN_MACHINE_NAME%%-node
 
-COPY . /app
+COPY ./ ./
 
 RUN apt-get update && apt-get install -y libjpeg-dev libavformat-dev libswscale-dev libavcodec-dev
 RUN curl -o- -L https://yarnpkg.com/install.sh | bash
 
 RUN npm install
 
-CMD ["node", "app.js"]
+CMD ["node", "/app/app.js"]
