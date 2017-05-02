@@ -4,4 +4,11 @@
   margin: 0 auto;
   justify-content: center;
   background: #93298E;
+  opacity: 0;
+}
+
+.logo-animated {
+  transition: opacity .5s ease-in-out;
+  transform: translate3d(0, 50px, 0);
+  transition-delay: 1s;
 }
