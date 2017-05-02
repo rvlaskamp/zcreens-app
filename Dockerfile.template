@@ -28,6 +28,7 @@ RUN apt-get update && apt-get install -y \
   libsmbclient \
   libssh-4 \
   fbset \
+  omxplayer \
   libexpat-dev && rm -rf /var/lib/apt/lists/*
 
 # Set Xorg and FLUXBOX preferences
