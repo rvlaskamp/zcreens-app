@@ -8,6 +8,7 @@ const electronConfig = {
   URL_LAUNCHER_TOUCH: process.env.URL_LAUNCHER_TOUCH === '1' ? 1 : 0,
   URL_LAUNCHER_TOUCH_SIMULATE: process.env.URL_LAUNCHER_TOUCH_SIMULATE === '1' ? 1 : 0,
   URL_LAUNCHER_FRAME: process.env.URL_LAUNCHER_FRAME === '1' ? 1 : 0,
+  URL_LAUNCHER_TRANSPARENT: process.env.URL_LAUNCHER_TRANSPARENT === '1' ? 1 : 0,
   URL_LAUNCHER_KIOSK: process.env.URL_LAUNCHER_KIOSK === '1' ? 1 : 0,
   URL_LAUNCHER_NODE: process.env.URL_LAUNCHER_NODE === '1' ? 1 : 0,
   URL_LAUNCHER_WIDTH: parseInt(process.env.URL_LAUNCHER_WIDTH || 1920, 10),
@@ -48,6 +49,7 @@ app.on('ready', () => {
     width: electronConfig.URL_LAUNCHER_WIDTH,
     height: electronConfig.URL_LAUNCHER_HEIGHT,
     frame: !!(electronConfig.URL_LAUNCHER_FRAME),
+    transparent: !!(electronConfig.URL_LAUNCHER_TRANSPARENT),
     title: electronConfig.URL_LAUNCHER_TITLE,
     kiosk: !!(electronConfig.URL_LAUNCHER_KIOSK),
     webPreferences: {
