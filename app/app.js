@@ -54,8 +54,8 @@ app.showFPS(false);
      client.sendCommand( 0xf0, CEC.Opcode.GIVE_DEVICE_POWER_STATUS);
    });
 
-   cec.on('USER_CONTROL_PRESSED', (event, key, keyName) => {
-     console.log(keyName);
+   cec.on('USER_CONTROL_PRESSED', (event, key) => {
+     console.log(key);
    });
 
    // Start CEC Client
