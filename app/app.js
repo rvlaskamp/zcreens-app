@@ -47,23 +47,6 @@ app.showFPS(false);
      return;
    }
 
-   // Initialize CEC Client
-   const cec = new NodeCec('node-cec-monitor');
-
-   cec.once('ready', (client) => {
-     console.log( ' -- READY -- ' );
-     client.sendCommand( 0xf0, CEC.Opcode.GIVE_DEVICE_POWER_STATUS);
-   });
-
-   cec.on('USER_CONTROL_PRESSED', (event, key) => {
-     const keyName = cecHelper.getKey(key);
-
-     console.log(keyName);
-   });
-
-   // Start CEC Client
-   cec.start( 'cec-client' );
-
    // Create and set the root group
    const root = app.createGroup();
    app.setRoot(root);
@@ -75,6 +58,22 @@ app.showFPS(false);
    // Load the menu items
    fetch.menuItems()
    .then((menuItems) => {
+
+     // Initialize CEC Client
+     const cec = new NodeCec('node-cec-monitor');
+
+     cec.once('ready', (client) => {
+       console.log( ' -- CEC READY -- ' );
+       client.sendCommand( 0xf0, CEC.Opcode.GIVE_DEVICE_POWER_STATUS);
+     });
+
+     cec.on('USER_CONTROL_PRESSED', (event, key) => {
+       mainView.remotePressed(key);
+     });
+
+     // Start CEC Client
+     cec.start( 'cec-client' );
+
      mainView.addMenu(menuItems);
    });
 
