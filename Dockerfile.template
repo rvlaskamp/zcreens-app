@@ -39,8 +39,8 @@ COPY ./app/package.json ./
 # Install CEC-Client
 RUN git clone git://github.com/Pulse-Eight/libcec.git
 WORKDIR libcec
-CMD ["./bootstrap"]
-CMD ["./configure --with-rpi-include-path=/opt/vc/include", "--with-rpi-lib-path=/opt/vc/lib --enable-rpi"]
+CMD ["bash","./bootstrap"]
+CMD ["bash","./configure --with-rpi-include-path=/opt/vc/include --with-rpi-lib-path=/opt/vc/lib --enable-rpi"]
 RUN make
 RUN make install
 RUN ldconfig
