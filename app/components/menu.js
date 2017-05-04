@@ -28,8 +28,8 @@ function menuComponent(app, menuItems) {
     const options = {
       innerRadius: 50,
       outerRadius: 45,
-      innerFill: colors.background,
-      outerFill: colors.menuLight,
+      innerFill: colors.menuDark,
+      outerFill: colors.menuDark,
       iconPostfix: 'dark',
       opacity: 0.5,
       x: 75 + (200 * index),
@@ -55,8 +55,10 @@ menuComponent.prototype.resize = function() {
 }
 
 menuComponent.prototype.changeMenuItem = function(direction) {
+  const currentMenuItem = this.activeMenuItem;
   if (direction === 'left') {
     if (this.activeMenuItem > 0) {
+
       this.activeMenuItem = this.activeMenuItem - 1;
       this.menu[this.activeMenuItem].activate();
     }
@@ -69,11 +71,7 @@ menuComponent.prototype.changeMenuItem = function(direction) {
     }
   }
 
-  this.menu.forEach((menuItem, index) => {
-    if (index !== this.activeMenuItem) {
-      menuItem.deactivate();
-    }
-  });
+  this.menu[currentMenuItem].deactivate();
 }
 
 module.exports = menuComponent;

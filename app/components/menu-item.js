@@ -15,7 +15,7 @@ function menuItemComponent(app, title, icon, options) {
   this.menuItemInnerCircle = app.createCircle();
   this.menuItemInnerCircle.fill(options.innerFill);
   this.menuItemInnerCircle.radius(options.outerRadius);
-  this.menuItemInnerCircle.opacity(options.opacity);
+  this.menuItemInnerCircle.opacity(0);
 
   this.menuItemOuterCircle = app.createCircle();
   this.menuItemOuterCircle.fill(options.outerFill);
@@ -58,13 +58,13 @@ menuItemComponent.prototype.resize = function() {
 
 menuItemComponent.prototype.activate = function() {
   this.menuItemInnerCircle.opacity.anim().from(0.5).to(1).dur(500).start();
-  this.menuItemOuterCircle.opacity.anim().from(0.5).to(1).dur(500).start();
+  this.menuItemOuterCircle.opacity.anim().from(0).to(1).dur(500).start();
   this.menuItemTitle.opacity.anim().from(0.5).to(1).dur(500).start();
 }
 
 menuItemComponent.prototype.deactivate = function() {
   this.menuItemInnerCircle.opacity.anim().from(1).to(0.5).dur(500).start();
-  this.menuItemOuterCircle.opacity.anim().from(1).to(0.5).dur(500).start();
+  this.menuItemOuterCircle.opacity.anim().from(1).to(0).dur(500).start();
   this.menuItemTitle.opacity.anim().from(1).to(0.5).dur(500).start();
 }
 
