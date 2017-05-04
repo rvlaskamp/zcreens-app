@@ -21,6 +21,13 @@ RUN apt-get update && apt-get install -y \
   libswscale-dev \
   libavcodec-dev \
   omxplayer \
+  build-essential \
+  autoconf \
+  liblockdev1-dev \
+  libudev-dev \
+  git \
+  libtool \
+  pkg-config \
   && rm -rf /var/lib/apt/lists/*
 
 # Move to app dir
@@ -28,6 +35,17 @@ WORKDIR /usr/src/app
 
 # Move package.json to filesystem
 COPY ./app/package.json ./
+
+# Install CEC-Client
+RUN git clone git://github.com/Pulse-Eight/libcec.git
+WORKDIR libcec
+CMD ["./bootstrap"]
+CMD ["./configure --with-rpi-include-path=/opt/vc/include", "--with-rpi-lib-path=/opt/vc/lib --enable-rpi"]
+RUN make
+RUN make install
+RUN ldconfig
+
+WORKDIR /usr/src/app
 
 # Install AminoGFX-GL
 RUN git clone https://github.com/joshmarinacci/aminogfx-gl
