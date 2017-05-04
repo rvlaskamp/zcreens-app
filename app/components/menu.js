@@ -43,7 +43,7 @@ function menuComponent(app, menuItems) {
 
     const item = new menuItemComponent(app, menuItem.title, menuItem.icon, options);
     this.menuGroup.add(item.menuItemGroup);
-    this.menu.add(item);
+    this.menu.push(item);
 
     this.menuGroup.opacity.anim().from(0).to(1).delay(500).dur(500).start();
   });
