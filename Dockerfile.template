@@ -39,14 +39,14 @@ COPY ./app/package.json ./
 # Install CEC-Client
 RUN git clone https://github.com/Pulse-Eight/platform.git
 WORKDIR /usr/src/app/libcec
-RUN mkdir /usr/src/app/libcec/platform/build
+RUN mkdir -p /usr/src/app/libcec/platform/build
 WORKDIR /usr/src/app/libcec/platform/build
 RUN cmake ..
 RUN make
 RUN make install
 WORKDIR /usr/src/app/libcec
 RUN git clone https://github.com/Pulse-Eight/libcec.git
-RUN mkdir /usr/src/app/libcec/build
+RUN mkdir -p /usr/src/app/libcec/build
 WORKDIR /usr/src/app/libcec/build
 RUN cmake -DRPI_INCLUDE_DIR=/opt/vc/include -DRPI_LIB_DIR=/opt/vc/lib ..
 RUN make -j4
