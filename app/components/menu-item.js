@@ -53,4 +53,14 @@ menuItemComponent.prototype.resize = function() {
 
 }
 
+menuItemComponent.prototype.activate = function() {
+  this.menuItemOuterCircle.fill(colors.menuDark);
+  this.menuItemInnerCircle.fill(colors.menuDark);
+}
+
+menuItemComponent.prototype.deactivate = function() {
+  this.menuItemOuterCircle.fill(colors.menuLight);
+  this.menuItemInnerCircle.fill(colors.background);
+}
+
 module.exports = menuItemComponent;

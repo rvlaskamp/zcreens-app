@@ -23,4 +23,28 @@ mainView.prototype.addMenu = function(menuItems) {
   this.mainGroup.add(this.menuComponent.menuGroup);
 }
 
+mainView.prototype.remotePressed = function(key) {
+  switch(key) {
+    case 0:
+      // OK Button
+      break;
+    case 1:
+      // UP
+      break;
+    case 2:
+      // DOWN
+      break;
+    case 3:
+      // LEFT
+      this.menuComponent.changeMenuItem('left');
+      break;
+    case 4:
+      // RIGHT
+      this.menuComponent.changeMenuItem('right');
+      break;
+    default:
+      // Default case
+  }
+}
+
 module.exports = mainView;
