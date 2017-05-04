@@ -54,13 +54,15 @@ menuItemComponent.prototype.resize = function() {
 }
 
 menuItemComponent.prototype.activate = function() {
-  this.menuItemOuterCircle.fill(colors.menuDark);
-  this.menuItemInnerCircle.fill(colors.menuDark);
+  this.menuItemOuterCircle.fill.anim().from(colors.menuLight).to(colors.menuDark).dur(250).start();
+  this.menuItemInnerCircle.fill.anim().from(colors.background).to(colors.menuDark).dur(250).start();
+  this.menuItemTitle.fill.anim().from(colors.menuLight).to(colors.menuDark).dur(250).start();
 }
 
 menuItemComponent.prototype.deactivate = function() {
-  this.menuItemOuterCircle.fill(colors.menuLight);
-  this.menuItemInnerCircle.fill(colors.background);
+  this.menuItemOuterCircle.fill.anim().from(colors.menuDark).to(colors.menuLight).dur(250).start();
+  this.menuItemInnerCircle.fill.anim().from(colors.menuDark).to(colors.background).dur(250).start();
+  this.menuItemTitle.fill.anim().from(colors.menuDark).to(colors.menuLight).dur(250).start();
 }
 
 module.exports = menuItemComponent;
