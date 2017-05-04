@@ -13,7 +13,7 @@ RUN apt-get update && apt-get install -y \
   libswscale-dev \
   libavcodec-dev \
   omxplayer \
-  rm -rf /var/lib/apt/lists/*
+  && rm -rf /var/lib/apt/lists/*
 
 # Move to app dir
 WORKDIR /usr/src/app
