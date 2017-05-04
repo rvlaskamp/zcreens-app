@@ -31,13 +31,13 @@ function menuComponent(app, menuItems) {
       innerFill: colors.background,
       outerFill: colors.menuLight,
       iconPostfix: 'dark',
+      opacity: 0.5,
       x: 75 + (200 * index),
       y: 50
     };
 
     if (index === 0) {
-      options.innerFill = colors.menuDark;
-      options.outerFill = colors.menuDark;
+      options.opacity = 1;
       options.iconPostfix = 'light';
     }
 

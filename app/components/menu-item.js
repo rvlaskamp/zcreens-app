@@ -15,10 +15,12 @@ function menuItemComponent(app, title, icon, options) {
   this.menuItemInnerCircle = app.createCircle();
   this.menuItemInnerCircle.fill(options.innerFill);
   this.menuItemInnerCircle.radius(options.outerRadius);
+  this.menuItemInnerCircle.opacity(options.opacity);
 
   this.menuItemOuterCircle = app.createCircle();
   this.menuItemOuterCircle.fill(options.outerFill);
   this.menuItemOuterCircle.radius(options.innerRadius);
+  this.menuItemOuterCircle.opacity(options.opacity);
 
   // Create the icon image
   this.menuItemIcon = app.createImageView();
@@ -38,6 +40,7 @@ function menuItemComponent(app, title, icon, options) {
   this.menuItemTitle.x(-100);
   this.menuItemTitle.y(80);
   this.menuItemTitle.align('center');
+  this.menuItemTitle.opacity(options.opacity);
 
   this.menuItemGroup.x(options.x);
   this.menuItemGroup.y(options.y);
@@ -54,15 +57,15 @@ menuItemComponent.prototype.resize = function() {
 }
 
 menuItemComponent.prototype.activate = function() {
-  this.menuItemOuterCircle.fill.anim().from(colors.menuLight).to(colors.menuDark).dur(250).start();
-  this.menuItemInnerCircle.fill.anim().from(colors.background).to(colors.menuDark).dur(250).start();
-  this.menuItemTitle.fill.anim().from(colors.menuLight).to(colors.menuDark).dur(250).start();
+  this.menuItemInnerCircle.opacity.anim().from(0.5).to(1).dur(500).start();
+  this.menuItemOuterCircle.opacity.anim().from(0.5).to(1).dur(500).start();
+  this.menuItemTitle.opacity.anim().from(0.5).to(1).dur(500).start();
 }
 
 menuItemComponent.prototype.deactivate = function() {
-  this.menuItemOuterCircle.fill.anim().from(colors.menuDark).to(colors.menuLight).dur(250).start();
-  this.menuItemInnerCircle.fill.anim().from(colors.menuDark).to(colors.background).dur(250).start();
-  this.menuItemTitle.fill.anim().from(colors.menuDark).to(colors.menuLight).dur(250).start();
+  this.menuItemInnerCircle.opacity.anim().from(1).to(0.5).dur(500).start();
+  this.menuItemOuterCircle.opacity.anim().from(1).to(0.5).dur(500).start();
+  this.menuItemTitle.opacity.anim().from(1).to(0.5).dur(500).start();
 }
 
 module.exports = menuItemComponent;
