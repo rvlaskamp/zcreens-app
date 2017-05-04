@@ -37,11 +37,19 @@ WORKDIR /usr/src/app
 COPY ./app/package.json ./
 
 # Install CEC-Client
-RUN git clone git://github.com/Pulse-Eight/libcec.git
-WORKDIR libcec
-CMD ["sh","./bootstrap"]
-CMD ["sh","./configure --with-rpi-include-path=/opt/vc/include --with-rpi-lib-path=/opt/vc/lib --enable-rpi"]
+RUN git clone https://github.com/Pulse-Eight/platform.git
+WORKDIR /usr/src/app/libcec
+RUN mkdir platform/build
+WORKDIR /usr/src/app/libcec/platform/build
+RUN cmake ..
 RUN make
+RUN make install
+WORKDIR /usr/src/app/libcec
+RUN git clone https://github.com/Pulse-Eight/libcec.git
+RUN mkdir libcec/build
+WORKDIR /usr/src/app/libcec/build
+RUN cmake -DRPI_INCLUDE_DIR=/opt/vc/include -DRPI_LIB_DIR=/opt/vc/lib ..
+RUN make -j4
 RUN make install
 RUN ldconfig
 
