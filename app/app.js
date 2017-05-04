@@ -54,6 +54,9 @@ app.showFPS(false);
      client.sendCommand( 0xf0, CEC.Opcode.GIVE_DEVICE_POWER_STATUS);
    });
 
+   // Start CEC Client
+   cec.start( 'cec-client', '-m', '-d', '8', '-b', 'r' );
+
    // Create and set the root group
    const root = app.createGroup();
    app.setRoot(root);
