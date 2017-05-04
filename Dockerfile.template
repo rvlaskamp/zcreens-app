@@ -8,9 +8,9 @@ COPY debian-pinning /etc/apt/preferences.d/
 
 # Install
 RUN apt-get update && apt-get install -y \
-  curl
-  git
-  apt-utils
+  curl \
+  git \
+  apt-utils \
   bc
 
 # NodeJS
