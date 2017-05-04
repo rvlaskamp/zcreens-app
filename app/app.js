@@ -18,6 +18,7 @@ const CEC = nodecec.CEC;
   Helpers
  */
 const fetch = require('./helpers/fetch');
+const cecHelper = require('./helpers/cec');
 
 /*
   Views
@@ -55,7 +56,9 @@ app.showFPS(false);
    });
 
    cec.on('USER_CONTROL_PRESSED', (event, key) => {
-     console.log(key);
+     const keyName = cecHelper.getKey(key);
+
+     console.log(keyName);
    });
 
    // Start CEC Client
