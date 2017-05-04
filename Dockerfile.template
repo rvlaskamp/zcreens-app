@@ -43,9 +43,9 @@ COPY ./app/package.json ./
 
 # Install CEC-Client
 RUN git clone https://github.com/Pulse-Eight/platform.git
-WORKDIR /usr/src/app/libcec
-RUN mkdir -p /usr/src/app/libcec/platform/build
-WORKDIR /usr/src/app/libcec/platform/build
+WORKDIR /usr/src/app/platform
+RUN mkdir -p /usr/src/app/platform/build
+WORKDIR /usr/src/app/platform/build
 RUN cmake ..
 RUN make
 RUN make install
