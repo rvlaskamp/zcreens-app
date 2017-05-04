@@ -58,12 +58,8 @@ app.showFPS(false);
      console.log(keyName);
    });
 
-   cec.on( 'ROUTING_CHANGE', function(packet, fromSource, toSource) {
-  console.log( 'Routing changed from ' + fromSource + ' to ' + toSource + '.' );
-});
-
    // Start CEC Client
-   cec.start( 'cec-client', '-m', '-d', '8', '-b', 'r' );
+   cec.start( 'cec-client' );
 
    // Create and set the root group
    const root = app.createGroup();
