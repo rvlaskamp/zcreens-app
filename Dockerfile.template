@@ -23,6 +23,7 @@ RUN apt-get update && apt-get install -y \
   libswscale-dev \
   libavcodec-dev \
   omxplayer \
+  nodejs \
   && rm -rf /var/lib/apt/lists/*
 
 # Move to app dir
