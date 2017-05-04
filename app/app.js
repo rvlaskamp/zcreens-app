@@ -58,6 +58,10 @@ app.showFPS(false);
      console.log(event);
    });
 
+   cec.on( 'ROUTING_CHANGE', function(packet, fromSource, toSource) {
+  console.log( 'Routing changed from ' + fromSource + ' to ' + toSource + '.' );
+});
+
    // Start CEC Client
    cec.start( 'cec-client', '-m', '-d', '8', '-b', 'r' );
 
