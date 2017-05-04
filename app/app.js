@@ -2,12 +2,17 @@
  *  Zcreens RaspberryPi App
  */
  const amino = require('./aminogfx-gl/main');
+ const nodecec = require('node-cec');
  const app = new amino.AminoGfx();
 
 /*
   Configuration
  */
 const dimensions = require('./config/dimensions');
+
+// CEC Client
+const NodeCec = nodecec.NodeCec;
+const CEC = nodecec.CEC;
 
 /*
   Helpers
@@ -40,6 +45,14 @@ app.showFPS(false);
      console.log('Start failed', err.message);
      return;
    }
+
+   // Initialize CEC Client
+   const cec = new NodeCec('node-cec-monitor');
+
+   cec.once('ready', (client) => {
+     console.log( ' -- READY -- ' );
+     client.sendCommand( 0xf0, CEC.Opcode.GIVE_DEVICE_POWER_STATUS);
+   });
 
    // Create and set the root group
    const root = app.createGroup();
