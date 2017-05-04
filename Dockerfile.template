@@ -28,6 +28,11 @@ RUN apt-get update && apt-get install -y \
   git \
   libtool \
   pkg-config \
+  cmake \
+  libudev-dev \
+  libxrandr-dev \
+  python-dev \
+  swig \
   && rm -rf /var/lib/apt/lists/*
 
 # Move to app dir
