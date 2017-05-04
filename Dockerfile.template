@@ -1,29 +1,26 @@
-# FROM resin/%%RESIN_MACHINE_NAME%%-node:latest
-FROM resin/rpi-raspbian:jessie
+FROM resin/%%RESIN_MACHINE_NAME%%-node:latest
 
 # debian httpredir mirror proxy often ends up with 404s - editing source file to avoid it
-# RUN sed -i "s!httpredir.debian.org!`curl -s -D - http://httpredir.debian.org/demo/debian/ | awk '/^Link:/ { print $2 }' | sed -e 's@<http://\(.*\)/debian/>;@\1@g'`!" /etc/apt/sources.list
+RUN sed -i "s!httpredir.debian.org!`curl -s -D - http://httpredir.debian.org/demo/debian/ | awk '/^Link:/ { print $2 }' | sed -e 's@<http://\(.*\)/debian/>;@\1@g'`!" /etc/apt/sources.list
 
 COPY debian-pinning /etc/apt/preferences.d/
 
-# Install
-RUN apt-get update && apt-get install -y \
-  curl \
-  git \
-  apt-utils \
-  bc
+# Install Raspberrypi lib
+RUN apt-get update && apt-get install --reinstall -y \
+  libraspberrypi0 \
+  libraspberrypi-dev \
+  libraspberrypi-doc \
+  libraspberrypi-bin
 
 # Install other apt deps
 RUN apt-get update && apt-get install -y \
+  apt-utils \
   libjpeg-dev \
   libavformat-dev \
   libswscale-dev \
   libavcodec-dev \
   omxplayer \
-  nodejs \
   && rm -rf /var/lib/apt/lists/*
-
-RUN export PATH=$PATH:/usr/local/bin/node
 
 # Move to app dir
 WORKDIR /usr/src/app
