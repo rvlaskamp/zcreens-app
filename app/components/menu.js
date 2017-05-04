@@ -61,6 +61,7 @@ menuComponent.prototype.changeMenuItem = function(direction) {
 
       this.activeMenuItem = this.activeMenuItem - 1;
       this.menu[this.activeMenuItem].activate();
+      this.menu[currentMenuItem].deactivate();
     }
   }
 
@@ -68,10 +69,9 @@ menuComponent.prototype.changeMenuItem = function(direction) {
     if (this.activeMenuItem < this.menu.length) {
       this.activeMenuItem = this.activeMenuItem + 1;
       this.menu[this.activeMenuItem].activate();
+      this.menu[currentMenuItem].deactivate();
     }
   }
-
-  this.menu[currentMenuItem].deactivate();
 }
 
 module.exports = menuComponent;
