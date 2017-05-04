@@ -23,9 +23,7 @@ RUN apt-get update && apt-get install -y \
   nodejs \
   && rm -rf /var/lib/apt/lists/*
 
-RUN vi ~/.bash_aliases
 RUN export PATH=$PATH:/usr/local/bin/node
-RUN bash
 
 # Move to app dir
 WORKDIR /usr/src/app
