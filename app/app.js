@@ -20,6 +20,8 @@ const CEC = nodecec.CEC;
 const fetch = require('./helpers/fetch');
 const cecHelper = require('./helpers/cec');
 
+const isDevelopment = (process.argv[2]);
+
 /*
   Views
  */
@@ -59,21 +61,23 @@ app.showFPS(false);
    fetch.menuItems()
    .then((menuItems) => {
 
-     // Initialize CEC Client
-     const cec = new NodeCec('node-cec-monitor');
+     if (!isDevelopment) {
+       // Initialize CEC Client
+       const cec = new NodeCec('node-cec-monitor');
 
-     // Start CEC Client
-     cec.start( 'cec-client' );
+       // Start CEC Client
+       cec.start( 'cec-client' );
 
-     cec.once('ready', (client) => {
-       console.log( ' -- CEC READY -- ' );
-       client.sendCommand( 0xf0, CEC.Opcode.GIVE_DEVICE_POWER_STATUS);
-     });
+       cec.once('ready', (client) => {
+         console.log( ' -- CEC READY -- ' );
+         client.sendCommand( 0xf0, CEC.Opcode.GIVE_DEVICE_POWER_STATUS);
+       });
 
-     cec.on('USER_CONTROL_PRESSED', (event, key) => {
-       console.log( ' -- CEC KEY PRESSED', key);
-       mainView.remotePressed(key);
-     });
+       cec.on('USER_CONTROL_PRESSED', (event, key) => {
+         console.log( ' -- CEC KEY PRESSED', key);
+         mainView.remotePressed(key);
+       });
+     }
 
      // Add menu items
      mainView.addMenu(menuItems);

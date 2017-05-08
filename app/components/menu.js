@@ -14,7 +14,7 @@ function menuComponent(app, menuItems) {
 
   this.activeMenuItem = 0;
 
-  const width = menuItems.length * 274;
+  const width = menuItems.length * 300;
 
   this.menu = [];
   this.menuGroup.opacity(0);
@@ -28,7 +28,7 @@ function menuComponent(app, menuItems) {
     const options = {
       iconPostfix: 'light',
       opacity: 0.5,
-      x: (274 * index),
+      x: (300 * index),
       y: 0,
       active: false
     };
