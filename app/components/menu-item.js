@@ -31,7 +31,7 @@ function menuItemComponent(app, title, icon, options) {
   if (options.active) {
     this.menuItemIconActive.opacity(1);
   } else {
-
+    this.menuItemIconActive.opacity(0);
   }
 
   // Create the title

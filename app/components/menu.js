@@ -28,8 +28,9 @@ function menuComponent(app, menuItems) {
     const options = {
       iconPostfix: 'light',
       opacity: 0.5,
-      x: 50 + (174 * index),
-      y: 0
+      x: (174 * index),
+      y: 0,
+      active: false
     };
 
     if (index === 0) {
