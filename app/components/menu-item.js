@@ -18,14 +18,14 @@ function menuItemComponent(app, title, icon, options) {
   // this.menuItemIcon.size('stretch');
   this.menuItemIcon.w(174);
   this.menuItemIcon.h(174);
-  this.menuItemIcon.x(68);
+  this.menuItemIcon.x(0);
   this.menuItemIcon.y(0);
 
   this.menuItemIconActive = app.createImageView();
   this.menuItemIconActive.src(path.resolve(__dirname, '..', 'assets', 'images', 'icons', `${icon}-dark.png`));
   this.menuItemIconActive.w(174);
   this.menuItemIconActive.h(174);
-  this.menuItemIconActive.x(68);
+  this.menuItemIconActive.x(0);
   this.menuItemIconActive.y(0);
 
   if (options.active) {
