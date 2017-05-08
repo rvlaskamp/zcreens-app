@@ -63,11 +63,13 @@ menuItemComponent.prototype.resize = function() {
 menuItemComponent.prototype.activate = function() {
   this.menuItemIconActive.opacity.anim().from(0).to(1).dur(250).start();
   this.menuItemIcon.opacity.anim().from(1).to(0).dur(250).start();
+  this.menuItemTitle.opacity.anim().from(0.5).to(1).start();
 }
 
 menuItemComponent.prototype.deactivate = function() {
   this.menuItemIconActive.opacity.anim().from(1).to(0).dur(250).start();
   this.menuItemIcon.opacity.anim().from(0).to(1).dur(250).start();
+  this.menuItemTitle.opacity.anim().from(1).to(0.5).start();
 }
 
 module.exports = menuItemComponent;
