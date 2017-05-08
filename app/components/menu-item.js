@@ -11,25 +11,22 @@ function menuItemComponent(app, title, icon, options) {
   this.app = app;
   this.menuItemGroup = app.createGroup();
 
-  // Create the inner and outer circle
-  this.menuItemInnerCircle = app.createCircle();
-  this.menuItemInnerCircle.fill(options.innerFill);
-  this.menuItemInnerCircle.radius(options.outerRadius);
-  this.menuItemInnerCircle.opacity(0);
-
-  this.menuItemOuterCircle = app.createCircle();
-  this.menuItemOuterCircle.fill(options.outerFill);
-  this.menuItemOuterCircle.radius(options.innerRadius);
-  this.menuItemOuterCircle.opacity(options.opacity);
-
   // Create the icon image
   this.menuItemIcon = app.createImageView();
-  this.menuItemIcon.src(path.resolve(__dirname, '..', 'assets', 'images', 'icons', `${icon}-${options.iconPostfix}.png`));
-  this.menuItemIcon.size('stretch');
-  this.menuItemIcon.w(50);
-  this.menuItemIcon.h(50);
+  this.menuItemIcon.src(path.resolve(__dirname, '..', 'assets', 'images', 'icons', `${icon}-light.png`));
+  // this.menuItemIcon.size('stretch');
+  this.menuItemIcon.w(174);
+  this.menuItemIcon.h(174);
   this.menuItemIcon.x(-25);
   this.menuItemIcon.y(-25);
+
+  this.menuItemIconActive = app.createImageView();
+  this.menuItemIconActive.src(path.resolve(__dirname, '..', 'assets', 'images', 'icons', `${icon}-dark.png`));
+  this.menuItemIconActive.w(174);
+  this.menuItemIconActive.h(174);
+  this.menuItemIconActive.x(-25);
+  this.menuItemIconActive.y(-25);
+  this.menuItemIconActive.opacity(0);
 
   // Create the title
   this.menuItemTitle = app.createText();
@@ -45,9 +42,8 @@ function menuItemComponent(app, title, icon, options) {
   this.menuItemGroup.x(options.x);
   this.menuItemGroup.y(options.y);
 
-  this.menuItemGroup.add(this.menuItemOuterCircle);
-  this.menuItemGroup.add(this.menuItemInnerCircle);
   this.menuItemGroup.add(this.menuItemIcon);
+  this.menuItemGroup.add(this.menuItemIconActive);
   this.menuItemGroup.add(this.menuItemTitle);
 
 }
@@ -57,15 +53,13 @@ menuItemComponent.prototype.resize = function() {
 }
 
 menuItemComponent.prototype.activate = function() {
-  this.menuItemInnerCircle.opacity.anim().from(0.5).to(1).dur(500).start();
-  this.menuItemOuterCircle.opacity.anim().from(0).to(1).dur(500).start();
-  this.menuItemTitle.opacity.anim().from(0.5).to(1).dur(500).start();
+  this.menuItemIconActive.opacity.anim().from(0).to(1).dur(250).start();
+  this.menuItemIcon.opacity.anim().from(1).to(0).dur(250).start();
 }
 
 menuItemComponent.prototype.deactivate = function() {
-  this.menuItemInnerCircle.opacity.anim().from(1).to(0.5).dur(500).start();
-  this.menuItemOuterCircle.opacity.anim().from(1).to(0).dur(500).start();
-  this.menuItemTitle.opacity.anim().from(1).to(0.5).dur(500).start();
+  this.menuItemIconActive.opacity.anim().from(1).to(0).dur(250).start();
+  this.menuItemIcon.opacity.anim().from(0).to(1).dur(250).start();
 }
 
 module.exports = menuItemComponent;

@@ -26,11 +26,7 @@ function menuComponent(app, menuItems) {
 
   menuItems.forEach((menuItem, index) => {
     const options = {
-      innerRadius: 50,
-      outerRadius: 45,
-      innerFill: colors.menuDark,
-      outerFill: colors.menuDark,
-      iconPostfix: 'dark',
+      iconPostfix: 'light',
       opacity: 0.5,
       x: 75 + (200 * index),
       y: 50
@@ -38,7 +34,7 @@ function menuComponent(app, menuItems) {
 
     if (index === 0) {
       options.opacity = 1;
-      options.iconPostfix = 'light';
+      options.active = true;
     }
 
     const item = new menuItemComponent(app, menuItem.title, menuItem.icon, options);
@@ -66,7 +62,7 @@ menuComponent.prototype.changeMenuItem = function(direction) {
   }
 
   if (direction === 'right') {
-    if (this.activeMenuItem < this.menu.length) {
+    if (this.activeMenuItem < (this.menu.length - 1)) {
       this.activeMenuItem = this.activeMenuItem + 1;
       this.menu[this.activeMenuItem].activate();
       this.menu[currentMenuItem].deactivate();

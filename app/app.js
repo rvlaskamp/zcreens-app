@@ -62,18 +62,20 @@ app.showFPS(false);
      // Initialize CEC Client
      const cec = new NodeCec('node-cec-monitor');
 
+     // Start CEC Client
+     cec.start( 'cec-client' );
+
      cec.once('ready', (client) => {
        console.log( ' -- CEC READY -- ' );
        client.sendCommand( 0xf0, CEC.Opcode.GIVE_DEVICE_POWER_STATUS);
      });
 
      cec.on('USER_CONTROL_PRESSED', (event, key) => {
+       console.log( ' -- CEC KEY PRESSED', key);
        mainView.remotePressed(key);
      });
 
-     // Start CEC Client
-     cec.start( 'cec-client' );
-
+     // Add menu items
      mainView.addMenu(menuItems);
    });
 
