@@ -18,14 +18,14 @@ function menuItemComponent(app, title, icon, options) {
   // this.menuItemIcon.size('stretch');
   this.menuItemIcon.w(174);
   this.menuItemIcon.h(174);
-  this.menuItemIcon.x(0);
+  this.menuItemIcon.x(68);
   this.menuItemIcon.y(0);
 
   this.menuItemIconActive = app.createImageView();
   this.menuItemIconActive.src(path.resolve(__dirname, '..', 'assets', 'images', 'icons', `${icon}-dark.png`));
   this.menuItemIconActive.w(174);
   this.menuItemIconActive.h(174);
-  this.menuItemIconActive.x(0);
+  this.menuItemIconActive.x(68);
   this.menuItemIconActive.y(0);
 
   if (options.active) {
@@ -39,9 +39,9 @@ function menuItemComponent(app, title, icon, options) {
   this.menuItemTitle.text(title);
   this.menuItemTitle.fill(colors.menuDark);
   this.menuItemTitle.fontSize(50);
-  this.menuItemTitle.w(174);
+  this.menuItemTitle.w(274);
   this.menuItemTitle.x(0);
-  this.menuItemTitle.y(184);
+  this.menuItemTitle.y(190);
   this.menuItemTitle.align('center');
   this.menuItemTitle.opacity(options.opacity);
 
