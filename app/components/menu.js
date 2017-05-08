@@ -14,12 +14,12 @@ function menuComponent(app, menuItems) {
 
   this.activeMenuItem = 0;
 
-  const width = menuItems.length * 200;
+  const width = menuItems.length * 174;
 
   this.menu = [];
   this.menuGroup.opacity(0);
   this.menuGroup.w(width);
-  this.menuGroup.h(100);
+  this.menuGroup.h(200);
 
   this.menuGroup.x(dimensionsHelper.getCenterX(this.app.w(), width));
   this.menuGroup.y(dimensionsHelper.getCenterY(this.app.h(), this.menuGroup.h()));
@@ -28,8 +28,8 @@ function menuComponent(app, menuItems) {
     const options = {
       iconPostfix: 'light',
       opacity: 0.5,
-      x: 75 + (200 * index),
-      y: 50
+      x: 50 + (174 * index),
+      y: 0
     };
 
     if (index === 0) {

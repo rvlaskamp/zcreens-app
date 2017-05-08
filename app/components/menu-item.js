@@ -11,31 +11,37 @@ function menuItemComponent(app, title, icon, options) {
   this.app = app;
   this.menuItemGroup = app.createGroup();
 
+
   // Create the icon image
   this.menuItemIcon = app.createImageView();
   this.menuItemIcon.src(path.resolve(__dirname, '..', 'assets', 'images', 'icons', `${icon}-light.png`));
   // this.menuItemIcon.size('stretch');
   this.menuItemIcon.w(174);
   this.menuItemIcon.h(174);
-  this.menuItemIcon.x(-25);
-  this.menuItemIcon.y(-25);
+  this.menuItemIcon.x(0);
+  this.menuItemIcon.y(0);
 
   this.menuItemIconActive = app.createImageView();
   this.menuItemIconActive.src(path.resolve(__dirname, '..', 'assets', 'images', 'icons', `${icon}-dark.png`));
   this.menuItemIconActive.w(174);
   this.menuItemIconActive.h(174);
-  this.menuItemIconActive.x(-25);
-  this.menuItemIconActive.y(-25);
-  this.menuItemIconActive.opacity(0);
+  this.menuItemIconActive.x(0);
+  this.menuItemIconActive.y(0);
+
+  if (options.active) {
+    this.menuItemIconActive.opacity(1);
+  } else {
+
+  }
 
   // Create the title
   this.menuItemTitle = app.createText();
   this.menuItemTitle.text(title);
-  this.menuItemTitle.fill(options.outerFill);
-  this.menuItemTitle.fontSize(30);
-  this.menuItemTitle.w(200);
-  this.menuItemTitle.x(-100);
-  this.menuItemTitle.y(80);
+  this.menuItemTitle.fill(colors.menuDark);
+  this.menuItemTitle.fontSize(50);
+  this.menuItemTitle.w(174);
+  this.menuItemTitle.x(0);
+  this.menuItemTitle.y(184);
   this.menuItemTitle.align('center');
   this.menuItemTitle.opacity(options.opacity);
 

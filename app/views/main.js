@@ -27,6 +27,7 @@ mainView.prototype.remotePressed = function(key) {
   switch(key) {
     case 0:
       // OK Button
+      this.menuComponent.resize();
       break;
     case 1:
       // UP
