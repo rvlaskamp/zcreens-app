@@ -58,25 +58,25 @@ mainView.prototype.remotePressed = function(key) {
     case 1:
       // UP
       if (currentState === 'menuSmallActive') {
-        this.menuComponent.changeMenuItem('up');
+        this.menuComponent.changeMenuItem('down', currentState);
       }
       break;
     case 2:
       // DOWN
       if (currentState === 'menuSmallActive') {
-        this.menuComponent.changeMenuItem('down');
+        this.menuComponent.changeMenuItem('down', currentState);
       }
       break;
     case 3:
       // LEFT
       if (currentState === 'menuLargeActive') {
-        this.menuComponent.changeMenuItem('left');
+        this.menuComponent.changeMenuItem('left', currentState);
       }
       break;
     case 4:
       // RIGHT
       if (currentState === 'menuLargeActive') {
-        this.menuComponent.changeMenuItem('right');
+        this.menuComponent.changeMenuItem('right', currentState);
       }
       break;
     default:
