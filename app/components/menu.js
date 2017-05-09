@@ -66,20 +66,25 @@ menuComponent.prototype.resize = function() {
 menuComponent.prototype.changeMenuItem = function(direction, state) {
   const currentMenuItem = this.activeMenuItem;
   if (direction === 'left' || direction === 'up') {
-    if (this.activeMenuItem > 0) {
-
+    if (this.activeMenuItem === 0) {
+      this.activeMenuItem = this.menu.length - 1;
+    } else {
       this.activeMenuItem = this.activeMenuItem - 1;
-      this.menu[this.activeMenuItem].activate(state);
-      this.menu[currentMenuItem].deactivate(state);
     }
+
+    this.menu[this.activeMenuItem].activate(state);
+    this.menu[currentMenuItem].deactivate(state);
   }
 
   if (direction === 'right' || direction === 'down') {
-    if (this.activeMenuItem < (this.menu.length - 1)) {
+    if (this.activeMenuItem === (this.menu.length - 1)) {
+      this.activeMenuItem = 0;
+    } else {
       this.activeMenuItem = this.activeMenuItem + 1;
-      this.menu[this.activeMenuItem].activate(state);
-      this.menu[currentMenuItem].deactivate(state);
     }
+
+    this.menu[this.activeMenuItem].activate(state);
+    this.menu[currentMenuItem].deactivate(state);
   }
 }
 
