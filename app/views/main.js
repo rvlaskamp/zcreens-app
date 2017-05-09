@@ -21,6 +21,12 @@ mainView.prototype.addMenu = function(menuItems) {
   this.menuComponent = new menuComponent(this.app, menuItems);
 
   this.mainGroup.add(this.menuComponent.menuGroup);
+
+  if (process.argv[2]) {
+    setTimeout(() => {
+      this.menuComponent.resize();
+    }, 2000);
+  }
 }
 
 mainView.prototype.remotePressed = function(key) {

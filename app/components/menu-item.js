@@ -56,20 +56,26 @@ function menuItemComponent(app, title, icon, options) {
 
 }
 
-menuItemComponent.prototype.resize = function() {
-
+menuItemComponent.prototype.resize = function(delay) {
+  this.menuItemIcon.sx.anim().from(this.menuItemIcon.sx()).to(0.5).dur(250).delay(delay).start();
+  this.menuItemIcon.sy.anim().from(this.menuItemIcon.sy()).to(0.5).dur(250).delay(delay).start();
+  this.menuItemIcon.x.anim().from(this.menuItemIcon.x()).to(dimensionsHelper.getCenterX(274, (174 / 2))).dur(250).delay(delay).start();
+  this.menuItemIconActive.sx.anim().from(this.menuItemIcon.sx()).to(0.5).dur(250).delay(delay).start();
+  this.menuItemIconActive.sy.anim().from(this.menuItemIcon.sy()).to(0.5).dur(250).delay(delay).start();
+  this.menuItemIconActive.x.anim().from(this.menuItemIcon.x()).to(dimensionsHelper.getCenterX(274, (174 / 2))).dur(250).delay(delay).start();
+  this.menuItemTitle.opacity.anim().from(this.menuItemTitle.opacity()).to(0).dur(250).delay(delay).start();
 }
 
 menuItemComponent.prototype.activate = function() {
   this.menuItemIconActive.opacity.anim().from(0).to(1).dur(250).start();
   this.menuItemIcon.opacity.anim().from(1).to(0).dur(250).start();
-  this.menuItemTitle.opacity.anim().from(0.5).to(1).start();
+  this.menuItemTitle.opacity.anim().from(0.5).to(1).dur(250).start();
 }
 
 menuItemComponent.prototype.deactivate = function() {
   this.menuItemIconActive.opacity.anim().from(1).to(0).dur(250).start();
   this.menuItemIcon.opacity.anim().from(0).to(1).dur(250).start();
-  this.menuItemTitle.opacity.anim().from(1).to(0.5).start();
+  this.menuItemTitle.opacity.anim().from(1).to(0.5).dur(250).start();
 }
 
 module.exports = menuItemComponent;

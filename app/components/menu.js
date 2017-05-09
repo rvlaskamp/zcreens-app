@@ -48,7 +48,10 @@ function menuComponent(app, menuItems) {
 }
 
 menuComponent.prototype.resize = function() {
-
+  this.menu.forEach((menuItem, index) => {
+    const delay = (index * 150);
+    menuItem.resize(delay);
+  });
 }
 
 menuComponent.prototype.changeMenuItem = function(direction) {
