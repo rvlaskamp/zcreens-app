@@ -58,7 +58,7 @@ mainView.prototype.remotePressed = function(key) {
     case 1:
       // UP
       if (currentState === 'menuSmallActive') {
-        this.menuComponent.changeMenuItem('down', currentState);
+        this.menuComponent.changeMenuItem('up', currentState);
       }
       break;
     case 2:
