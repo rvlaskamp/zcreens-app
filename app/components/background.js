@@ -16,7 +16,7 @@ function backgroundComponent(app) {
 }
 
 backgroundComponent.prototype.resize = function() {
-  this.background.w.anim().from(this.background.w()).to(dimensionsHelper.calcWidth(this.app.w(), 25)).dur(1000).start();
+  this.background.w.anim().from(this.background.w()).to(dimensionsHelper.calcWidth(this.app.w(), 30)).dur(1000).start();
 }
 
 module.exports = backgroundComponent;

@@ -48,16 +48,25 @@ function menuComponent(app, menuItems) {
 }
 
 menuComponent.prototype.resize = function() {
+  const menuItemHeight = 120;
+  const menuHeight = this.menu.length * menuItemHeight;
+
+  const menuY = dimensionsHelper.getCenterY(this.app.h(), menuHeight);
+
+  this.menuGroup.w.anim().from(this.menuGroup.w()).to(87).dur(500).start();
+  this.menuGroup.x.anim().from(this.menuGroup.x()).to(-25).dur(500).start();
+  this.menuGroup.y.anim().from(this.menuGroup.y()).to(menuY).dur(500).start();
   this.menu.forEach((menuItem, index) => {
     const delay = (index * 150);
-    menuItem.resize(delay);
+    const menuItemY = (index * menuItemHeight);
+    menuItem.resize(delay, menuItemY);
   });
 }
 
-menuComponent.prototype.changeMenuItem = function(direction) {
+menuComponent.prototype.changeMenuItem = function(direction, state) {
   const currentMenuItem = this.activeMenuItem;
   if (direction === 'left') {
-    if (this.activeMenuItem > 0) {
+    if (this.activeMenuItem > 0 && state === 'menuLargeActive') {
 
       this.activeMenuItem = this.activeMenuItem - 1;
       this.menu[this.activeMenuItem].activate();
@@ -65,8 +74,25 @@ menuComponent.prototype.changeMenuItem = function(direction) {
     }
   }
 
+  if (direction === 'up') {
+    if (this.activeMenuItem > 0 && state === 'menuSmallActive') {
+
+      this.activeMenuItem = this.activeMenuItem - 1;
+      this.menu[this.activeMenuItem].activate(state);
+      this.menu[currentMenuItem].deactivate(state);
+    }
+  }
+
   if (direction === 'right') {
-    if (this.activeMenuItem < (this.menu.length - 1)) {
+    if (this.activeMenuItem < (this.menu.length - 1) && state === 'menuLargeActive') {
+      this.activeMenuItem = this.activeMenuItem + 1;
+      this.menu[this.activeMenuItem].activate(state);
+      this.menu[currentMenuItem].deactivate(state);
+    }
+  }
+
+  if (direction === 'down') {
+    if (this.activeMenuItem < (this.menu.length - 1) && state === 'menuSmallActive') {
       this.activeMenuItem = this.activeMenuItem + 1;
       this.menu[this.activeMenuItem].activate();
       this.menu[currentMenuItem].deactivate();

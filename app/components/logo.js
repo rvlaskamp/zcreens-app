@@ -25,4 +25,8 @@ logoComponent.prototype.move = function() {
   this.logo.y.anim().from(this.logo.y()).to(-125).dur(1000).start();
 }
 
+logoComponent.prototype.hide = function() {
+  this.logo.opacity.anim().from(this.logo.opacity()).to(0).dur(250).start();
+}
+
 module.exports = logoComponent;
