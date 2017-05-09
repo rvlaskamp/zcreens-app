@@ -36,29 +36,48 @@ mainView.prototype.addMenu = function(menuItems) {
 }
 
 mainView.prototype.remotePressed = function(key) {
+  const currentState = this.state.get();
+
   switch(key) {
     case 0:
       // OK Button
-      this.state.set('menuSmallActive');
-      this.menuComponent.resize();
-      this.backgroundComponent.resize();
-      this.logoComponent.hide();
+
+      if (currentState === 'menuLargeActive') {
+        this.state.set('menuSmallActive');
+        this.menuComponent.resize();
+        this.backgroundComponent.resize();
+        this.logoComponent.hide();
+      }
+
+      if (currentState === 'menuSmallActive') {
+
+      }
+
+
       break;
     case 1:
       // UP
-      this.menuComponent.changeMenuItem('up', this.state.get());
+      if (currentState === 'menuSmallActive') {
+        this.menuComponent.changeMenuItem('up');
+      }
       break;
     case 2:
       // DOWN
-      this.menuComponent.changeMenuItem('down', this.state.get());
+      if (currentState === 'menuSmallActive') {
+        this.menuComponent.changeMenuItem('down');
+      }
       break;
     case 3:
       // LEFT
-      this.menuComponent.changeMenuItem('left', this.state.get());
+      if (currentState === 'menuLargeActive') {
+        this.menuComponent.changeMenuItem('left');
+      }
       break;
     case 4:
       // RIGHT
-      this.menuComponent.changeMenuItem('right', this.state.get());
+      if (currentState === 'menuLargeActive') {
+        this.menuComponent.changeMenuItem('right');
+      }
       break;
     default:
       // Default case

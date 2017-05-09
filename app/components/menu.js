@@ -65,7 +65,7 @@ menuComponent.prototype.resize = function() {
 
 menuComponent.prototype.changeMenuItem = function(direction, state) {
   const currentMenuItem = this.activeMenuItem;
-  if (direction === 'left') {
+  if (direction === 'left' || direction === 'up') {
     if (this.activeMenuItem > 0 && state === 'menuLargeActive') {
 
       this.activeMenuItem = this.activeMenuItem - 1;
@@ -74,28 +74,11 @@ menuComponent.prototype.changeMenuItem = function(direction, state) {
     }
   }
 
-  if (direction === 'up') {
-    if (this.activeMenuItem > 0 && state === 'menuSmallActive') {
-
-      this.activeMenuItem = this.activeMenuItem - 1;
-      this.menu[this.activeMenuItem].activate(state);
-      this.menu[currentMenuItem].deactivate(state);
-    }
-  }
-
-  if (direction === 'right') {
+  if (direction === 'right' || direction === 'down') {
     if (this.activeMenuItem < (this.menu.length - 1) && state === 'menuLargeActive') {
       this.activeMenuItem = this.activeMenuItem + 1;
       this.menu[this.activeMenuItem].activate(state);
       this.menu[currentMenuItem].deactivate(state);
-    }
-  }
-
-  if (direction === 'down') {
-    if (this.activeMenuItem < (this.menu.length - 1) && state === 'menuSmallActive') {
-      this.activeMenuItem = this.activeMenuItem + 1;
-      this.menu[this.activeMenuItem].activate();
-      this.menu[currentMenuItem].deactivate();
     }
   }
 }
