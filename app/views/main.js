@@ -5,6 +5,7 @@
 const backgroundComponent = require('../components/background');
 const logoComponent = require('../components/logo');
 const menuComponent = require('../components/menu');
+const submenuComponent = require('../components/submenu');
 const state = require('../helpers/state');
 
 function mainView(app) {
@@ -22,8 +23,10 @@ mainView.prototype.addMenu = function(menuItems) {
   this.state.set('menuLargeActive');
   this.logoComponent.move();
   this.menuComponent = new menuComponent(this.app, menuItems);
+  this.submenuComponent = new submenuComponent(this.app);
 
   this.mainGroup.add(this.menuComponent.menuGroup);
+  this.mainGroup.add(this.submenuComponent.menuGroup);
 
   if (process.argv[2]) {
     setTimeout(() => {
@@ -31,6 +34,10 @@ mainView.prototype.addMenu = function(menuItems) {
       this.menuComponent.resize();
       this.backgroundComponent.resize();
       this.logoComponent.hide();
+
+      setTimeout(() => {
+        this.submenuComponent.show(menuItems[0].submenu);
+      }, 1500);
     }, 2000);
   }
 }

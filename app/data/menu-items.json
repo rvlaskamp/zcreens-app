@@ -2,7 +2,24 @@
   {
     "title": "Televisie",
     "icon": "tv",
-    "bg": "bg-signage"
+    "submenu": [
+      {
+        "title": "NPO 1",
+        "stream": "udp://239.192.0.1:1234"
+      },
+      {
+        "title": "NPO 2",
+        "stream": "udp://239.192.0.1:1234"
+      },
+      {
+        "title": "NPO 3",
+        "stream": "udp://239.192.0.1:1234"
+      },
+      {
+        "title": "RTL 4",
+        "stream": "udp://239.192.0.1:1234"
+      }
+    ]
   },
   {
     "title": "Radio",
