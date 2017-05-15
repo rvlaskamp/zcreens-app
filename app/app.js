@@ -36,6 +36,7 @@ const views = {
 
 app.w(dimensions.app.width);
 app.h(dimensions.app.height);
+app.opacity(0);
 app.title('Zcreens');
 app.showFPS(false);
 
