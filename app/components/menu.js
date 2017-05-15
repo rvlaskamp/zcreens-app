@@ -5,6 +5,7 @@
 const colors = require('../config/colors');
 
 const dimensionsHelper = require('../helpers/dimensions');
+const omxplayerHelper = require('../helpers/omxplayer');
 
 const submenuComponent = require('../components/submenu');
 const menuItemComponent = require('./menu-item');
@@ -54,6 +55,9 @@ function menuComponent(app, mainGroup, menuItems) {
 }
 
 menuComponent.prototype.resize = function() {
+  this.menuContainerActive = true;
+
+  this.omxplayer = new omxplayerHelper();
 
   const menuItemHeight = 120;
   const menuHeight = this.menu.length * menuItemHeight;
@@ -96,6 +100,16 @@ menuComponent.prototype.changeMenuItem = function(direction, state) {
     this.menu[this.activeMenuItem].activate(state);
     this.menu[currentMenuItem].deactivate(state);
   }
+}
+
+menuComponent.prototype.toggleMenu = function() {
+  if (this.menuContainerActive) {
+
+  }
+}
+
+menuComponent.prototype.action = function() {
+  this.omxplayer.play('http://clips.vorwaerts-gmbh.de/VfE_html5.mp4');
 }
 
 module.exports = menuComponent;

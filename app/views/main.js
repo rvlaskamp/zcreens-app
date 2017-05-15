@@ -51,7 +51,7 @@ mainView.prototype.remotePressed = function(key) {
       }
 
       if (currentState === 'menuSmallActive') {
-
+        this.menuComponent.action();
       }
 
 
