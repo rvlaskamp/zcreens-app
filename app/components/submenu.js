@@ -51,40 +51,13 @@ function submenuComponent(app) {
   this.menuGroup.add(this.menuItemsGroup);
   this.menuGroup.add(this.background);
   this.menuGroup.add(this.backgroundMenu);
-
-
-
-
-  /*
-  menuItems.forEach((menuItem, index) => {
-    const options = {
-      iconPostfix: 'light',
-      opacity: 0.5,
-      x: (300 * index),
-      y: 0,
-      active: false
-    };
-
-    if (index === 0) {
-      options.opacity = 1;
-      options.active = true;
-    }
-
-    const item = new menuItemComponent(app, menuItem.title, menuItem.icon, options);
-    this.menuGroup.add(item.menuItemGroup);
-    this.menu.push(item);
-
-    this.menuGroup.opacity.anim().from(0).to(1).delay(500).dur(500).start();
-  });
-  */
-
 }
 
 submenuComponent.prototype.show = function(menuItems) {
   this.menuItems = new circularBuffer(menuItems);
 
-  const menuItemSpacing = 20;
-  const menuItemHeight = 72;
+  const menuItemSpacing = 25;
+  const menuItemHeight = 80;
   const menuItemWidth = 320;
 
   // Calculate maximum menu items
@@ -107,15 +80,13 @@ submenuComponent.prototype.show = function(menuItems) {
     const label = this.app.createText();
     label.text(menuItem.title);
     label.fill(colors.menuDark);
-    label.fontSize(30);
+    label.fontSize(35);
     label.w(item.w());
     label.y(42);
 
     item.add(label);
 
     this.menuItemsGroup.add(item);
-
-    console.log(this.menuItems.next());
   });
 
   this.menuGroup.opacity.anim().from(0).to(1).delay(1000).dur(500).start();
