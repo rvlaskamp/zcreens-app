@@ -6,13 +6,19 @@ const colors = require('../config/colors');
 
 const dimensionsHelper = require('../helpers/dimensions');
 
+const submenuComponent = require('../components/submenu');
 const menuItemComponent = require('./menu-item');
 
-function menuComponent(app, menuItems) {
+function menuComponent(app, mainGroup, menuItems) {
+  this.activeMenuItem = 0;
   this.app = app;
+  this.menuItems = menuItems;
+  this.mainGroup = mainGroup;
   this.menuGroup = app.createGroup();
 
-  this.activeMenuItem = 0;
+  // Create submenu
+  this.submenu = new submenuComponent(this.app);
+  this.mainGroup.add(this.submenu.menuGroup);
 
   const width = menuItems.length * 300;
 
@@ -24,7 +30,7 @@ function menuComponent(app, menuItems) {
   this.menuGroup.x(dimensionsHelper.getCenterX(this.app.w(), width));
   this.menuGroup.y(dimensionsHelper.getCenterY(this.app.h(), this.menuGroup.h()));
 
-  menuItems.forEach((menuItem, index) => {
+  this.menuItems.forEach((menuItem, index) => {
     const options = {
       iconPostfix: 'light',
       opacity: 0.5,
@@ -48,10 +54,12 @@ function menuComponent(app, menuItems) {
 }
 
 menuComponent.prototype.resize = function() {
+
   const menuItemHeight = 120;
   const menuHeight = this.menu.length * menuItemHeight;
 
   const menuY = dimensionsHelper.getCenterY(this.app.h(), menuHeight);
+
 
   this.menuGroup.w.anim().from(this.menuGroup.w()).to(87).dur(500).start();
   this.menuGroup.x.anim().from(this.menuGroup.x()).to(-25).dur(500).start();
@@ -61,6 +69,8 @@ menuComponent.prototype.resize = function() {
     const menuItemY = (index * menuItemHeight);
     menuItem.resize(delay, menuItemY);
   });
+
+  this.submenu.show(this.menuItems[this.activeMenuItem].submenu);
 }
 
 menuComponent.prototype.changeMenuItem = function(direction, state) {

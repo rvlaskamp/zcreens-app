@@ -6,6 +6,7 @@ const path = require('path');
 
 
 const colors = require('../config/colors');
+const circularBuffer = require('../helpers/circularBuffer');
 
 const dimensionsHelper = require('../helpers/dimensions');
 
@@ -40,6 +41,14 @@ function submenuComponent(app) {
   this.backgroundMenu.x(dimensionsHelper.getCenterX(this.menuGroup.w(), this.backgroundMenu.w()));
   this.backgroundMenu.y(dimensionsHelper.getCenterY(this.menuGroup.h(), this.backgroundMenu.h()));
 
+  this.menuItemsGroup = app.createGroup();
+  this.menuItemsGroup.w(320);
+  this.menuItemsGroup.h(this.menuGroup.h());
+  this.menuItemsGroup.x(dimensionsHelper.getCenterX(this.menuGroup.w(), this.menuItemsGroup.w()));
+  this.menuItemsGroup.y(dimensionsHelper.getCenterY(this.menuGroup.h(), this.menuItemsGroup.h()));
+
+
+  this.menuGroup.add(this.menuItemsGroup);
   this.menuGroup.add(this.background);
   this.menuGroup.add(this.backgroundMenu);
 
@@ -72,37 +81,44 @@ function submenuComponent(app) {
 }
 
 submenuComponent.prototype.show = function(menuItems) {
-  let menuSort = [];
+  this.menuItems = new circularBuffer(menuItems);
+
   const menuItemSpacing = 20;
   const menuItemHeight = 72;
   const menuItemWidth = 320;
 
   // Calculate maximum menu items
   const totalItems = (Math.round(this.menuGroup.h() / (menuItemHeight + menuItemSpacing)) - 1);
-
   const totalTopBottomItems = (totalItems - 1) / 2;
 
-  if (menuItems.length > totalTopBottomItems) {
-
-  } else {
-    menuSort = menuItems;
+  if (menuItems.length < totalItems) {
+   this.menuItemsGroup.h(menuItems.length * menuItemHeight);
+   this.menuItemsGroup.y(this.backgroundMenu.y());
   }
-  /*
-  this.rect = app.createRect();
-  this.rect.w(320);
-  this.rect.h(72);
-  this.rect.x(dimensionsHelper.getCenterX(this.menuGroup.w(), 320));
-  this.rect.y(100);
-  this.rect.fill('#3d3d3d');
-  */
 
-
+  // Add menu items to the menuItemsGroup
   menuItems.forEach((menuItem, index) => {
-    console.log(menuItem)
+    const item = this.app.createGroup();
+    item.w(this.menuItemsGroup.w() - 10);
+    item.h(this.backgroundMenu.h());
+    item.x(10);
+    item.y(menuItemHeight * index);
 
+    const label = this.app.createText();
+    label.text(menuItem.title);
+    label.fill(colors.menuDark);
+    label.fontSize(30);
+    label.w(item.w());
+    label.y(42);
+
+    item.add(label);
+
+    this.menuItemsGroup.add(item);
+
+    console.log(this.menuItems.next());
   });
 
-  this.menuGroup.opacity.anim().from(0).to(1).dur(500).start();
+  this.menuGroup.opacity.anim().from(0).to(1).delay(1000).dur(500).start();
 }
 
 submenuComponent.prototype.changeMenuItem = function(direction, state) {
