@@ -7,6 +7,8 @@ const logoComponent = require('../components/logo');
 const menuComponent = require('../components/menu');
 const state = require('../helpers/state');
 
+const dimensionsHelper = require('../helpers/dimensions');
+
 function mainView(app) {
   this.app = app;
   this.mainGroup = app.createGroup();
