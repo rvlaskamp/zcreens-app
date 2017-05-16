@@ -61,7 +61,7 @@ WORKDIR /usr/src/app
 RUN git clone https://github.com/joshmarinacci/aminogfx-gl
 COPY ./app/rpi.cpp /usr/src/app/aminogfx-gl/src
 WORKDIR /usr/src/app/aminogfx-gl
-RUN npm install
+RUN npm install --build-from-source
 
 # Move back to app dir
 WORKDIR /usr/src/app
