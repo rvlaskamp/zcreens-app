@@ -53,6 +53,8 @@ app.showFPS(false);
    // Create and set the root group
    const root = app.createGroup();
    app.setRoot(root);
+   app.opaciy(0);
+   app.fill('#ffffff');
 
    // Add the main view to the root group
    const mainView = new views.main(app);
