@@ -30,7 +30,7 @@ function submenuComponent(app) {
   this.background = app.createImageView();
   this.background.src(path.resolve(__dirname, '..', 'assets', 'images', 'background-submenu.png'));
   this.background.w(this.menuGroup.w());
-  this.background.h(1080);
+  this.background.h(this.menuGroup.h());
   this.background.size('stretch');
   this.background.y(dimensionsHelper.getCenterY(this.menuGroup.h(), this.background.h()));
 
@@ -82,7 +82,7 @@ submenuComponent.prototype.show = function(menuItems) {
     label.fill(colors.menuDark);
     label.fontSize(35);
     label.w(item.w());
-    label.y(42);
+    label.y(45);
 
     item.add(label);
 
@@ -93,28 +93,7 @@ submenuComponent.prototype.show = function(menuItems) {
 }
 
 submenuComponent.prototype.changeMenuItem = function(direction, state) {
-  const currentMenuItem = this.activeMenuItem;
-  if (direction === 'left' || direction === 'up') {
-    if (this.activeMenuItem === 0) {
-      this.activeMenuItem = this.menu.length - 1;
-    } else {
-      this.activeMenuItem = this.activeMenuItem - 1;
-    }
 
-    this.menu[this.activeMenuItem].activate(state);
-    this.menu[currentMenuItem].deactivate(state);
-  }
-
-  if (direction === 'right' || direction === 'down') {
-    if (this.activeMenuItem === (this.menu.length - 1)) {
-      this.activeMenuItem = 0;
-    } else {
-      this.activeMenuItem = this.activeMenuItem + 1;
-    }
-
-    this.menu[this.activeMenuItem].activate(state);
-    this.menu[currentMenuItem].deactivate(state);
-  }
 }
 
 module.exports = submenuComponent;

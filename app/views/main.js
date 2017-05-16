@@ -48,6 +48,7 @@ mainView.prototype.remotePressed = function(key) {
         this.menuComponent.resize();
         this.backgroundComponent.resize();
         this.logoComponent.hide();
+        this.app.w(dimensionsHelper.calcWidth(this.app.w(), 30));
       }
 
       if (currentState === 'menuSmallActive') {
