@@ -53,11 +53,16 @@ app.showFPS(false);
    // Create and set the root group
    const root = app.createGroup();
    app.setRoot(root);
-   app.opacity(0.1);
-   app.fill('none');
+
+   const rect = app.createRect();
+   rect.w(app.w());
+   rect.h(app.h());
+   rect.opacity(0.1);
 
    // Add the main view to the root group
    const mainView = new views.main(app);
+
+   root.add(rect);
    root.add(mainView.mainGroup);
 
    // Load the menu items
