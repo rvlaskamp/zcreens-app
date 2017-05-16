@@ -109,7 +109,8 @@ menuComponent.prototype.toggleMenu = function() {
 }
 
 menuComponent.prototype.action = function() {
-  this.omxplayer.play('http://clips.vorwaerts-gmbh.de/VfE_html5.mp4');
+  this.omxplayer.play('http://download.blender.org/peach/bigbuckbunny_movies/big_buck_bunny_1080p_h264.mov');
+
 }
 
 module.exports = menuComponent;

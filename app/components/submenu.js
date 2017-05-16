@@ -56,8 +56,8 @@ function submenuComponent(app) {
 submenuComponent.prototype.show = function(menuItems) {
   this.menuItems = new circularBuffer(menuItems);
 
-  const menuItemSpacing = 25;
-  const menuItemHeight = 80;
+  const menuItemSpacing = 20;
+  const menuItemHeight = 72;
   const menuItemWidth = 320;
 
   // Calculate maximum menu items
