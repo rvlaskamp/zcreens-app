@@ -59,7 +59,6 @@ WORKDIR /usr/src/app
 
 # Install AminoGFX-GL
 RUN git clone https://github.com/joshmarinacci/aminogfx-gl
-COPY ./app/rpi.cpp /usr/src/app/aminogfx-gl/src
 WORKDIR /usr/src/app/aminogfx-gl
 RUN npm install
 
