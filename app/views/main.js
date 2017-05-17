@@ -79,7 +79,7 @@ mainView.prototype.remotePressed = function(key) {
       }
 
       if (currentState === state.menuSmall) {
-        this.menuComponent.toggleMenu();
+        this.menuComponent.activateMenu();
       }
       break;
     case 4:
@@ -89,7 +89,7 @@ mainView.prototype.remotePressed = function(key) {
       }
 
       if (currentState === state.menuSmall) {
-        this.menuComponent.toggleMenu();
+        this.menuComponent.activateSubmenu();
       }
       break;
     default:

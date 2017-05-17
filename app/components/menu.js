@@ -104,20 +104,20 @@ menuComponent.prototype.changeMenuItem = function(direction, state) {
   }
 }
 
-menuComponent.prototype.toggleMenu = function() {
+menuComponent.prototype.activateMenu = function() {
   const currentState = this.state.get();
 
-  if (currentState === state.menuActive) {
-    this.state.set(state.submenuActive);
-    this.menuGroup.opacity.anim().from(this.menuGroup.opacity()).to(0.25).dur(500).start();
-    this.submenu.activate();
-  }
+  this.state.set(state.menuActive);
+  this.menuGroup.opacity.anim().from(this.menuGroup.opacity()).to(1).dur(500).start();
+  this.submenu.deactivate();
+}
 
-  if (currentState === state.submenuActive) {
-    this.state.set(state.menuActive);
-    this.menuGroup.opacity.anim().from(this.menuGroup.opacity()).to(1).dur(500).start();
-    this.submenu.deactivate();
-  }
+menuComponent.prototype.activateSubmenu = function() {
+  const currentState = this.state.get();
+
+  this.state.set(state.submenuActive);
+  this.menuGroup.opacity.anim().from(this.menuGroup.opacity()).to(0.25).dur(500).start();
+  this.submenu.activate();
 }
 
 menuComponent.prototype.action = function() {
