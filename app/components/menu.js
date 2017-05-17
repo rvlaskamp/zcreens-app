@@ -78,26 +78,29 @@ menuComponent.prototype.resize = function() {
 
 menuComponent.prototype.changeMenuItem = function(direction, state) {
   const currentMenuItem = this.activeMenuItem;
-  if (direction === 'left' || direction === 'up') {
-    if (this.activeMenuItem === 0) {
-      this.activeMenuItem = this.menu.length - 1;
-    } else {
-      this.activeMenuItem = this.activeMenuItem - 1;
+
+  if (this.menu.length > 0) {
+    if (direction === 'left' || direction === 'up') {
+      if (this.activeMenuItem === 0) {
+        this.activeMenuItem = this.menu.length - 1;
+      } else {
+        this.activeMenuItem = this.activeMenuItem - 1;
+      }
+
+      this.menu[this.activeMenuItem].activate(state);
+      this.menu[currentMenuItem].deactivate(state);
     }
 
-    this.menu[this.activeMenuItem].activate(state);
-    this.menu[currentMenuItem].deactivate(state);
-  }
+    if (direction === 'right' || direction === 'down') {
+      if (this.activeMenuItem === (this.menu.length - 1)) {
+        this.activeMenuItem = 0;
+      } else {
+        this.activeMenuItem = this.activeMenuItem + 1;
+      }
 
-  if (direction === 'right' || direction === 'down') {
-    if (this.activeMenuItem === (this.menu.length - 1)) {
-      this.activeMenuItem = 0;
-    } else {
-      this.activeMenuItem = this.activeMenuItem + 1;
+      this.menu[this.activeMenuItem].activate(state);
+      this.menu[currentMenuItem].deactivate(state);
     }
-
-    this.menu[this.activeMenuItem].activate(state);
-    this.menu[currentMenuItem].deactivate(state);
   }
 }
 
@@ -105,12 +108,14 @@ menuComponent.prototype.toggleMenu = function() {
   const currentState = this.state.get();
 
   if (currentState === state.menuActive) {
-    this.menuGroup.opacity.anim().from(this.menuGroup.opacity()).to(0.25).delay(500).dur(500).start();
+    this.state.set(state.submenuActive);
+    this.menuGroup.opacity.anim().from(this.menuGroup.opacity()).to(0.25).dur(500).start();
     this.submenu.activate();
   }
 
   if (currentState === state.submenuActive) {
-    this.menuGroup.opacity.anim().from(this.menuGroup.opacity()).to(1).delay(500).dur(500).start();
+    this.state.set(state.menuActive);
+    this.menuGroup.opacity.anim().from(this.menuGroup.opacity()).to(1).dur(500).start();
     this.submenu.deactivate();
   }
 }

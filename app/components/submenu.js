@@ -23,7 +23,6 @@ function submenuComponent(app) {
   const width = dimensionsHelper.calcWidth(this.app.w(), 20);
 
   this.menu = [];
-  this.menuGroup.opacity(0);
   this.menuGroup.w(width);
   this.menuGroup.h(this.app.h());
   this.menuGroup.x(dimensionsHelper.calcWidth(this.app.w(), 10));
@@ -50,12 +49,14 @@ function submenuComponent(app) {
   this.backgroundImageMenu.h(72);
   this.backgroundImageMenu.x(dimensionsHelper.getCenterX(this.menuGroup.w(), this.backgroundImageMenu.w()));
   this.backgroundImageMenu.y(dimensionsHelper.getCenterY(this.menuGroup.h(), this.backgroundImageMenu.h()));
+  this.backgroundImageMenu.opacity(0);
 
   this.menuItemsGroup = app.createGroup();
   this.menuItemsGroup.w(320);
   this.menuItemsGroup.h(this.menuGroup.h());
   this.menuItemsGroup.x(dimensionsHelper.getCenterX(this.menuGroup.w(), this.menuItemsGroup.w()));
   this.menuItemsGroup.y(dimensionsHelper.getCenterY(this.menuGroup.h(), this.menuItemsGroup.h()));
+  this.menuItemsGroup.opacity(0);
 
   this.menuGroup.add(this.background);
   this.menuGroup.add(this.menuItemsGroup);
@@ -105,15 +106,18 @@ submenuComponent.prototype.show = function(menuItems) {
     this.menuItemsGroup.add(item);
   });
 
-  this.menuGroup.opacity.anim().from(0).to(0.25).delay(1000).dur(500).start();
+  this.menuItemsGroup.opacity.anim().from(this.menuGroup.opacity()).to(1).delay(1000).dur(500).start();
+  this.backgroundImageMenu.opacity.anim().from(this.menuGroup.opacity()).to(1).delay(1000).dur(500).start();
 }
 
 submenuComponent.prototype.activate = function() {
-  this.menuGroup.opacity.anim().from(this.menuGroup.opacity()).to(1).delay(1000).dur(500).start();
+  this.menuItemsGroup.opacity.anim().from(this.menuGroup.opacity()).to(1).dur(500).start();
+  this.backgroundImageMenu.opacity.anim().from(this.menuGroup.opacity()).to(1).dur(500).start();
 }
 
 submenuComponent.prototype.deactivate = function() {
-  this.menuGroup.opacity.anim().from(this.menuGroup.opacity()).to(0.25).delay(1000).dur(500).start();
+  this.menuItemsGroup.opacity.anim().from(this.menuGroup.opacity()).to(0.25).dur(500).start();
+  this.backgroundImageMenu.opacity.anim().from(this.backgroundImageMenu.opacity()).to(0.25).dur(500).start();
 }
 
 submenuComponent.prototype.play = function() {
