@@ -58,7 +58,7 @@ function menuComponent(app, mainGroup, menuItems) {
 
 }
 
-menuComponent.prototype.resize = function(state) {
+menuComponent.prototype.resize = function() {
   this.state.set(state.menuActive);
   this.menuContainerActive = true;
 
