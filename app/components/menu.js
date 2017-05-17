@@ -10,7 +10,6 @@ const menuItemComponent = require('./menu-item');
 
 const stateHelper = require('../helpers/state');
 const dimensionsHelper = require('../helpers/dimensions');
-const omxplayerHelper = require('../helpers/omxplayer');
 
 function menuComponent(app, mainGroup, menuItems) {
   this.activeMenuItem = 0;
@@ -18,7 +17,6 @@ function menuComponent(app, mainGroup, menuItems) {
   this.menuItems = menuItems;
   this.mainGroup = mainGroup;
   this.menuGroup = app.createGroup();
-  this.omxplayer = new omxplayerHelper();
   this.state = new stateHelper();
 
   // Create submenu
@@ -104,13 +102,25 @@ menuComponent.prototype.changeMenuItem = function(direction, state) {
 }
 
 menuComponent.prototype.toggleMenu = function() {
-  if (this.menuContainerActive) {
+  const currentState = this.state.get();
 
+  if (currentState === state.menuActive) {
+    this.menuGroup.opacity.anim().from(this.menuGroup.opacity()).to(0.5).delay(500).dur(500).start();
+    this.submenu.activate();
+  }
+
+  if (currentState === state.submenuActive) {
+    this.menuGroup.opacity.anim().from(this.menuGroup.opacity()).to(1).delay(500).dur(500).start();
+    this.submenu.deactivate();
   }
 }
 
 menuComponent.prototype.action = function() {
-  this.omxplayer.play('http://download.blender.org/peach/bigbuckbunny_movies/big_buck_bunny_1080p_h264.mov');
+  const currentState = this.state.get();
+
+  if (currentState === state.submenuActive) {
+    this.submenu.play();
+  }
 
 }
 

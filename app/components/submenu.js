@@ -9,12 +9,14 @@ const colors = require('../config/colors');
 const circularBuffer = require('../helpers/circularBuffer');
 
 const dimensionsHelper = require('../helpers/dimensions');
+const omxplayerHelper = require('../helpers/omxplayer');
 
 const menuItemComponent = require('./menu-item');
 
 function submenuComponent(app) {
   this.app = app;
   this.menuGroup = app.createGroup();
+  this.omxplayer = new omxplayerHelper();
 
   this.activeMenuItem = 0;
 
@@ -25,7 +27,7 @@ function submenuComponent(app) {
   this.menuGroup.w(width);
   this.menuGroup.h(this.app.h());
   this.menuGroup.x(dimensionsHelper.calcWidth(this.app.w(), 10));
-  this.menuGroup.y(50);
+  this.menuGroup.y(40);
 
   this.background = app.createRect();
   this.background.w(this.menuGroup.w());
@@ -33,6 +35,7 @@ function submenuComponent(app) {
   this.background.x(0);
   this.background.y(0);
   this.background.fill(colors.background);
+  this.background.opacity(1);
 
   this.backgroundImage = app.createImageView();
   this.backgroundImage.src(path.resolve(__dirname, '..', 'assets', 'images', 'background-submenu.png'));
@@ -61,6 +64,7 @@ function submenuComponent(app) {
 }
 
 submenuComponent.prototype.show = function(menuItems) {
+  this.currentIndex = 0;
   this.menuItems = new circularBuffer(menuItems);
 
   const menuItemSpacing = 20;
@@ -69,11 +73,16 @@ submenuComponent.prototype.show = function(menuItems) {
 
   // Calculate maximum menu items
   const totalItems = (Math.round(this.menuGroup.h() / (menuItemHeight + menuItemSpacing)) - 1);
-  const totalTopBottomItems = (totalItems - 1) / 2;
+  const totalBottomItems = (Math.round(totalItems - 1) / 2);
 
-  if (menuItems.length < totalItems) {
-   this.menuItemsGroup.h(menuItems.length * menuItemHeight);
-   this.menuItemsGroup.y(this.backgroundImageMenu.y());
+  console.log(totalItems);
+  console.log(totalBottomItems);
+  console.log(menuItems.length - 1);
+
+  if ((menuItems.length - 1) < totalItems) {
+    this.rotatingMenu = false;
+    this.menuItemsGroup.h(menuItems.length * menuItemHeight);
+    this.menuItemsGroup.y(this.backgroundImageMenu.y());
   }
 
   // Add menu items to the menuItemsGroup
@@ -96,11 +105,21 @@ submenuComponent.prototype.show = function(menuItems) {
     this.menuItemsGroup.add(item);
   });
 
-  this.menuGroup.opacity.anim().from(0).to(1).delay(1000).dur(500).start();
+  this.menuGroup.opacity.anim().from(0).to(0.5).delay(1000).dur(500).start();
 }
 
-submenuComponent.prototype.changeMenuItem = function(direction, state) {
+submenuComponent.prototype.activate = function() {
+  this.menuGroup.opacity.anim().from(this.menuGroup.opacity()).to(1).delay(1000).dur(500).start();
+}
 
+submenuComponent.prototype.deactivate = function() {
+  this.menuGroup.opacity.anim().from(this.menuGroup.opacity()).to(0.5).delay(1000).dur(500).start();
+}
+
+submenuComponent.prototype.play = function() {
+  if (!this.omxplayer.isPlaying) {
+    this.omxplayer.play('http://download.blender.org/peach/bigbuckbunny_movies/big_buck_bunny_1080p_h264.mov');
+  }
 }
 
 module.exports = submenuComponent;

@@ -77,11 +77,19 @@ mainView.prototype.remotePressed = function(key) {
       if (currentState === state.menuLarge) {
         this.menuComponent.changeMenuItem('left', currentState);
       }
+
+      if (currentState === state.menuSmall) {
+        this.menuComponent.toggleMenu();
+      }
       break;
     case 4:
       // RIGHT
       if (currentState === state.menuLarge) {
         this.menuComponent.changeMenuItem('right', currentState);
+      }
+
+      if (currentState === state.menuSmall) {
+        this.menuComponent.toggleMenu();
       }
       break;
     default:
