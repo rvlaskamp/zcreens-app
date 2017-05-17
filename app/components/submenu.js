@@ -26,7 +26,7 @@ function submenuComponent(app) {
   this.menuGroup.w(width);
   this.menuGroup.h(this.app.h());
   this.menuGroup.x(dimensionsHelper.calcWidth(this.app.w(), 10));
-  this.menuGroup.y(40);
+  this.menuGroup.y(35);
 
   this.background = app.createRect();
   this.background.w(this.menuGroup.w());
@@ -81,9 +81,9 @@ submenuComponent.prototype.show = function(menuItems) {
   // Add menu items to the menuItemsGroup
   menuItems.forEach((menuItem, index) => {
     const item = this.app.createGroup();
-    item.w(this.menuItemsGroup.w() - 10);
+    item.w(this.menuItemsGroup.w() - 20);
     item.h(this.backgroundImageMenu.h());
-    item.x(10);
+    item.x(20);
     item.y(menuItemHeight * index);
 
     const label = this.app.createText();
@@ -98,23 +98,24 @@ submenuComponent.prototype.show = function(menuItems) {
     this.menuItemsGroup.add(item);
   });
 
-  this.menuItemsGroup.opacity.anim().from(this.menuGroup.opacity()).to(0.25).delay(1000).dur(500).start();
-  this.backgroundImageMenu.opacity.anim().from(this.menuGroup.opacity()).to(0.25).delay(1000).dur(500).start();
+  this.menuItemsGroup.opacity.anim().from(0).to(0.25).delay(1000).dur(500).start();
+  this.backgroundImageMenu.opacity.anim().from(0).to(0.25).delay(1000).dur(500).start();
 }
 
 submenuComponent.prototype.activate = function() {
-  this.menuItemsGroup.opacity.anim().from(this.menuGroup.opacity()).to(1).dur(500).start();
-  this.backgroundImageMenu.opacity.anim().from(this.menuGroup.opacity()).to(1).dur(500).start();
+  this.menuItemsGroup.opacity.anim().from(this.menuItemsGroup.opacity()).to(1).dur(500).start();
+  this.backgroundImageMenu.opacity.anim().from(this.backgroundImageMenu.opacity()).to(1).dur(500).start();
 }
 
 submenuComponent.prototype.deactivate = function() {
-  this.menuItemsGroup.opacity.anim().from(this.menuGroup.opacity()).to(0.25).dur(500).start();
+  this.menuItemsGroup.opacity.anim().from(this.menuItemsGroup.opacity()).to(0.25).dur(500).start();
   this.backgroundImageMenu.opacity.anim().from(this.backgroundImageMenu.opacity()).to(0.25).dur(500).start();
 }
 
 submenuComponent.prototype.play = function() {
-
+  if(!this.omxplayer.isPlaying()) {
     this.omxplayer.play('http://download.blender.org/peach/bigbuckbunny_movies/big_buck_bunny_1080p_h264.mov');
+  }
 }
 
 module.exports = submenuComponent;

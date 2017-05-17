@@ -79,9 +79,7 @@ menuComponent.prototype.resize = function() {
 menuComponent.prototype.changeMenuItem = function(direction, state) {
   const currentMenuItem = this.activeMenuItem;
 
-  console.log(this.menuItems.length);
-
-  if (this.menuItems.length > 0) {
+  if (this.menuItems.length > 1) {
     if (direction === 'left' || direction === 'up') {
       if (this.activeMenuItem === 0) {
         this.activeMenuItem = this.menu.length - 1;

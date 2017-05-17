@@ -12,7 +12,7 @@ omxplayer.prototype.play = function(url) {
 }
 
 omxplayer.prototype.isPlaying = function() {
-  return this.isPlaying;
+  return this.playing;
 }
 
 module.exports = omxplayer;
