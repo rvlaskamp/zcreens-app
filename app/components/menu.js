@@ -105,7 +105,7 @@ menuComponent.prototype.toggleMenu = function() {
   const currentState = this.state.get();
 
   if (currentState === state.menuActive) {
-    this.menuGroup.opacity.anim().from(this.menuGroup.opacity()).to(0.5).delay(500).dur(500).start();
+    this.menuGroup.opacity.anim().from(this.menuGroup.opacity()).to(0.25).delay(500).dur(500).start();
     this.submenu.activate();
   }
 

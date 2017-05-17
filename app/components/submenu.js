@@ -105,7 +105,7 @@ submenuComponent.prototype.show = function(menuItems) {
     this.menuItemsGroup.add(item);
   });
 
-  this.menuGroup.opacity.anim().from(0).to(0.5).delay(1000).dur(500).start();
+  this.menuGroup.opacity.anim().from(0).to(0.25).delay(1000).dur(500).start();
 }
 
 submenuComponent.prototype.activate = function() {
@@ -113,7 +113,7 @@ submenuComponent.prototype.activate = function() {
 }
 
 submenuComponent.prototype.deactivate = function() {
-  this.menuGroup.opacity.anim().from(this.menuGroup.opacity()).to(0.5).delay(1000).dur(500).start();
+  this.menuGroup.opacity.anim().from(this.menuGroup.opacity()).to(0.25).delay(1000).dur(500).start();
 }
 
 submenuComponent.prototype.play = function() {
