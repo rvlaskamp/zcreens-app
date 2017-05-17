@@ -54,11 +54,6 @@ app.showFPS(false);
    const root = app.createGroup();
    app.setRoot(root);
 
-   const rect = app.createRect();
-   rect.w(app.w());
-   rect.h(app.h());
-   rect.opacity(0.1);
-
    // Add the main view to the root group
    const mainView = new views.main(app);
 

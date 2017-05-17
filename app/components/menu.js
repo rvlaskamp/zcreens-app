@@ -3,12 +3,14 @@
  */
 
 const colors = require('../config/colors');
-
-const dimensionsHelper = require('../helpers/dimensions');
-const omxplayerHelper = require('../helpers/omxplayer');
+const state = require('../config/state');
 
 const submenuComponent = require('../components/submenu');
 const menuItemComponent = require('./menu-item');
+
+const stateHelper = require('../helpers/state');
+const dimensionsHelper = require('../helpers/dimensions');
+const omxplayerHelper = require('../helpers/omxplayer');
 
 function menuComponent(app, mainGroup, menuItems) {
   this.activeMenuItem = 0;
@@ -16,6 +18,8 @@ function menuComponent(app, mainGroup, menuItems) {
   this.menuItems = menuItems;
   this.mainGroup = mainGroup;
   this.menuGroup = app.createGroup();
+  this.omxplayer = new omxplayerHelper();
+  this.state = new stateHelper();
 
   // Create submenu
   this.submenu = new submenuComponent(this.app);
@@ -54,16 +58,13 @@ function menuComponent(app, mainGroup, menuItems) {
 
 }
 
-menuComponent.prototype.resize = function() {
+menuComponent.prototype.resize = function(state) {
+  this.state.set(state.menuActive);
   this.menuContainerActive = true;
-
-  this.omxplayer = new omxplayerHelper();
 
   const menuItemHeight = 120;
   const menuHeight = this.menu.length * menuItemHeight;
-
   const menuY = dimensionsHelper.getCenterY(this.app.h(), menuHeight);
-
 
   this.menuGroup.w.anim().from(this.menuGroup.w()).to(87).dur(500).start();
   this.menuGroup.x.anim().from(this.menuGroup.x()).to(-25).dur(500).start();
