@@ -98,8 +98,8 @@ submenuComponent.prototype.show = function(menuItems) {
     this.menuItemsGroup.add(item);
   });
 
-  this.menuItemsGroup.opacity.anim().from(this.menuGroup.opacity()).to(1).delay(1000).dur(500).start();
-  this.backgroundImageMenu.opacity.anim().from(this.menuGroup.opacity()).to(1).delay(1000).dur(500).start();
+  this.menuItemsGroup.opacity.anim().from(this.menuGroup.opacity()).to(0.25).delay(1000).dur(500).start();
+  this.backgroundImageMenu.opacity.anim().from(this.menuGroup.opacity()).to(0.25).delay(1000).dur(500).start();
 }
 
 submenuComponent.prototype.activate = function() {

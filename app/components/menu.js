@@ -79,7 +79,9 @@ menuComponent.prototype.resize = function() {
 menuComponent.prototype.changeMenuItem = function(direction, state) {
   const currentMenuItem = this.activeMenuItem;
 
-  if (this.menu.length > 0) {
+  console.log(this.menuItems.length);
+
+  if (this.menuItems.length > 0) {
     if (direction === 'left' || direction === 'up') {
       if (this.activeMenuItem === 0) {
         this.activeMenuItem = this.menu.length - 1;
@@ -107,7 +109,7 @@ menuComponent.prototype.changeMenuItem = function(direction, state) {
 menuComponent.prototype.activateMenu = function() {
   const currentState = this.state.get();
 
-  if (currentState !== this.state.menuActive) {
+  if (currentState !== state.menuActive) {
     this.state.set(state.menuActive);
     this.menuGroup.opacity.anim().from(this.menuGroup.opacity()).to(1).dur(500).start();
     this.submenu.deactivate();
@@ -117,7 +119,7 @@ menuComponent.prototype.activateMenu = function() {
 menuComponent.prototype.activateSubmenu = function() {
   const currentState = this.state.get();
 
-  if (currentState !== this.state.submenuActive) {
+  if (currentState !== state.submenuActive) {
     this.state.set(state.submenuActive);
     this.menuGroup.opacity.anim().from(this.menuGroup.opacity()).to(0.25).dur(500).start();
     this.submenu.activate();
