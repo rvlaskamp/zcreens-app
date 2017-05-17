@@ -32,6 +32,7 @@ function submenuComponent(app) {
   this.background.h(this.menuGroup.h());
   this.background.x(0);
   this.background.y(0);
+  this.background.fill(colors.background);
 
   this.backgroundImage = app.createImageView();
   this.backgroundImage.src(path.resolve(__dirname, '..', 'assets', 'images', 'background-submenu.png'));

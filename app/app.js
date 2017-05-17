@@ -56,8 +56,7 @@ app.showFPS(false);
 
    // Add the main view to the root group
    const mainView = new views.main(app);
-
-   root.add(rect);
+   
    root.add(mainView.mainGroup);
 
    // Load the menu items
