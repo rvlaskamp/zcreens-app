@@ -36,13 +36,6 @@ function submenuComponent(app) {
   this.background.fill(colors.background);
   this.background.opacity(1);
 
-  this.backgroundImage = app.createImageView();
-  this.backgroundImage.src(path.resolve(__dirname, '..', 'assets', 'images', 'background-submenu.png'));
-  this.backgroundImage.w(this.menuGroup.w());
-  this.backgroundImage.h(this.menuGroup.h());
-  this.backgroundImage.size('stretch');
-  this.backgroundImage.y(dimensionsHelper.getCenterY(this.menuGroup.h(), this.backgroundImage.h()));
-
   this.backgroundImageMenu = app.createImageView();
   this.backgroundImageMenu.src(path.resolve(__dirname, '..', 'assets', 'images', 'submenu-item.png'));
   this.backgroundImageMenu.w(320);
@@ -60,7 +53,6 @@ function submenuComponent(app) {
 
   this.menuGroup.add(this.background);
   this.menuGroup.add(this.menuItemsGroup);
-  this.menuGroup.add(this.backgroundImage);
   this.menuGroup.add(this.backgroundImageMenu);
 }
 
@@ -121,9 +113,8 @@ submenuComponent.prototype.deactivate = function() {
 }
 
 submenuComponent.prototype.play = function() {
-  if (!this.omxplayer.isPlaying) {
+
     this.omxplayer.play('http://download.blender.org/peach/bigbuckbunny_movies/big_buck_bunny_1080p_h264.mov');
-  }
 }
 
 module.exports = submenuComponent;
