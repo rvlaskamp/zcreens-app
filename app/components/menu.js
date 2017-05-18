@@ -78,28 +78,56 @@ menuComponent.prototype.resize = function() {
 
 menuComponent.prototype.changeMenuItem = function(direction, state) {
   const currentMenuItem = this.activeMenuItem;
+  const currentState = this.state.get();
 
-  if (this.menuItems.length > 1) {
-    if (direction === 'left' || direction === 'up') {
-      if (this.activeMenuItem === 0) {
-        this.activeMenuItem = this.menu.length - 1;
-      } else {
-        this.activeMenuItem = this.activeMenuItem - 1;
-      }
-
-      this.menu[this.activeMenuItem].activate(state);
-      this.menu[currentMenuItem].deactivate(state);
+  function setMenuItemPrev() {
+    if (this.activeMenuItem === 0) {
+      this.activeMenuItem = this.menu.length - 1;
+    } else {
+      this.activeMenuItem = this.activeMenuItem - 1;
     }
 
-    if (direction === 'right' || direction === 'down') {
-      if (this.activeMenuItem === (this.menu.length - 1)) {
-        this.activeMenuItem = 0;
-      } else {
-        this.activeMenuItem = this.activeMenuItem + 1;
-      }
+    this.menu[this.activeMenuItem].activate(state);
+    this.menu[currentMenuItem].deactivate(state);
+  }
 
-      this.menu[this.activeMenuItem].activate(state);
-      this.menu[currentMenuItem].deactivate(state);
+  function setMenuItemNext() {
+    if (this.activeMenuItem === (this.menu.length - 1)) {
+      this.activeMenuItem = 0;
+    } else {
+      this.activeMenuItem = this.activeMenuItem + 1;
+    }
+
+    this.menu[this.activeMenuItem].activate(state);
+    this.menu[currentMenuItem].deactivate(state);
+  }
+
+  if (this.menuItems.length > 1) {
+    switch (direction) {
+      case 'up':
+        if (currentState === state.menuActive) {
+          setMenuItemPrev();
+        }
+
+        if (currentState === state.submenuActive) {
+          this.submenu
+        }
+        break;
+      case 'right':
+        if (currentState === state.menuActive) {
+          setMenuItemNext();
+        }
+        break;
+      case 'down':
+        if (currentState === state.menuActive) {
+          setMenuItemNext();
+        }
+        break;
+      case 'left':
+        if (currentState === state.menuActive) {
+          setMenuItemPrev();
+        }
+        break;
     }
   }
 }
