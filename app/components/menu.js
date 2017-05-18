@@ -120,7 +120,18 @@ menuComponent.prototype.changeMenuItem = function(direction) {
     switch (direction) {
       case 'up':
         if (currentState === state.menuActive) {
-          setMenuItemPrev();
+          if (this.activeMenuItem === 0) {
+            this.activeMenuItem = this.menu.length - 1;
+          } else {
+            this.activeMenuItem = this.activeMenuItem - 1;
+          }
+
+          this.menu[this.activeMenuItem].activate(state);
+          this.menu[currentMenuItem].deactivate(state);
+
+          if (this.menuSmall) {
+            this.submenu.update(this.menuItems[this.activeMenuItem].submenu);
+          }
         }
 
         if (currentState === state.submenuActive) {
@@ -130,12 +141,34 @@ menuComponent.prototype.changeMenuItem = function(direction) {
         break;
       case 'right':
         if (currentState === state.menuActive) {
-          setMenuItemNext();
+          if (this.activeMenuItem === (this.menu.length - 1)) {
+            this.activeMenuItem = 0;
+          } else {
+            this.activeMenuItem = this.activeMenuItem + 1;
+          }
+
+          this.menu[this.activeMenuItem].activate(state);
+          this.menu[currentMenuItem].deactivate(state);
+
+          if (this.menuSmall) {
+            this.submenu.update(this.menuItems[this.activeMenuItem].submenu);
+          }
         }
         break;
       case 'down':
         if (currentState === state.menuActive) {
-          setMenuItemNext();
+          if (this.activeMenuItem === (this.menu.length - 1)) {
+            this.activeMenuItem = 0;
+          } else {
+            this.activeMenuItem = this.activeMenuItem + 1;
+          }
+
+          this.menu[this.activeMenuItem].activate(state);
+          this.menu[currentMenuItem].deactivate(state);
+
+          if (this.menuSmall) {
+            this.submenu.update(this.menuItems[this.activeMenuItem].submenu);
+          }
         }
 
         if (currentState === state.submenuActive) {
@@ -144,7 +177,18 @@ menuComponent.prototype.changeMenuItem = function(direction) {
         break;
       case 'left':
         if (currentState === state.menuActive) {
-          setMenuItemPrev();
+          if (this.activeMenuItem === 0) {
+            this.activeMenuItem = this.menu.length - 1;
+          } else {
+            this.activeMenuItem = this.activeMenuItem - 1;
+          }
+
+          this.menu[this.activeMenuItem].activate(state);
+          this.menu[currentMenuItem].deactivate(state);
+
+          if (this.menuSmall) {
+            this.submenu.update(this.menuItems[this.activeMenuItem].submenu);
+          }
         }
         break;
     }
