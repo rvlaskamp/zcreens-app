@@ -116,6 +116,8 @@ submenuComponent.prototype.moveDown = function() {
     this.activeMenuItem = this.activeMenuItem + 1;
     const y = this.backgroundImageMenu.y() + this.backgroundImageMenu.h();
     this.backgroundImageMenu.y.anim().from(this.backgroundImageMenu.y()).to(y).dur(250).start();
+
+    console.log('moveDown');
   }
 }
 
