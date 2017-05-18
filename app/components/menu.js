@@ -19,6 +19,7 @@ function menuComponent(app, mainGroup, menuItems) {
   this.menuGroup = app.createGroup();
   this.state = new stateHelper();
   this.state.set(state.menuActive);
+  this.menuSmall = false;
 
   // Create submenu
   this.submenu = new submenuComponent(this.app);
@@ -60,6 +61,7 @@ function menuComponent(app, mainGroup, menuItems) {
 menuComponent.prototype.resize = function() {
   this.state.set(state.menuActive);
   this.menuContainerActive = true;
+  this.menuSmall = true;
 
   const menuItemHeight = 120;
   const menuHeight = this.menu.length * menuItemHeight;
@@ -77,11 +79,12 @@ menuComponent.prototype.resize = function() {
   this.submenu.show(this.menuItems[this.activeMenuItem].submenu);
 }
 
-menuComponent.prototype.changeMenuItem = function(direction, state) {
+menuComponent.prototype.changeMenuItem = function(direction) {
   const currentMenuItem = this.activeMenuItem;
   const currentState = this.state.get();
 
   console.log(currentState);
+  console.log(direction);
 
   function setMenuItemPrev() {
     if (this.activeMenuItem === 0) {
@@ -93,7 +96,7 @@ menuComponent.prototype.changeMenuItem = function(direction, state) {
     this.menu[this.activeMenuItem].activate(state);
     this.menu[currentMenuItem].deactivate(state);
 
-    if (state === state.menuSmall) {
+    if (this.menuSmall) {
       this.submenu.update(this.menuItems[this.activeMenuItem].submenu);
     }
   }
@@ -108,7 +111,7 @@ menuComponent.prototype.changeMenuItem = function(direction, state) {
     this.menu[this.activeMenuItem].activate(state);
     this.menu[currentMenuItem].deactivate(state);
 
-    if (state === state.menuSmall) {
+    if (this.menuSmall) {
       this.submenu.update(this.menuItems[this.activeMenuItem].submenu);
     }
   }
