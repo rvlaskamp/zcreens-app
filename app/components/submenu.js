@@ -136,9 +136,7 @@ submenuComponent.prototype.moveDown = function() {
 
 submenuComponent.prototype.play = function() {
   console.log('play', this.menuItems[this.activeMenuItem].stream);
-  if(!this.omxplayer.isPlaying()) {
-    this.omxplayer.play(this.menuItems[this.activeMenuItem].stream);
-  }
+  this.omxplayer.play(this.menuItems[this.activeMenuItem].stream);
 }
 
 submenuComponent.prototype.stop = function() {
