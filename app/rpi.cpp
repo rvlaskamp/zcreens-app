@@ -469,7 +469,6 @@ void AminoGfxRPi::initRenderer() {
 
     //Notes: works but seeing issues with font shader which uses transparent pixels! The background is visible at the border pixels of the font!
 
-
     dispman_alpha.flags = DISPMANX_FLAGS_ALPHA_FROM_SOURCE;
     dispman_alpha.opacity = 255;
     dispman_alpha.mask = 0;

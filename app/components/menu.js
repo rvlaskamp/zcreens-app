@@ -3,12 +3,13 @@
  */
 
 const colors = require('../config/colors');
-
-const dimensionsHelper = require('../helpers/dimensions');
-const omxplayerHelper = require('../helpers/omxplayer');
+const state = require('../config/state');
 
 const submenuComponent = require('../components/submenu');
 const menuItemComponent = require('./menu-item');
+
+const stateHelper = require('../helpers/state');
+const dimensionsHelper = require('../helpers/dimensions');
 
 function menuComponent(app, mainGroup, menuItems) {
   this.activeMenuItem = 0;
@@ -16,6 +17,7 @@ function menuComponent(app, mainGroup, menuItems) {
   this.menuItems = menuItems;
   this.mainGroup = mainGroup;
   this.menuGroup = app.createGroup();
+  this.state = new stateHelper();
 
   // Create submenu
   this.submenu = new submenuComponent(this.app);
@@ -55,15 +57,12 @@ function menuComponent(app, mainGroup, menuItems) {
 }
 
 menuComponent.prototype.resize = function() {
+  this.state.set(state.menuActive);
   this.menuContainerActive = true;
-
-  this.omxplayer = new omxplayerHelper();
 
   const menuItemHeight = 120;
   const menuHeight = this.menu.length * menuItemHeight;
-
   const menuY = dimensionsHelper.getCenterY(this.app.h(), menuHeight);
-
 
   this.menuGroup.w.anim().from(this.menuGroup.w()).to(87).dur(500).start();
   this.menuGroup.x.anim().from(this.menuGroup.x()).to(-25).dur(500).start();
@@ -79,37 +78,66 @@ menuComponent.prototype.resize = function() {
 
 menuComponent.prototype.changeMenuItem = function(direction, state) {
   const currentMenuItem = this.activeMenuItem;
-  if (direction === 'left' || direction === 'up') {
-    if (this.activeMenuItem === 0) {
-      this.activeMenuItem = this.menu.length - 1;
-    } else {
-      this.activeMenuItem = this.activeMenuItem - 1;
+
+  console.log(this.menuItems.length);
+
+  if (this.menuItems.length > 0) {
+    if (direction === 'left' || direction === 'up') {
+      if (this.activeMenuItem === 0) {
+        this.activeMenuItem = this.menu.length - 1;
+      } else {
+        this.activeMenuItem = this.activeMenuItem - 1;
+      }
+
+      this.menu[this.activeMenuItem].activate(state);
+      this.menu[currentMenuItem].deactivate(state);
     }
 
-    this.menu[this.activeMenuItem].activate(state);
-    this.menu[currentMenuItem].deactivate(state);
-  }
+    if (direction === 'right' || direction === 'down') {
+      if (this.activeMenuItem === (this.menu.length - 1)) {
+        this.activeMenuItem = 0;
+      } else {
+        this.activeMenuItem = this.activeMenuItem + 1;
+      }
 
-  if (direction === 'right' || direction === 'down') {
-    if (this.activeMenuItem === (this.menu.length - 1)) {
-      this.activeMenuItem = 0;
-    } else {
-      this.activeMenuItem = this.activeMenuItem + 1;
+      this.menu[this.activeMenuItem].activate(state);
+      this.menu[currentMenuItem].deactivate(state);
     }
-
-    this.menu[this.activeMenuItem].activate(state);
-    this.menu[currentMenuItem].deactivate(state);
   }
 }
 
-menuComponent.prototype.toggleMenu = function() {
-  if (this.menuContainerActive) {
+menuComponent.prototype.activateMenu = function() {
+  const currentState = this.state.get();
 
+  if (currentState !== state.menuActive) {
+    this.state.set(state.menuActive);
+    this.menuGroup.opacity.anim().from(this.menuGroup.opacity()).to(1).dur(500).start();
+    this.submenu.deactivate();
+  }
+}
+
+menuComponent.prototype.activateSubmenu = function() {
+  const currentState = this.state.get();
+
+  if (currentState !== state.submenuActive) {
+    this.state.set(state.submenuActive);
+    this.menuGroup.opacity.anim().from(this.menuGroup.opacity()).to(0.25).dur(500).start();
+    this.submenu.activate();
   }
 }
 
 menuComponent.prototype.action = function() {
-  this.omxplayer.play('http://download.blender.org/peach/bigbuckbunny_movies/big_buck_bunny_1080p_h264.mov');
+  const currentState = this.state.get();
+
+  if (currentState === state.menuActive) {
+    this.state.set(state.submenuActive);
+    this.menuGroup.opacity.anim().from(this.menuGroup.opacity()).to(0.25).dur(500).start();
+    this.submenu.activate();
+  }
+
+  if (currentState === state.submenuActive) {
+    this.submenu.play();
+  }
 
 }
 
