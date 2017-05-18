@@ -103,9 +103,31 @@ submenuComponent.prototype.deactivate = function() {
   this.backgroundImageMenu.opacity.anim().from(this.backgroundImageMenu.opacity()).to(0.25).dur(500).start();
 }
 
+submenuComponent.prototype.moveUp = function() {
+  if (this.activeMenuItem > 0) {
+    this.activeMenuItem = this.activeMenuItem - 1;
+    const y = this.backgroundImageMenu.y() - this.backgroundImageMenu.h();
+    this.backgroundImageMenu.y.anim().from(this.backgroundImageMenu.y()).to(y).dur(250).start();
+  }
+}
+
+submenuComponent.prototype.moveDown = function() {
+  if (this.activeMenuItem === (this.menuItems.length -1)) {
+    this.activeMenuItem = this.activeMenuItem + 1;
+    const y = this.backgroundImageMenu.y() + this.backgroundImageMenu.h();
+    this.backgroundImageMenu.y.anim().from(this.backgroundImageMenu.y()).to(y).dur(250).start();
+  }
+}
+
 submenuComponent.prototype.play = function() {
   if(!this.omxplayer.isPlaying()) {
-    this.omxplayer.play('http://download.blender.org/peach/bigbuckbunny_movies/big_buck_bunny_1080p_h264.mov');
+    this.omxplayer.play(this.menuItems[this.activeMenuItem].stream);
+  }
+}
+
+submenuComponent.prototype.stop = function() {
+  if(this.omxplayer.isPlaying()) {
+    this.omxplayer.stop();
   }
 }
 

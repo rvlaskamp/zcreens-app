@@ -55,7 +55,7 @@ mainView.prototype.remotePressed = function(key) {
       }
 
       if (currentState === state.menuSmall) {
-        this.menuComponent.action();
+        this.menuComponent.action('ok');
       }
 
 
@@ -92,6 +92,16 @@ mainView.prototype.remotePressed = function(key) {
         this.menuComponent.activateSubmenu();
       }
       break;
+    case 68:
+      // PLAY
+      if (currentState === state.menuSmall) {
+        this.menuComponent.action('play');
+      }
+    case 69:
+      // PLAY
+      if (currentState === state.menuSmall) {
+        this.menuComponent.action('stop');
+      }
     default:
       // Default case
   }

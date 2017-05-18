@@ -4,6 +4,10 @@
     "icon": "tv",
     "submenu": [
       {
+        "title": "Big Buck Bunny test",
+        "stream": "http://download.blender.org/peach/bigbuckbunny_movies/big_buck_bunny_1080p_h264.mov"
+      },
+      {
         "title": "NPO 1",
         "stream": "udp://239.192.0.1:1234"
       },

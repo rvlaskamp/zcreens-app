@@ -118,7 +118,7 @@ menuComponent.prototype.changeMenuItem = function(direction, state) {
         }
 
         if (currentState === state.submenuActive) {
-
+          this.submenu.moveUp();
         }
         break;
       case 'right':
@@ -129,6 +129,10 @@ menuComponent.prototype.changeMenuItem = function(direction, state) {
       case 'down':
         if (currentState === state.menuActive) {
           setMenuItemNext();
+        }
+
+        if (currentState === state.submenuActive) {
+          this.submenu.moveDown();
         }
         break;
       case 'left':
@@ -160,17 +164,29 @@ menuComponent.prototype.activateSubmenu = function() {
   }
 }
 
-menuComponent.prototype.action = function() {
+menuComponent.prototype.action = function(action) {
   const currentState = this.state.get();
 
-  if (currentState === state.menuActive) {
-    this.state.set(state.submenuActive);
-    this.menuGroup.opacity.anim().from(this.menuGroup.opacity()).to(0.25).dur(500).start();
-    this.submenu.activate();
-  }
+  switch (action) {
+    case 'ok':
+      if (currentState === state.menuActive) {
+        this.state.set(state.submenuActive);
+        this.menuGroup.opacity.anim().from(this.menuGroup.opacity()).to(0.25).dur(500).start();
+        this.submenu.activate();
+      }
 
-  if (currentState === state.submenuActive) {
-    this.submenu.play();
+      if (currentState === state.submenuActive) {
+        this.submenu.play();
+      }
+      break;
+    case 'play':
+      if (currentState === state.submenuActive) {
+        this.submenu.play();
+      }
+    case 'stop':
+      if (currentState === state.submenuActive) {
+        this.submenu.stop();
+      }
   }
 
 }

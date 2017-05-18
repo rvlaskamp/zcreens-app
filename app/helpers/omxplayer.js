@@ -12,6 +12,11 @@ omxplayer.prototype.play = function(url) {
   this.playing = true;
 }
 
+omxplayer.prototype.stop = function() {
+  this.player = null;
+  this.playing = false;
+}
+
 omxplayer.prototype.isPlaying = function() {
   return this.playing;
 }
