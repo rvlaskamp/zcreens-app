@@ -111,24 +111,27 @@ submenuComponent.prototype.moveUp = function() {
 
   if (this.activeMenuItem === 0) {
     this.activeMenuItem = this.menuItems.length - 1;
+    const y = this.backgroundImageMenu.h() * this.menuItems.length;
+    this.backgroundImageMenu.y.anim().from(this.backgroundImageMenu.y()).to(y).dur(250).start();
   } else {
     this.activeMenuItem = this.activeMenuItem - 1;
-  }
 
-  const y = this.backgroundImageMenu.y() - this.backgroundImageMenu.h();
-  this.backgroundImageMenu.y.anim().from(this.backgroundImageMenu.y()).to(y).dur(250).start();
+    const y = this.backgroundImageMenu.y() - this.backgroundImageMenu.h();
+    this.backgroundImageMenu.y.anim().from(this.backgroundImageMenu.y()).to(y).dur(250).start();
+  }
 }
 
 submenuComponent.prototype.moveDown = function() {
 
   if (this.activeMenuItem === (this.menuItems.length - 1)) {
     this.activeMenuItem = 0;
+    this.backgroundImageMenu.y.anim().from(this.backgroundImageMenu.y()).to(0).dur(250).start();
   } else {
     this.activeMenuItem = this.activeMenuItem + 1;
-  }
 
-  const y = this.backgroundImageMenu.y() + this.backgroundImageMenu.h();
-  this.backgroundImageMenu.y.anim().from(this.backgroundImageMenu.y()).to(y).dur(250).start();
+    const y = this.backgroundImageMenu.y() + this.backgroundImageMenu.h();
+    this.backgroundImageMenu.y.anim().from(this.backgroundImageMenu.y()).to(y).dur(250).start();
+  }
 }
 
 submenuComponent.prototype.play = function() {
