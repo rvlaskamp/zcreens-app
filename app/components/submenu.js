@@ -24,9 +24,9 @@ function submenuComponent(app) {
 
   this.menu = [];
   this.menuGroup.w(width);
-  this.menuGroup.h(this.app.h());
+  this.menuGroup.h(this.app.h() - 50);
   this.menuGroup.x(dimensionsHelper.calcWidth(this.app.w(), 10));
-  this.menuGroup.y(35);
+  this.menuGroup.y(50);
 
   this.backgroundImageMenu = app.createImageView();
   this.backgroundImageMenu.src(path.resolve(__dirname, '..', 'assets', 'images', 'submenu-item.png'));
@@ -34,7 +34,7 @@ function submenuComponent(app) {
   this.backgroundImageMenu.h(72);
   this.backgroundImageMenu.x(dimensionsHelper.getCenterX(this.menuGroup.w(), this.backgroundImageMenu.w()));
   // this.backgroundImageMenu.y(dimensionsHelper.getCenterY(this.menuGroup.h(), this.backgroundImageMenu.h()));
-  this.backgroundImageMenu.y(20);
+  this.backgroundImageMenu.y(0);
   this.backgroundImageMenu.opacity(0);
 
   this.menuItemsGroup = app.createGroup();
@@ -91,6 +91,7 @@ submenuComponent.prototype.show = function(menuItems) {
   this.menuItemsGroup.opacity.anim().from(0).to(0.25).delay(1000).dur(500).start();
   this.backgroundImageMenu.opacity.anim().from(0).to(0.25).delay(1000).dur(500).start();
 }
+
 
 submenuComponent.prototype.activate = function() {
   this.menuItemsGroup.opacity.anim().from(this.menuItemsGroup.opacity()).to(1).dur(500).start();

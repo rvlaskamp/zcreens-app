@@ -6,6 +6,7 @@ function omxplayer() {
 }
 
 omxplayer.prototype.play = function(url) {
+  this.player = null;
   this.player = this.playerManager.create(url);
   this.player.play();
   this.playing = true;
