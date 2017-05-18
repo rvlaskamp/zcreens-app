@@ -83,9 +83,6 @@ menuComponent.prototype.changeMenuItem = function(direction) {
   const currentMenuItem = this.activeMenuItem;
   const currentState = this.state.get();
 
-  console.log(currentState);
-  console.log(direction);
-
   function setMenuItemPrev() {
     if (this.activeMenuItem === 0) {
       this.activeMenuItem = this.menu.length - 1;
@@ -172,6 +169,7 @@ menuComponent.prototype.changeMenuItem = function(direction) {
         }
 
         if (currentState === state.submenuActive) {
+          
           this.submenu.moveDown();
         }
         break;

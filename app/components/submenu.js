@@ -112,12 +112,13 @@ submenuComponent.prototype.moveUp = function() {
 }
 
 submenuComponent.prototype.moveDown = function() {
-  if (this.activeMenuItem === (this.menuItems.length -1)) {
+  console.log('moveDown');
+  console.log(this.activeMenuItem);
+  
+  if (this.activeMenuItem === (this.menuItems.length - 1)) {
     this.activeMenuItem = this.activeMenuItem + 1;
     const y = this.backgroundImageMenu.y() + this.backgroundImageMenu.h();
     this.backgroundImageMenu.y.anim().from(this.backgroundImageMenu.y()).to(y).dur(250).start();
-
-    console.log('moveDown');
   }
 }
 
