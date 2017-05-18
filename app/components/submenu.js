@@ -50,7 +50,7 @@ function submenuComponent(app) {
 
 submenuComponent.prototype.show = function(menuItems) {
   this.currentIndex = 0;
-  this.menuItems = new circularBuffer(menuItems);
+  this.menuItems = menuItems;
 
   const menuItemSpacing = 20;
   const menuItemHeight = 72;
