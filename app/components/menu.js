@@ -118,6 +118,7 @@ menuComponent.prototype.changeMenuItem = function(direction, state) {
         }
 
         if (currentState === state.submenuActive) {
+          console.log('move up');
           this.submenu.moveUp();
         }
         break;
