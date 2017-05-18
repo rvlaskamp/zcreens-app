@@ -99,7 +99,7 @@ mainView.prototype.remotePressed = function(key) {
       }
       break;
     case 69:
-      // PLAY
+      // Stop
       if (currentState === state.menuSmall) {
         this.menuComponent.action('stop');
       }

@@ -18,6 +18,7 @@ function menuComponent(app, mainGroup, menuItems) {
   this.mainGroup = mainGroup;
   this.menuGroup = app.createGroup();
   this.state = new stateHelper();
+  this.state.set(state.menuActive);
 
   // Create submenu
   this.submenu = new submenuComponent(this.app);
@@ -79,6 +80,8 @@ menuComponent.prototype.resize = function() {
 menuComponent.prototype.changeMenuItem = function(direction, state) {
   const currentMenuItem = this.activeMenuItem;
   const currentState = this.state.get();
+
+  console.log(currentState);
 
   function setMenuItemPrev() {
     if (this.activeMenuItem === 0) {
