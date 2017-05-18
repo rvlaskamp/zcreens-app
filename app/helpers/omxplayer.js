@@ -7,7 +7,7 @@ function omxplayer() {
 }
 
 omxplayer.prototype.play = function(url) {
-  if (this.player && !this.playing) {
+  if (this.player) {
     this.player.stop();
     this.player = null;
   }
