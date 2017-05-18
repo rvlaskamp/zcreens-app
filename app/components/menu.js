@@ -74,12 +74,12 @@ menuComponent.prototype.resize = function() {
   });
 
   this.submenu.show(this.menuItems[this.activeMenuItem].submenu);
+  this.activateSubmenu();
+  this.action();
 }
 
 menuComponent.prototype.changeMenuItem = function(direction, state) {
   const currentMenuItem = this.activeMenuItem;
-
-  console.log(this.menuItems.length);
 
   if (this.menuItems.length > 0) {
     if (direction === 'left' || direction === 'up') {

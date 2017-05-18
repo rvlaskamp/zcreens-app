@@ -58,7 +58,6 @@ mainView.prototype.remotePressed = function(key) {
         this.menuComponent.action();
       }
 
-
       break;
     case 1:
       // UP
