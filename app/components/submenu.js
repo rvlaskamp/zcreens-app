@@ -92,6 +92,10 @@ submenuComponent.prototype.show = function(menuItems) {
   this.backgroundImageMenu.opacity.anim().from(0).to(0.25).delay(1000).dur(500).start();
 }
 
+submenuComponent.prototype.update = function(menuItems) {
+  console.log('update', menuItems);
+}
+
 
 submenuComponent.prototype.activate = function() {
   this.menuItemsGroup.opacity.anim().from(this.menuItemsGroup.opacity()).to(1).dur(500).start();
@@ -114,7 +118,7 @@ submenuComponent.prototype.moveUp = function() {
 submenuComponent.prototype.moveDown = function() {
   console.log('moveDown');
   console.log(this.activeMenuItem);
-  
+
   if (this.activeMenuItem === (this.menuItems.length - 1)) {
     this.activeMenuItem = this.activeMenuItem + 1;
     const y = this.backgroundImageMenu.y() + this.backgroundImageMenu.h();
