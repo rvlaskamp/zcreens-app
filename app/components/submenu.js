@@ -111,7 +111,7 @@ submenuComponent.prototype.moveUp = function() {
 
   if (this.activeMenuItem === 0) {
     this.activeMenuItem = this.menuItems.length - 1;
-    const y = this.backgroundImageMenu.h() * this.menuItems.length;
+    const y = this.backgroundImageMenu.h() * (this.menuItems.length - 1;
     this.backgroundImageMenu.y.anim().from(this.backgroundImageMenu.y()).to(y).dur(250).start();
   } else {
     this.activeMenuItem = this.activeMenuItem - 1;
