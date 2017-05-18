@@ -28,20 +28,13 @@ function submenuComponent(app) {
   this.menuGroup.x(dimensionsHelper.calcWidth(this.app.w(), 10));
   this.menuGroup.y(35);
 
-  this.background = app.createRect();
-  this.background.w(this.menuGroup.w());
-  this.background.h(this.menuGroup.h());
-  this.background.x(0);
-  this.background.y(0);
-  this.background.fill(colors.background);
-  this.background.opacity(1);
-
   this.backgroundImageMenu = app.createImageView();
   this.backgroundImageMenu.src(path.resolve(__dirname, '..', 'assets', 'images', 'submenu-item.png'));
   this.backgroundImageMenu.w(320);
   this.backgroundImageMenu.h(72);
   this.backgroundImageMenu.x(dimensionsHelper.getCenterX(this.menuGroup.w(), this.backgroundImageMenu.w()));
-  this.backgroundImageMenu.y(dimensionsHelper.getCenterY(this.menuGroup.h(), this.backgroundImageMenu.h()));
+  // this.backgroundImageMenu.y(dimensionsHelper.getCenterY(this.menuGroup.h(), this.backgroundImageMenu.h()));
+  this.backgroundImageMenu.y(20);
   this.backgroundImageMenu.opacity(0);
 
   this.menuItemsGroup = app.createGroup();
@@ -51,7 +44,6 @@ function submenuComponent(app) {
   this.menuItemsGroup.y(dimensionsHelper.getCenterY(this.menuGroup.h(), this.menuItemsGroup.h()));
   this.menuItemsGroup.opacity(0);
 
-  this.menuGroup.add(this.background);
   this.menuGroup.add(this.menuItemsGroup);
   this.menuGroup.add(this.backgroundImageMenu);
 }
@@ -72,9 +64,7 @@ submenuComponent.prototype.show = function(menuItems) {
   console.log(totalBottomItems);
   console.log(menuItems.length - 1);
 
-  if ((menuItems.length - 1) < totalItems) {
-    this.rotatingMenu = false;
-    this.menuItemsGroup.h(menuItems.length * menuItemHeight);
+  if (menuItems.length < totalItems) {
     this.menuItemsGroup.y(this.backgroundImageMenu.y());
   }
 
