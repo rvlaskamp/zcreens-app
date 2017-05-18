@@ -7,12 +7,17 @@ function omxplayer() {
 }
 
 omxplayer.prototype.play = function(url) {
+  const playerOptions = {
+    '--live': true,
+    '--deinterlace': true
+  };
+
   if (this.player) {
     this.player.stop();
     this.player = null;
   }
 
-  this.player = this.playerManager.create(url);
+  this.player = this.playerManager.create(url, playerOptions);
   this.player.play();
   this.playing = true;
 }
