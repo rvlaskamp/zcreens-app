@@ -85,40 +85,10 @@ menuComponent.prototype.changeMenuItem = function(direction) {
   const currentMenuItem = this.activeMenuItem;
   const currentState = this.state.get();
 
-  function setMenuItemPrev() {
-    if (this.activeMenuItem === 0) {
-      this.activeMenuItem = this.menu.length - 1;
-    } else {
-      this.activeMenuItem = this.activeMenuItem - 1;
-    }
-
-    this.menu[this.activeMenuItem].activate(state);
-    this.menu[currentMenuItem].deactivate(state);
-
-    if (this.menuSmall) {
-      this.submenu.update(this.menuItems[this.activeMenuItem].submenu);
-    }
-  }
-
-  function setMenuItemNext() {
-    if (this.activeMenuItem === (this.menu.length - 1)) {
-      this.activeMenuItem = 0;
-    } else {
-      this.activeMenuItem = this.activeMenuItem + 1;
-    }
-
-    this.menu[this.activeMenuItem].activate(state);
-    this.menu[currentMenuItem].deactivate(state);
-
-    if (this.menuSmall) {
-      this.submenu.update(this.menuItems[this.activeMenuItem].submenu);
-    }
-  }
-
-  if (this.menuItems.length > 1) {
-    switch (direction) {
-      case 'up':
-        if (currentState === state.menuActive) {
+  switch (direction) {
+    case 'up':
+      if (currentState === state.menuActive) {
+        if (this.menuItems.length > 1) {
           if (this.activeMenuItem === 0) {
             this.activeMenuItem = this.menu.length - 1;
           } else {
@@ -132,14 +102,15 @@ menuComponent.prototype.changeMenuItem = function(direction) {
             this.submenu.update(this.menuItems[this.activeMenuItem].submenu);
           }
         }
+      }
 
-        if (currentState === state.submenuActive) {
-          console.log('move up');
-          this.submenu.moveUp();
-        }
-        break;
-      case 'right':
-        if (currentState === state.menuActive) {
+      if (currentState === state.submenuActive) {
+        this.submenu.moveUp();
+      }
+      break;
+    case 'right':
+      if (currentState === state.menuActive) {
+        if (this.menuItems.length > 1) {
           if (this.activeMenuItem === (this.menu.length - 1)) {
             this.activeMenuItem = 0;
           } else {
@@ -153,9 +124,11 @@ menuComponent.prototype.changeMenuItem = function(direction) {
             this.submenu.update(this.menuItems[this.activeMenuItem].submenu);
           }
         }
-        break;
-      case 'down':
-        if (currentState === state.menuActive) {
+      }
+      break;
+    case 'down':
+      if (currentState === state.menuActive) {
+        if (this.menuItems.length > 1) {
           if (this.activeMenuItem === (this.menu.length - 1)) {
             this.activeMenuItem = 0;
           } else {
@@ -169,14 +142,16 @@ menuComponent.prototype.changeMenuItem = function(direction) {
             this.submenu.update(this.menuItems[this.activeMenuItem].submenu);
           }
         }
+      }
 
-        if (currentState === state.submenuActive) {
+      if (currentState === state.submenuActive) {
+        this.submenu.moveDown();
+      }
 
-          this.submenu.moveDown();
-        }
-        break;
-      case 'left':
-        if (currentState === state.menuActive) {
+      break;
+    case 'left':
+      if (currentState === state.menuActive) {
+        if (this.menuItems.length > 1) {
           if (this.activeMenuItem === 0) {
             this.activeMenuItem = this.menu.length - 1;
           } else {
@@ -190,8 +165,8 @@ menuComponent.prototype.changeMenuItem = function(direction) {
             this.submenu.update(this.menuItems[this.activeMenuItem].submenu);
           }
         }
-        break;
-    }
+      }
+      break;
   }
 }
 
