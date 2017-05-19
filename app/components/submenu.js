@@ -24,24 +24,17 @@ function submenuComponent(app) {
 
   this.menu = [];
   this.menuGroup.w(width);
-  this.menuGroup.h(this.app.h());
+  this.menuGroup.h(this.app.h() - 50);
   this.menuGroup.x(dimensionsHelper.calcWidth(this.app.w(), 10));
-  this.menuGroup.y(40);
-
-  this.background = app.createRect();
-  this.background.w(this.menuGroup.w());
-  this.background.h(this.menuGroup.h());
-  this.background.x(0);
-  this.background.y(0);
-  this.background.fill(colors.background);
-  this.background.opacity(1);
+  this.menuGroup.y(50);
 
   this.backgroundImageMenu = app.createImageView();
   this.backgroundImageMenu.src(path.resolve(__dirname, '..', 'assets', 'images', 'submenu-item.png'));
   this.backgroundImageMenu.w(320);
   this.backgroundImageMenu.h(72);
   this.backgroundImageMenu.x(dimensionsHelper.getCenterX(this.menuGroup.w(), this.backgroundImageMenu.w()));
-  this.backgroundImageMenu.y(dimensionsHelper.getCenterY(this.menuGroup.h(), this.backgroundImageMenu.h()));
+  // this.backgroundImageMenu.y(dimensionsHelper.getCenterY(this.menuGroup.h(), this.backgroundImageMenu.h()));
+  this.backgroundImageMenu.y(0);
   this.backgroundImageMenu.opacity(0);
 
   this.menuItemsGroup = app.createGroup();
@@ -51,14 +44,13 @@ function submenuComponent(app) {
   this.menuItemsGroup.y(dimensionsHelper.getCenterY(this.menuGroup.h(), this.menuItemsGroup.h()));
   this.menuItemsGroup.opacity(0);
 
-  this.menuGroup.add(this.background);
   this.menuGroup.add(this.menuItemsGroup);
   this.menuGroup.add(this.backgroundImageMenu);
 }
 
 submenuComponent.prototype.show = function(menuItems) {
   this.currentIndex = 0;
-  this.menuItems = new circularBuffer(menuItems);
+  this.menuItems = menuItems;
 
   const menuItemSpacing = 20;
   const menuItemHeight = 72;
@@ -72,18 +64,16 @@ submenuComponent.prototype.show = function(menuItems) {
   console.log(totalBottomItems);
   console.log(menuItems.length - 1);
 
-  if ((menuItems.length - 1) < totalItems) {
-    this.rotatingMenu = false;
-    this.menuItemsGroup.h(menuItems.length * menuItemHeight);
+  if (menuItems.length < totalItems) {
     this.menuItemsGroup.y(this.backgroundImageMenu.y());
   }
 
   // Add menu items to the menuItemsGroup
   menuItems.forEach((menuItem, index) => {
     const item = this.app.createGroup();
-    item.w(this.menuItemsGroup.w() - 10);
+    item.w(this.menuItemsGroup.w() - 20);
     item.h(this.backgroundImageMenu.h());
-    item.x(10);
+    item.x(20);
     item.y(menuItemHeight * index);
 
     const label = this.app.createText();
@@ -98,23 +88,61 @@ submenuComponent.prototype.show = function(menuItems) {
     this.menuItemsGroup.add(item);
   });
 
-  this.menuItemsGroup.opacity.anim().from(this.menuGroup.opacity()).to(0.25).delay(1000).dur(500).start();
-  this.backgroundImageMenu.opacity.anim().from(this.menuGroup.opacity()).to(0.25).delay(1000).dur(500).start();
+  this.menuItemsGroup.opacity.anim().from(0).to(0.25).delay(1000).dur(500).start();
+  this.backgroundImageMenu.opacity.anim().from(0).to(0.25).delay(1000).dur(500).start();
 }
 
+submenuComponent.prototype.update = function(menuItems) {
+  console.log('update', menuItems);
+}
+
+
 submenuComponent.prototype.activate = function() {
-  this.menuItemsGroup.opacity.anim().from(this.menuGroup.opacity()).to(1).dur(500).start();
-  this.backgroundImageMenu.opacity.anim().from(this.menuGroup.opacity()).to(1).dur(500).start();
+  this.menuItemsGroup.opacity.anim().from(this.menuItemsGroup.opacity()).to(1).dur(500).start();
+  this.backgroundImageMenu.opacity.anim().from(this.backgroundImageMenu.opacity()).to(1).dur(500).start();
 }
 
 submenuComponent.prototype.deactivate = function() {
-  this.menuItemsGroup.opacity.anim().from(this.menuGroup.opacity()).to(0.25).dur(500).start();
+  this.menuItemsGroup.opacity.anim().from(this.menuItemsGroup.opacity()).to(0.25).dur(500).start();
   this.backgroundImageMenu.opacity.anim().from(this.backgroundImageMenu.opacity()).to(0.25).dur(500).start();
 }
 
-submenuComponent.prototype.play = function() {
+submenuComponent.prototype.moveUp = function() {
 
-    this.omxplayer.play('http://download.blender.org/peach/bigbuckbunny_movies/big_buck_bunny_1080p_h264.mov');
+  if (this.activeMenuItem === 0) {
+    this.activeMenuItem = this.menuItems.length - 1;
+    const y = this.backgroundImageMenu.h() * (this.menuItems.length - 1);
+    this.backgroundImageMenu.y.anim().from(this.backgroundImageMenu.y()).to(y).dur(250).start();
+  } else {
+    this.activeMenuItem = this.activeMenuItem - 1;
+
+    const y = this.backgroundImageMenu.y() - this.backgroundImageMenu.h();
+    this.backgroundImageMenu.y.anim().from(this.backgroundImageMenu.y()).to(y).dur(250).start();
+  }
+}
+
+submenuComponent.prototype.moveDown = function() {
+
+  if (this.activeMenuItem === (this.menuItems.length - 1)) {
+    this.activeMenuItem = 0;
+    this.backgroundImageMenu.y.anim().from(this.backgroundImageMenu.y()).to(0).dur(250).start();
+  } else {
+    this.activeMenuItem = this.activeMenuItem + 1;
+
+    const y = this.backgroundImageMenu.y() + this.backgroundImageMenu.h();
+    this.backgroundImageMenu.y.anim().from(this.backgroundImageMenu.y()).to(y).dur(250).start();
+  }
+}
+
+submenuComponent.prototype.play = function() {
+  console.log('play', this.menuItems[this.activeMenuItem].stream);
+  this.omxplayer.play(this.menuItems[this.activeMenuItem].stream);
+}
+
+submenuComponent.prototype.stop = function() {
+  if(this.omxplayer.isPlaying()) {
+    this.omxplayer.stop();
+  }
 }
 
 module.exports = submenuComponent;

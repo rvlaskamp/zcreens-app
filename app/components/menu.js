@@ -18,6 +18,8 @@ function menuComponent(app, mainGroup, menuItems) {
   this.mainGroup = mainGroup;
   this.menuGroup = app.createGroup();
   this.state = new stateHelper();
+  this.state.set(state.menuActive);
+  this.menuSmall = false;
 
   // Create submenu
   this.submenu = new submenuComponent(this.app);
@@ -59,6 +61,7 @@ function menuComponent(app, mainGroup, menuItems) {
 menuComponent.prototype.resize = function() {
   this.state.set(state.menuActive);
   this.menuContainerActive = true;
+  this.menuSmall = true;
 
   const menuItemHeight = 120;
   const menuHeight = this.menu.length * menuItemHeight;
@@ -78,30 +81,116 @@ menuComponent.prototype.resize = function() {
   this.action();
 }
 
-menuComponent.prototype.changeMenuItem = function(direction, state) {
+menuComponent.prototype.changeMenuItem = function(direction) {
   const currentMenuItem = this.activeMenuItem;
+  const currentState = this.state.get();
 
-  if (this.menuItems.length > 0) {
-    if (direction === 'left' || direction === 'up') {
-      if (this.activeMenuItem === 0) {
-        this.activeMenuItem = this.menu.length - 1;
-      } else {
-        this.activeMenuItem = this.activeMenuItem - 1;
-      }
-
-      this.menu[this.activeMenuItem].activate(state);
-      this.menu[currentMenuItem].deactivate(state);
+  function setMenuItemPrev() {
+    if (this.activeMenuItem === 0) {
+      this.activeMenuItem = this.menu.length - 1;
+    } else {
+      this.activeMenuItem = this.activeMenuItem - 1;
     }
 
-    if (direction === 'right' || direction === 'down') {
-      if (this.activeMenuItem === (this.menu.length - 1)) {
-        this.activeMenuItem = 0;
-      } else {
-        this.activeMenuItem = this.activeMenuItem + 1;
-      }
+    this.menu[this.activeMenuItem].activate(state);
+    this.menu[currentMenuItem].deactivate(state);
 
-      this.menu[this.activeMenuItem].activate(state);
-      this.menu[currentMenuItem].deactivate(state);
+    if (this.menuSmall) {
+      this.submenu.update(this.menuItems[this.activeMenuItem].submenu);
+    }
+  }
+
+  function setMenuItemNext() {
+    if (this.activeMenuItem === (this.menu.length - 1)) {
+      this.activeMenuItem = 0;
+    } else {
+      this.activeMenuItem = this.activeMenuItem + 1;
+    }
+
+    this.menu[this.activeMenuItem].activate(state);
+    this.menu[currentMenuItem].deactivate(state);
+
+    if (this.menuSmall) {
+      this.submenu.update(this.menuItems[this.activeMenuItem].submenu);
+    }
+  }
+
+  if (this.menuItems.length > 1) {
+    switch (direction) {
+      case 'up':
+        if (currentState === state.menuActive) {
+          if (this.activeMenuItem === 0) {
+            this.activeMenuItem = this.menu.length - 1;
+          } else {
+            this.activeMenuItem = this.activeMenuItem - 1;
+          }
+
+          this.menu[this.activeMenuItem].activate(state);
+          this.menu[currentMenuItem].deactivate(state);
+
+          if (this.menuSmall) {
+            this.submenu.update(this.menuItems[this.activeMenuItem].submenu);
+          }
+        }
+
+        if (currentState === state.submenuActive) {
+          console.log('move up');
+          this.submenu.moveUp();
+        }
+        break;
+      case 'right':
+        if (currentState === state.menuActive) {
+          if (this.activeMenuItem === (this.menu.length - 1)) {
+            this.activeMenuItem = 0;
+          } else {
+            this.activeMenuItem = this.activeMenuItem + 1;
+          }
+
+          this.menu[this.activeMenuItem].activate(state);
+          this.menu[currentMenuItem].deactivate(state);
+
+          if (this.menuSmall) {
+            this.submenu.update(this.menuItems[this.activeMenuItem].submenu);
+          }
+        }
+        break;
+      case 'down':
+        if (currentState === state.menuActive) {
+          if (this.activeMenuItem === (this.menu.length - 1)) {
+            this.activeMenuItem = 0;
+          } else {
+            this.activeMenuItem = this.activeMenuItem + 1;
+          }
+
+          this.menu[this.activeMenuItem].activate(state);
+          this.menu[currentMenuItem].deactivate(state);
+
+          if (this.menuSmall) {
+            this.submenu.update(this.menuItems[this.activeMenuItem].submenu);
+          }
+        }
+
+        if (currentState === state.submenuActive) {
+
+          this.submenu.moveDown();
+        }
+        break;
+      case 'left':
+        if (currentState === state.menuActive) {
+          if (this.activeMenuItem === 0) {
+            this.activeMenuItem = this.menu.length - 1;
+          } else {
+            this.activeMenuItem = this.activeMenuItem - 1;
+          }
+
+          this.menu[this.activeMenuItem].activate(state);
+          this.menu[currentMenuItem].deactivate(state);
+
+          if (this.menuSmall) {
+            this.submenu.update(this.menuItems[this.activeMenuItem].submenu);
+          }
+        }
+        break;
     }
   }
 }
@@ -126,17 +215,29 @@ menuComponent.prototype.activateSubmenu = function() {
   }
 }
 
-menuComponent.prototype.action = function() {
+menuComponent.prototype.action = function(action) {
   const currentState = this.state.get();
 
-  if (currentState === state.menuActive) {
-    this.state.set(state.submenuActive);
-    this.menuGroup.opacity.anim().from(this.menuGroup.opacity()).to(0.25).dur(500).start();
-    this.submenu.activate();
-  }
+  switch (action) {
+    case 'ok':
+      if (currentState === state.menuActive) {
+        this.state.set(state.submenuActive);
+        this.menuGroup.opacity.anim().from(this.menuGroup.opacity()).to(0.25).dur(500).start();
+        this.submenu.activate();
+      }
 
-  if (currentState === state.submenuActive) {
-    this.submenu.play();
+      if (currentState === state.submenuActive) {
+        this.submenu.play();
+      }
+      break;
+    case 'play':
+      if (currentState === state.submenuActive) {
+        this.submenu.play();
+      }
+    case 'stop':
+      if (currentState === state.submenuActive) {
+        this.submenu.stop();
+      }
   }
 
 }
