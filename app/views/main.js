@@ -36,6 +36,9 @@ function mainView(app) {
 mainView.prototype.addMenu = function(menuItems) {
   this.state = state.menuLarge;
   this.logoComponent.move();
+
+  console.log(menuItems);
+
   this.menuComponent = new menuComponent(this.app, this.mainGroup, menuItems);
   this.mainGroup.add(this.menuComponent.menuGroup);
 }

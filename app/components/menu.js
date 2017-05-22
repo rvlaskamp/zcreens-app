@@ -102,10 +102,6 @@ menuComponent.prototype.changeMenuItem = function(direction) {
 
           this.menu[this.activeMenuItem].activate(state);
           this.menu[currentMenuItem].deactivate(state);
-
-          if (this.menuSmall) {
-            this.submenu.update(this.menuItems[this.activeMenuItem].submenu);
-          }
         }
       }
 

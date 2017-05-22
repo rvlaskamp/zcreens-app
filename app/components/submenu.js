@@ -13,7 +13,7 @@ const omxplayerHelper = require('../helpers/omxplayer');
 const menuItemComponent = require('./menu-item');
 const submenuItemMarker = require('./submenu-item-marker');
 
-function submenuComponent(app, mainGroup, items) {
+function submenuComponent(app, items) {
   const width = dimensionsHelper.calcWidth(app.w(), 20);
   const totalWidth = dimensionsHelper.calcWidth(app.w(), 30);
   const menuItemSpacing = 20;
