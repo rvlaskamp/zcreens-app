@@ -16,7 +16,6 @@ function menuItemComponent(app, title, icon, options) {
   this.menuItemGroup.x(options.x);
   this.menuItemGroup.y(options.y);
 
-
   // Create the icon image
   this.menuItemIcon = app.createImageView();
   this.menuItemIcon.src(path.resolve(__dirname, '..', 'assets', 'images', 'icons', `${icon}-light.png`));

@@ -2,6 +2,8 @@
  *  Submenu item marker component
  */
 
+const path = require('path');
+
 function submenuMenuItemMarkerComponent(app) {
   this.app = app;
   this.group = app.createGroup();

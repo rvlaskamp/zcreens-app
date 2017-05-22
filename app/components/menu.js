@@ -22,8 +22,8 @@ function menuComponent(app, mainGroup, menuItems) {
   this.menuSmall = false;
 
   // Create submenu
-  this.submenu = new submenuComponent(this.app);
-  this.mainGroup.add(this.submenu.menuGroup);
+  // this.submenu = new submenuComponent(this.app);
+  // this.mainGroup.add(this.submenu.menuGroup);
 
   const width = menuItems.length * 300;
 
@@ -37,15 +37,12 @@ function menuComponent(app, mainGroup, menuItems) {
 
   this.menuItems.forEach((menuItem, index) => {
     const options = {
-      iconPostfix: 'light',
-      opacity: 0.5,
       x: (300 * index),
       y: 0,
       active: false
     };
 
     if (index === 0) {
-      options.opacity = 1;
       options.active = true;
     }
 
