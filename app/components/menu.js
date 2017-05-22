@@ -24,7 +24,7 @@ function menuComponent(app, mainGroup, menuItems) {
 
   // Create submenu
   // this.submenu = new submenuComponent(this.app);
-  this.mainGroup.add(this.submenuGroup);
+  this.mainGroup.insertAdd(this.submenuGroup, 2);
 
   const width = menuItems.length * 300;
 
@@ -213,8 +213,8 @@ menuComponent.prototype.action = function(action) {
     case 'ok':
       if (currentState === state.menuActive) {
         this.state.set(state.submenuActive);
-        this.menuGroup.opacity.anim().from(this.menuGroup.opacity()).to(0.25).dur(500).start();
-        this.submenus[this.activeMenuItem].activate();
+        this.menu[this.activeMenuItem].deactivate(this.menuSmall);
+        this.submenus[this.activeMenuItem].show();
       }
 
       if (currentState === state.submenuActive) {

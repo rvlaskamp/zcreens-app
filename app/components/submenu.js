@@ -41,7 +41,6 @@ function submenuComponent(app, items) {
 
   this.background = app.createRect();
   this.background.fill(colors.background);
-  this.background.opacity(0.95);
   this.background.w(this.menuGroup.w());
   this.background.h(this.menuGroup.h());
   this.background.x(0);
