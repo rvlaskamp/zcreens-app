@@ -38,6 +38,9 @@ function menuComponent(app, mainGroup, menuItems) {
   this.menuGroup.y(dimensionsHelper.getCenterY(this.app.h(), this.menuGroup.h()));
 
   this.menuItems.forEach((menuItem, index) => {
+    console.log(menuItem);
+
+
     // Create submenu
     const submenu = new submenuComponent(this.app, menuItem.submenu);
 

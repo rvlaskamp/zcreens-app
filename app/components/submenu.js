@@ -78,6 +78,7 @@ function submenuComponent(app, items) {
     this.menuItemsGroup.add(item);
   });
 
+  this.menuGroup.add(this.background);
   this.menuGroup.add(this.menuItemsGroup);
   this.menuGroup.add(this.marker.group);
 }
