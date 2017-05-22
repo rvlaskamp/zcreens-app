@@ -24,7 +24,7 @@ function menuComponent(app, mainGroup, menuItems) {
 
   // Create submenu
   // this.submenu = new submenuComponent(this.app);
-  // this.mainGroup.add(this.submenus[this.activeMenuItem].menuGroup);
+  this.mainGroup.add(this.submenuGroup);
 
   const width = menuItems.length * 300;
 
