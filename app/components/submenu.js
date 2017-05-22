@@ -85,12 +85,12 @@ function submenuComponent(app, items) {
 
 submenuComponent.prototype.show = function() {
   this.menuGroup.opacity.anim().from(0).to(1).dur(500).start();
-  this.menuGroup.x().anim().from(this.menuGroup.x()).to(dimensionsHelper.calcWidth(this.app.w(), 10)).dur(500).start();
+  this.menuGroup.x.anim().from(this.menuGroup.x()).to(dimensionsHelper.calcWidth(this.app.w(), 10)).dur(500).start();
 }
 
 submenuComponent.prototype.hide = function(menuItems) {
   this.menuGroup.opacity.anim().from(1).to(0).dur(500).start();
-  this.menuGroup.x().anim().from(this.menuGroup.x()).to(-(dimensionsHelper.calcWidth(this.app.w(), 30))).dur(500).start();
+  this.menuGroup.x.anim().from(this.menuGroup.x()).to(-(dimensionsHelper.calcWidth(this.app.w(), 30))).dur(500).start();
 }
 
 submenuComponent.prototype.update = function(menuItems) {

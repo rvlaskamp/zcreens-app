@@ -95,6 +95,11 @@ menuComponent.prototype.changeMenuItem = function(direction) {
     case 'up':
       if (currentState === state.menuActive) {
         if (this.menuItems.length > 1) {
+
+          if (this.menuSmall) {
+            this.submenus[this.activeMenuItem].hide();
+          }
+
           if (this.activeMenuItem === 0) {
             this.activeMenuItem = this.menu.length - 1;
           } else {
@@ -103,6 +108,10 @@ menuComponent.prototype.changeMenuItem = function(direction) {
 
           this.menu[this.activeMenuItem].activate(state);
           this.menu[currentMenuItem].deactivate(state);
+
+          if (this.menuSmall) {
+            this.submenus[this.activeMenuItem].show();
+          }
         }
       }
 
@@ -113,17 +122,22 @@ menuComponent.prototype.changeMenuItem = function(direction) {
     case 'right':
       if (currentState === state.menuActive) {
         if (this.menuItems.length > 1) {
+
+          if (this.menuSmall) {
+            this.submenus[this.activeMenuItem].hide();
+          }
+
           if (this.activeMenuItem === (this.menu.length - 1)) {
             this.activeMenuItem = 0;
           } else {
             this.activeMenuItem = this.activeMenuItem + 1;
           }
 
-          this.menu[this.activeMenuItem].activate(state);
-          this.menu[currentMenuItem].deactivate(state);
+          this.menu[this.activeMenuItem].activate(currentState);
+          this.menu[currentMenuItem].deactivate(currentState);
 
           if (this.menuSmall) {
-            this.submenu.update(this.menuItems[this.activeMenuItem].submenu);
+            this.submenus[this.activeMenuItem].show();
           }
         }
       }
@@ -137,8 +151,8 @@ menuComponent.prototype.changeMenuItem = function(direction) {
             this.activeMenuItem = this.activeMenuItem + 1;
           }
 
-          this.menu[this.activeMenuItem].activate(state);
-          this.menu[currentMenuItem].deactivate(state);
+          this.menu[this.activeMenuItem].activate(currentState);
+          this.menu[currentMenuItem].deactivate(currentState);
 
           if (this.menuSmall) {
             this.submenu.update(this.menuItems[this.activeMenuItem].submenu);
@@ -160,8 +174,8 @@ menuComponent.prototype.changeMenuItem = function(direction) {
             this.activeMenuItem = this.activeMenuItem - 1;
           }
 
-          this.menu[this.activeMenuItem].activate(state);
-          this.menu[currentMenuItem].deactivate(state);
+          this.menu[this.activeMenuItem].activate(currentState);
+          this.menu[currentMenuItem].deactivate(currentState);
 
           if (this.menuSmall) {
             this.submenu.update(this.menuItems[this.activeMenuItem].submenu);
@@ -177,8 +191,8 @@ menuComponent.prototype.activateMenu = function() {
 
   if (currentState !== state.menuActive) {
     this.state.set(state.menuActive);
-    this.menu[this.activeMenuItem].activate();
-    this.submenus[this.activeMenuItem].deactivate();
+    this.menu[this.activeMenuItem].activate(currentState);
+    this.submenus[this.activeMenuItem].deactivate(currentState);
   }
 }
 
@@ -187,8 +201,8 @@ menuComponent.prototype.activateSubmenu = function() {
 
   if (currentState !== state.submenuActive) {
     this.state.set(state.submenuActive);
-    this.menu[this.activeMenuItem].deactivate();
-    this.submenus[this.activeMenuItem].activate();
+    this.menu[this.activeMenuItem].deactivate(currentState);
+    this.submenus[this.activeMenuItem].activate(currentState);
   }
 }
 
