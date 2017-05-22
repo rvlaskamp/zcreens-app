@@ -102,17 +102,17 @@ submenuComponent.prototype.update = function(menuItems) {
 submenuComponent.prototype.activate = function() {
   this.marker.activate();
 
-  this.menu[this.activeMenuItem].fill(colors.menuDark);
+  this.menu[this.activeMenuItem].children[0].fill(colors.menuDark);
 }
 
 submenuComponent.prototype.deactivate = function() {
   this.marker.deactivate();
 
-  this.menu[this.activeMenuItem].fill(colors.menuLight);
+  this.menu[this.activeMenuItem].children[0].fill(colors.menuLight);
 }
 
 submenuComponent.prototype.moveUp = function() {
-  this.menu[this.activeMenuItem].fill(colors.menuLight);
+  this.menu[this.activeMenuItem].children[0].fill(colors.menuLight);
 
   if (this.activeMenuItem === 0) {
     this.activeMenuItem = this.menuItems.length - 1;
@@ -125,11 +125,11 @@ submenuComponent.prototype.moveUp = function() {
     this.marker.group.y.anim().from(this.marker.group.y()).to(y).dur(250).start();
   }
 
-  this.menu[this.activeMenuItem].fill(colors.menuDark);
+  this.menu[this.activeMenuItem].children[0].fill(colors.menuDark);
 }
 
 submenuComponent.prototype.moveDown = function() {
-  this.menu[this.activeMenuItem].fill(colors.menuLight);
+  this.menu[this.activeMenuItem].children[0].fill(colors.menuLight);
 
   if (this.activeMenuItem === (this.menuItems.length - 1)) {
     this.activeMenuItem = 0;
@@ -141,7 +141,7 @@ submenuComponent.prototype.moveDown = function() {
     this.marker.group.y.anim().from(this.marker.group.y()).to(y).dur(250).start();
   }
 
-  this.menu[this.activeMenuItem].fill(colors.menuDark);
+  this.menu[this.activeMenuItem].children[0].fill(colors.menuDark);
 }
 
 submenuComponent.prototype.play = function() {
