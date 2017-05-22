@@ -29,7 +29,7 @@ function submenuComponent(app, items) {
 
   // Create marker
   this.marker = new submenuItemMarker(this.app);
-  this.marker.group.y(0);
+  this.marker.group.y(50);
 
   // Create background
   this.menu = [];
@@ -116,7 +116,7 @@ submenuComponent.prototype.moveUp = function() {
 
   if (this.activeMenuItem === 0) {
     this.activeMenuItem = this.menuItems.length - 1;
-    const y = this.marker.group.h() * (this.menuItems.length - 1);
+    const y = (this.marker.group.h() * (this.menuItems.length - 1)) + 50;
     this.marker.group.y.anim().from(this.marker.group.y()).to(y).dur(250).start();
   } else {
     this.activeMenuItem = this.activeMenuItem - 1;
@@ -133,7 +133,7 @@ submenuComponent.prototype.moveDown = function() {
 
   if (this.activeMenuItem === (this.menuItems.length - 1)) {
     this.activeMenuItem = 0;
-    this.marker.group.y.anim().from(this.marker.group.y()).to(0).dur(250).start();
+    this.marker.group.y.anim().from(this.marker.group.y()).to(50).dur(250).start();
   } else {
     this.activeMenuItem = this.activeMenuItem + 1;
 
