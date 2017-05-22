@@ -4,7 +4,6 @@
 
 const path = require('path');
 
-
 const colors = require('../config/colors');
 const circularBuffer = require('../helpers/circularBuffer');
 
@@ -14,17 +13,22 @@ const omxplayerHelper = require('../helpers/omxplayer');
 const menuItemComponent = require('./menu-item');
 const submenuItemMarker = require('./submenu-item-marker');
 
-function submenuComponent(app) {
+function submenuComponent(app, items) {
+  const width = dimensionsHelper.calcWidth(app.w(), 20);
+  const menuItemSpacing = 20;
+  const menuItemHeight = 72;
+  const menuItemWidth = 320;
+
   this.app = app;
+  this.activeMenuItem = 0;
+  this.menuItems = items;
+
   this.menuGroup = app.createGroup();
   this.omxplayer = new omxplayerHelper();
 
   // Create components
   this.marker = new submenuItemMarker(this.app);
-
-  this.activeMenuItem = 0;
-
-  const width = dimensionsHelper.calcWidth(this.app.w(), 20);
+  this.marker.group.y(0);
 
   this.menu = [];
   this.menuGroup.w(width);
@@ -38,37 +42,9 @@ function submenuComponent(app) {
   this.menuItemsGroup.x(dimensionsHelper.getCenterX(this.menuGroup.w(), this.menuItemsGroup.w()));
   this.menuItemsGroup.y(dimensionsHelper.getCenterY(this.menuGroup.h(), this.menuItemsGroup.h()));
   this.menuItemsGroup.opacity(0);
-  /*
-  this.backgroundImageMenu = app.createImageView();
-  this.backgroundImageMenu.src(path.resolve(__dirname, '..', 'assets', 'images', 'submenu-item.png'));
-  this.backgroundImageMenu.w(320);
-  this.backgroundImageMenu.h(72);
-  this.backgroundImageMenu.x(dimensionsHelper.getCenterX(this.menuGroup.w(), this.backgroundImageMenu.w()));
-  // this.backgroundImageMenu.y(dimensionsHelper.getCenterY(this.menuGroup.h(), this.backgroundImageMenu.h()));
-  this.backgroundImageMenu.y(0);
-  this.backgroundImageMenu.opacity(0);
-  */
-
-  // Set marker init position
-  this.marker.group.y(0);
-
-  this.menuGroup.add(this.menuItemsGroup);
-  this.menuGroup.add(this.marker.group);
-}
-
-submenuComponent.prototype.show = function(menuItems) {
-  this.currentIndex = 0;
-  this.menuItems = menuItems;
-
-  const menuItemSpacing = 20;
-  const menuItemHeight = 72;
-  const menuItemWidth = 320;
-
-  // Calculate maximum menu items
-  const totalItems = (Math.round(this.menuGroup.h() / (menuItemHeight + menuItemSpacing)) - 1);
 
   // Add menu items to the menuItemsGroup
-  menuItems.forEach((menuItem, index) => {
+  this.menuItems.forEach((menuItem, index) => {
     const item = this.app.createGroup();
     item.w(this.menuItemsGroup.w() - 20);
     item.h(this.backgroundImageMenu.h());
@@ -82,7 +58,7 @@ submenuComponent.prototype.show = function(menuItems) {
     label.w(item.w());
     label.y(45);
 
-    if (index === this.currentIndex) {
+    if (index === this.activeMenuItem) {
       label.fill(colors.menuDark);
     }
 
@@ -90,6 +66,13 @@ submenuComponent.prototype.show = function(menuItems) {
 
     this.menuItemsGroup.add(item);
   });
+
+  this.menuGroup.add(this.menuItemsGroup);
+  this.menuGroup.add(this.marker.group);
+}
+
+submenuComponent.prototype.show = function(menuItems) {
+  this.menuItemsGroup.opacity.anim().from(this.menuItemsGroup.opacity()).to(1).dur(500).start();
 }
 
 submenuComponent.prototype.update = function(menuItems) {
@@ -98,16 +81,19 @@ submenuComponent.prototype.update = function(menuItems) {
 
 
 submenuComponent.prototype.activate = function() {
-  this.menuItemsGroup.opacity.anim().from(this.menuItemsGroup.opacity()).to(1).dur(500).start();
   this.marker.activate();
+
+  this.menuItems[this.activeMenuItem].fill(colors.menuDark);
 }
 
 submenuComponent.prototype.deactivate = function() {
-  this.menuItemsGroup.opacity.anim().from(this.menuItemsGroup.opacity()).to(0.25).dur(500).start();
   this.marker.deactivate();
+
+  this.menuItems[this.activeMenuItem].fill(colors.menuLight);
 }
 
 submenuComponent.prototype.moveUp = function() {
+  this.menuItems[this.activeMenuItem].fill(colors.menuLight);
 
   if (this.activeMenuItem === 0) {
     this.activeMenuItem = this.menuItems.length - 1;
@@ -119,9 +105,13 @@ submenuComponent.prototype.moveUp = function() {
     const y = this.marker.group.h() * (this.activeMenuItem);
     this.marker.group.y.anim().from(this.marker.group.y()).to(y).dur(250).start();
   }
+
+  this.menuItems[this.activeMenuItem].fill(colors.menuDark);
 }
 
 submenuComponent.prototype.moveDown = function() {
+  this.menuItems[this.activeMenuItem].fill(colors.menuLight);
+
   if (this.activeMenuItem === (this.menuItems.length - 1)) {
     this.activeMenuItem = 0;
     this.marker.group.y.anim().from(this.marker.group.y()).to(0).dur(250).start();
@@ -131,6 +121,8 @@ submenuComponent.prototype.moveDown = function() {
     const y = this.marker.group.h() * (this.activeMenuItem);
     this.marker.group.y.anim().from(this.marker.group.y()).to(y).dur(250).start();
   }
+
+  this.menuItems[this.activeMenuItem].fill(colors.menuDark);
 }
 
 submenuComponent.prototype.play = function() {

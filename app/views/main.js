@@ -51,7 +51,7 @@ mainView.prototype.remotePressed = function(key) {
 
         // Resize background to 10% from App width
         this.background.w.anim().from(this.background.w()).to(dimensionsHelper.calcWidth(this.app.w(), 10)).dur(1000).start();
-        this.background.opacity.anim().from(1).to(0.75).start();
+        this.background.opacity.anim().from(1).to(0.95).start();
 
         this.menuComponent.resize();
         this.logoComponent.hide();

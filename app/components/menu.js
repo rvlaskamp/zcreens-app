@@ -28,6 +28,7 @@ function menuComponent(app, mainGroup, menuItems) {
   const width = menuItems.length * 300;
 
   this.menu = [];
+  this.submenus = [];
   this.menuGroup.opacity(0);
   this.menuGroup.w(width);
   this.menuGroup.h(200);
