@@ -83,7 +83,7 @@ function submenuComponent(app, items) {
   this.menuGroup.add(this.marker.group);
 }
 
-submenuComponent.prototype.show = function(menuItems) {
+submenuComponent.prototype.show = function() {
   this.menuGroup.opacity.anim().from(0).to(1).dur(500).start();
   this.menuGroup.x().anim().from(this.menuGroup.x()).to(dimensionsHelper.calcWidth(this.app.w(), 10)).dur(500).start();
 }

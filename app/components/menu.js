@@ -38,7 +38,6 @@ function menuComponent(app, mainGroup, menuItems) {
   this.menuGroup.y(dimensionsHelper.getCenterY(this.app.h(), this.menuGroup.h()));
 
   this.menuItems.forEach((menuItem, index) => {
-    console.log(menuItem);
 
     // Create submenu
     const submenu = new submenuComponent(this.app, menuItem.submenu);
@@ -84,8 +83,8 @@ menuComponent.prototype.resize = function() {
     menuItem.resize(delay, menuItemY);
   });
 
-  // this.submenu.show(this.menuItems[this.activeMenuItem].submenu);
-  // this.activateSubmenu();
+  this.submenus[this.activeMenuItem].show();
+  this.activateSubmenu();
 }
 
 menuComponent.prototype.changeMenuItem = function(direction) {
@@ -178,8 +177,8 @@ menuComponent.prototype.activateMenu = function() {
 
   if (currentState !== state.menuActive) {
     this.state.set(state.menuActive);
-    this.menuGroup.opacity.anim().from(this.menuGroup.opacity()).to(1).dur(500).start();
-    this.submenu.deactivate();
+    this.menu[this.activeMenuItem].activate();
+    this.submenus[this.activeMenuItem].deactivate();
   }
 }
 
@@ -188,8 +187,8 @@ menuComponent.prototype.activateSubmenu = function() {
 
   if (currentState !== state.submenuActive) {
     this.state.set(state.submenuActive);
-    this.menuGroup.opacity.anim().from(this.menuGroup.opacity()).to(0.25).dur(500).start();
-    this.submenu.activate();
+    this.menu[this.activeMenuItem].deactivate();
+    this.submenus[this.activeMenuItem].activate();
   }
 }
 
