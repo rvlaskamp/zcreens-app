@@ -122,7 +122,6 @@ submenuComponent.prototype.moveUp = function() {
 }
 
 submenuComponent.prototype.moveDown = function() {
-
   if (this.activeMenuItem === (this.menuItems.length - 1)) {
     this.activeMenuItem = 0;
     this.marker.group.y.anim().from(this.marker.group.y()).to(0).dur(250).start();

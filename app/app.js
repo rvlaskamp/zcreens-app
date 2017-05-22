@@ -9,6 +9,7 @@
   Configuration
  */
 const dimensions = require('./config/dimensions');
+const colors = require('./config/colors');
 
 // CEC Client
 const NodeCec = nodecec.NodeCec;
@@ -37,6 +38,7 @@ const views = {
 app.w(dimensions.app.width);
 app.h(dimensions.app.height);
 app.opacity(0);
+app.fill(colors.background);
 app.title('Zcreens');
 app.showFPS(false);
 
@@ -56,7 +58,7 @@ app.showFPS(false);
 
    // Add the main view to the root group
    const mainView = new views.main(app);
-   
+
    root.add(mainView.mainGroup);
 
    // Load the menu items

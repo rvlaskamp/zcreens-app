@@ -76,9 +76,8 @@ menuComponent.prototype.resize = function() {
     menuItem.resize(delay, menuItemY);
   });
 
-  this.submenu.show(this.menuItems[this.activeMenuItem].submenu);
-  this.activateSubmenu();
-  this.action();
+  // this.submenu.show(this.menuItems[this.activeMenuItem].submenu);
+  // this.activateSubmenu();
 }
 
 menuComponent.prototype.changeMenuItem = function(direction) {

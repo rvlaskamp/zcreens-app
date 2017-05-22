@@ -4,7 +4,6 @@
 
 const state = require('../config/state');
 
-const backgroundComponent = require('../components/background');
 const logoComponent = require('../components/logo');
 const menuComponent = require('../components/menu');
 
@@ -13,44 +12,47 @@ const dimensionsHelper = require('../helpers/dimensions');
 
 function mainView(app) {
   this.app = app;
-  this.mainGroup = app.createGroup();
-  this.backgroundComponent = new backgroundComponent(app);
-  this.logoComponent = new logoComponent(app);
-  this.state = new stateHelper();
+  this.state = null;
 
-  this.mainGroup.add(this.backgroundComponent.background);
+  // Create main Group
+  this.mainGroup = app.createGroup();
+
+  // Create background Rect
+  this.background = app.createRect();
+  this.background.w.bindTo(app.w);
+  this.background.h.bindTo(app.h);
+  this.background.fill(colors.background);
+  this.background.opacity(1);
+
+  // Create logo Component
+  this.logoComponent = new logoComponent(app);
+
+  // Add background and logo to mainGroup
+  this.mainGroup.add(this.background);
   this.mainGroup.add(this.logoComponent.logo);
 }
 
 mainView.prototype.addMenu = function(menuItems) {
-  this.state.set(state.menuLarge);
+  this.state = state.menuLarge;
   this.logoComponent.move();
   this.menuComponent = new menuComponent(this.app, this.mainGroup, menuItems);
-
   this.mainGroup.add(this.menuComponent.menuGroup);
-
-  if (process.argv[2]) {
-    setTimeout(() => {
-      this.state.set(state.menuSmall);
-      this.menuComponent.resize();
-      this.backgroundComponent.resize();
-      this.logoComponent.hide();
-
-    }, 2000);
-  }
 }
 
 mainView.prototype.remotePressed = function(key) {
-  const currentState = this.state.get();
+  const currentState = this.state;
 
   switch(key) {
     case 0:
       // OK Button
-
       if (currentState === state.menuLarge) {
-        this.state.set(state.menuSmall);
+        this.state = state.menuSmall;
+
+        // Resize background to 10% from App width
+        this.background.w.anim().from(this.background.w()).to(dimensionsHelper.calcWidth(this.app.w(), 10)).dur(1000).start();
+        this.background.opacity.anim().from(1).to(0.75).start();
+
         this.menuComponent.resize();
-        this.backgroundComponent.resize();
         this.logoComponent.hide();
       }
 
