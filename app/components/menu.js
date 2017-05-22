@@ -24,7 +24,7 @@ function menuComponent(app, mainGroup, menuItems) {
 
   // Create submenu
   // this.submenu = new submenuComponent(this.app);
-  // this.mainGroup.add(this.submenu.menuGroup);
+  // this.mainGroup.add(this.submenus[this.activeMenuItem].menuGroup);
 
   const width = menuItems.length * 300;
 
@@ -84,7 +84,9 @@ menuComponent.prototype.resize = function() {
   });
 
   this.submenus[this.activeMenuItem].show();
-  this.activateSubmenu();
+  this.state.set(state.submenuActive);
+  this.menu[this.activeMenuItem].deactivate(this.menuSmall);
+  this.submenus[this.activeMenuItem].activate();
 }
 
 menuComponent.prototype.changeMenuItem = function(direction) {
@@ -96,27 +98,20 @@ menuComponent.prototype.changeMenuItem = function(direction) {
       if (currentState === state.menuActive) {
         if (this.menuItems.length > 1) {
 
-          if (this.menuSmall) {
-            this.submenus[this.activeMenuItem].hide();
-          }
-
           if (this.activeMenuItem === 0) {
             this.activeMenuItem = this.menu.length - 1;
           } else {
             this.activeMenuItem = this.activeMenuItem - 1;
           }
 
-          this.menu[this.activeMenuItem].activate(state);
-          this.menu[currentMenuItem].deactivate(state);
+          this.menu[this.activeMenuItem].activate(this.menuSmall);
+          this.menu[currentMenuItem].deactivate(this.menuSmall);
 
-          if (this.menuSmall) {
-            this.submenus[this.activeMenuItem].show();
-          }
         }
       }
 
       if (currentState === state.submenuActive) {
-        this.submenu.moveUp();
+        this.submenus[this.activeMenuItem].moveUp();
       }
       break;
     case 'right':
@@ -133,8 +128,8 @@ menuComponent.prototype.changeMenuItem = function(direction) {
             this.activeMenuItem = this.activeMenuItem + 1;
           }
 
-          this.menu[this.activeMenuItem].activate(currentState);
-          this.menu[currentMenuItem].deactivate(currentState);
+          this.menu[this.activeMenuItem].activate(this.menuSmall);
+          this.menu[currentMenuItem].deactivate(this.menuSmall);
 
           if (this.menuSmall) {
             this.submenus[this.activeMenuItem].show();
@@ -151,34 +146,39 @@ menuComponent.prototype.changeMenuItem = function(direction) {
             this.activeMenuItem = this.activeMenuItem + 1;
           }
 
-          this.menu[this.activeMenuItem].activate(currentState);
-          this.menu[currentMenuItem].deactivate(currentState);
+          this.menu[this.activeMenuItem].activate(this.menuSmall);
+          this.menu[currentMenuItem].deactivate(this.menuSmall);
 
           if (this.menuSmall) {
-            this.submenu.update(this.menuItems[this.activeMenuItem].submenu);
+             // this.submenus[this.activeMenuItem].update(this.menuItems[this.activeMenuItem].submenu);
           }
         }
       }
 
       if (currentState === state.submenuActive) {
-        this.submenu.moveDown();
+        this.submenus[this.activeMenuItem].moveDown();
       }
 
       break;
     case 'left':
       if (currentState === state.menuActive) {
         if (this.menuItems.length > 1) {
+
+          if (this.menuSmall) {
+            this.submenus[this.activeMenuItem].hide();
+          }
+
           if (this.activeMenuItem === 0) {
             this.activeMenuItem = this.menu.length - 1;
           } else {
             this.activeMenuItem = this.activeMenuItem - 1;
           }
 
-          this.menu[this.activeMenuItem].activate(currentState);
-          this.menu[currentMenuItem].deactivate(currentState);
+          this.menu[this.activeMenuItem].activate(this.menuSmall);
+          this.menu[currentMenuItem].deactivate(this.menuSmall);
 
           if (this.menuSmall) {
-            this.submenu.update(this.menuItems[this.activeMenuItem].submenu);
+            this.submenus[this.activeMenuItem].show();
           }
         }
       }
@@ -191,8 +191,8 @@ menuComponent.prototype.activateMenu = function() {
 
   if (currentState !== state.menuActive) {
     this.state.set(state.menuActive);
-    this.menu[this.activeMenuItem].activate(currentState);
-    this.submenus[this.activeMenuItem].deactivate(currentState);
+    this.menu[this.activeMenuItem].activate(this.menuSmall);
+    this.submenus[this.activeMenuItem].deactivate(this.menuSmall);
   }
 }
 
@@ -201,8 +201,8 @@ menuComponent.prototype.activateSubmenu = function() {
 
   if (currentState !== state.submenuActive) {
     this.state.set(state.submenuActive);
-    this.menu[this.activeMenuItem].deactivate(currentState);
-    this.submenus[this.activeMenuItem].activate(currentState);
+    this.menu[this.activeMenuItem].deactivate(this.menuSmall);
+    this.submenus[this.activeMenuItem].activate(this.menuSmall);
   }
 }
 
@@ -214,20 +214,20 @@ menuComponent.prototype.action = function(action) {
       if (currentState === state.menuActive) {
         this.state.set(state.submenuActive);
         this.menuGroup.opacity.anim().from(this.menuGroup.opacity()).to(0.25).dur(500).start();
-        this.submenu.activate();
+        this.submenus[this.activeMenuItem].activate();
       }
 
       if (currentState === state.submenuActive) {
-        this.submenu.play();
+        this.submenus[this.activeMenuItem].play();
       }
       break;
     case 'play':
       if (currentState === state.submenuActive) {
-        this.submenu.play();
+        this.submenus[this.activeMenuItem].play();
       }
     case 'stop':
       if (currentState === state.submenuActive) {
-        this.submenu.stop();
+        this.submenus[this.activeMenuItem].stop();
       }
   }
 
