@@ -121,7 +121,7 @@ submenuComponent.prototype.moveUp = function() {
   } else {
     this.activeMenuItem = this.activeMenuItem - 1;
 
-    const y = this.marker.group.h() * (this.activeMenuItem);
+    const y = (this.marker.group.h() * (this.activeMenuItem)) + 50;
     this.marker.group.y.anim().from(this.marker.group.y()).to(y).dur(250).start();
   }
 
@@ -137,7 +137,7 @@ submenuComponent.prototype.moveDown = function() {
   } else {
     this.activeMenuItem = this.activeMenuItem + 1;
 
-    const y = this.marker.group.h() * (this.activeMenuItem);
+    const y = (this.marker.group.h() * (this.activeMenuItem)) + 50;
     this.marker.group.y.anim().from(this.marker.group.y()).to(y).dur(250).start();
   }
 
