@@ -58,7 +58,7 @@ function submenuComponent(app, items) {
   this.menuItems.forEach((menuItem, index) => {
     const item = this.app.createGroup();
     item.w(this.menuItemsGroup.w() - 20);
-    item.h(this.backgroundImageMenu.h());
+    item.h(menuItemHeight);
     item.x(20);
     item.y(menuItemHeight * index);
 
