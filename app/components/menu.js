@@ -17,6 +17,7 @@ function menuComponent(app, mainGroup, menuItems) {
   this.menuItems = menuItems;
   this.mainGroup = mainGroup;
   this.menuGroup = app.createGroup();
+  this.submenuGroup = app.createGroup();
   this.state = new stateHelper();
   this.state.set(state.menuActive);
   this.menuSmall = false;
@@ -37,6 +38,9 @@ function menuComponent(app, mainGroup, menuItems) {
   this.menuGroup.y(dimensionsHelper.getCenterY(this.app.h(), this.menuGroup.h()));
 
   this.menuItems.forEach((menuItem, index) => {
+    // Create submenu
+    const submenu = new submenuComponent(this.app, menuItem.submenu);
+
     const options = {
       x: (300 * index),
       y: 0,
@@ -48,8 +52,12 @@ function menuComponent(app, mainGroup, menuItems) {
     }
 
     const item = new menuItemComponent(app, menuItem.title, menuItem.icon, options);
+
     this.menuGroup.add(item.menuItemGroup);
+    this.submenuGroup.add(submenu.menuGroup);
+
     this.menu.push(item);
+    this.submenus.push(submenu);
 
     this.menuGroup.opacity.anim().from(0).to(1).delay(500).dur(500).start();
   });

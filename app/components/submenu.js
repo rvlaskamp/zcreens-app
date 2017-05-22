@@ -13,8 +13,9 @@ const omxplayerHelper = require('../helpers/omxplayer');
 const menuItemComponent = require('./menu-item');
 const submenuItemMarker = require('./submenu-item-marker');
 
-function submenuComponent(app, items) {
+function submenuComponent(app, mainGroup, items) {
   const width = dimensionsHelper.calcWidth(app.w(), 20);
+  const totalWidth = dimensionsHelper.calcWidth(app.w(), 30);
   const menuItemSpacing = 20;
   const menuItemHeight = 72;
   const menuItemWidth = 320;
@@ -26,22 +27,32 @@ function submenuComponent(app, items) {
   this.menuGroup = app.createGroup();
   this.omxplayer = new omxplayerHelper();
 
-  // Create components
+  // Create marker
   this.marker = new submenuItemMarker(this.app);
   this.marker.group.y(0);
 
+  // Create background
   this.menu = [];
   this.menuGroup.w(width);
-  this.menuGroup.h(this.app.h() - 50);
-  this.menuGroup.x(dimensionsHelper.calcWidth(this.app.w(), 10));
-  this.menuGroup.y(50);
+  this.menuGroup.h(this.app.h());
+  this.menuGroup.x(-totalWidth);
+  this.menuGroup.y(0);
+  this.menuGroup.opacity(0);
+
+  this.background = app.createRect();
+  this.background.fill(colors.background);
+  this.background.opacity(0.95);
+  this.background.w(this.menuGroup.w());
+  this.background.h(this.menuGroup.h());
+  this.background.x(0);
+  this.background.y(0);
 
   this.menuItemsGroup = app.createGroup();
   this.menuItemsGroup.w(320);
-  this.menuItemsGroup.h(this.menuGroup.h());
+  this.menuItemsGroup.h(this.menuGroup.h() - 50);
   this.menuItemsGroup.x(dimensionsHelper.getCenterX(this.menuGroup.w(), this.menuItemsGroup.w()));
-  this.menuItemsGroup.y(dimensionsHelper.getCenterY(this.menuGroup.h(), this.menuItemsGroup.h()));
-  this.menuItemsGroup.opacity(0);
+  this.menuItemsGroup.y(50);
+
 
   // Add menu items to the menuItemsGroup
   this.menuItems.forEach((menuItem, index) => {
@@ -72,7 +83,13 @@ function submenuComponent(app, items) {
 }
 
 submenuComponent.prototype.show = function(menuItems) {
-  this.menuItemsGroup.opacity.anim().from(this.menuItemsGroup.opacity()).to(1).dur(500).start();
+  this.menuGroup.opacity.anim().from(0).to(1).dur(500).start();
+  this.menuGroup.x().anim().from(this.menuGroup.x()).to(dimensionsHelper.calcWidth(this.app.w(), 10)).dur(500).start();
+}
+
+submenuComponent.prototype.hide = function(menuItems) {
+  this.menuGroup.opacity.anim().from(1).to(0).dur(500).start();
+  this.menuGroup.x().anim().from(this.menuGroup.x()).to(-(dimensionsHelper.calcWidth(this.app.w(), 30))).dur(500).start();
 }
 
 submenuComponent.prototype.update = function(menuItems) {
