@@ -20,7 +20,7 @@ function submenuComponent(app) {
   this.omxplayer = new omxplayerHelper();
 
   // Create components
-  this.marker = new submenuItemMarker();
+  this.marker = new submenuItemMarker(this.app);
 
   this.activeMenuItem = 0;
 
