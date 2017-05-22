@@ -192,7 +192,7 @@ menuComponent.prototype.activateMenu = function() {
   if (currentState !== state.menuActive) {
     this.state.set(state.menuActive);
     this.menu[this.activeMenuItem].activate(this.menuSmall);
-    this.submenus[this.activeMenuItem].deactivate(this.menuSmall);
+    this.submenus[this.activeMenuItem].hide(this.menuSmall);
   }
 }
 
@@ -202,7 +202,7 @@ menuComponent.prototype.activateSubmenu = function() {
   if (currentState !== state.submenuActive) {
     this.state.set(state.submenuActive);
     this.menu[this.activeMenuItem].deactivate(this.menuSmall);
-    this.submenus[this.activeMenuItem].activate(this.menuSmall);
+    this.submenus[this.activeMenuItem].show(this.menuSmall);
   }
 }
 
