@@ -3,6 +3,7 @@
  */
 
 const state = require('../config/state');
+const colors = require('../config/colors');
 
 const logoComponent = require('../components/logo');
 const menuComponent = require('../components/menu');
