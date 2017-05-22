@@ -78,7 +78,6 @@ menuComponent.prototype.resize = function() {
 
   this.submenu.show(this.menuItems[this.activeMenuItem].submenu);
   this.activateSubmenu();
-  this.action();
 }
 
 menuComponent.prototype.changeMenuItem = function(direction) {
