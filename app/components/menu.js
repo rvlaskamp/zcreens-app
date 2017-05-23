@@ -230,7 +230,6 @@ menuComponent.prototype.getHidden = function() {
 
 menuComponent.prototype.show = function() {
   clearTimeout(this.menuHideTimer);
-  
   this.submenus[this.activeMenuItem].show();
   this.mainGroup.x.anim().from(this.mainGroup.x()).to(0).dur(250).start();
   this.isHidden = false;
@@ -238,7 +237,7 @@ menuComponent.prototype.show = function() {
   // Set timer
   this.menuHideTimer = setTimeout(() => {
     this.submenus[this.activeMenuItem].hide(this.menuSmall);
-    this.mainGroup.x.anim().from(this.mainGroup.x()).to(-(this.mainGroup.w())).delay(500).dur(250).start();
+    this.mainGroup.x.anim().from(this.mainGroup.x()).to(-(dimensionsHelper.calcWidth(this.app.w(), 10))).delay(250).dur(250).start();
     this.isHidden = true;
   }, 5000);
 }
