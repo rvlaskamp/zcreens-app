@@ -1,4 +1,5 @@
 const state = {
+  menuHidden: 'menuHidden',
   menuLarge: 'menuLarge',
   menuSmall: 'menuSmall',
   menuActive: 'menuActive',

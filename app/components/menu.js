@@ -205,6 +205,16 @@ menuComponent.prototype.activateSubmenu = function() {
   }
 }
 
+menuComponent.prototype.hide = function() {
+  this.submenus[this.activeMenuItem].hide(this.menuSmall);
+  this.mainGroup.x.anim().from(this.mainGroup.x()).to(-(this.mainGroup.w())).delay(500).dur(250).start();
+}
+
+menuComponent.prototype.show = function() {
+  this.submenus[this.activeMenuItem].show();
+  this.mainGroup.x.anim().from(this.mainGroup.x()).to(0).dur(250).start();
+}
+
 menuComponent.prototype.action = function(action) {
   const currentState = this.state.get();
 
