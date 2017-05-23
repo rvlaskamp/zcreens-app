@@ -26,17 +26,25 @@ function menuItemComponent(app, title, icon, options) {
   this.menuItemIcon.x(dimensionsHelper.getCenterX(274, 174));
   this.menuItemIcon.y(dimensionsHelper.getCenterY(274, 174));
 
+  this.menuItemIconSelected = app.createImageView();
+  this.menuItemIconSelected.src(path.resolve(__dirname, '..', 'assets', 'images', 'icons', `${icon}-dark.png`));
+  this.menuItemIconSelected.w(174);
+  this.menuItemIconSelected.h(174);
+  this.menuItemIconSelected.x(dimensionsHelper.getCenterX(274, 174));
+  this.menuItemIconSelected.y(dimensionsHelper.getCenterY(274, 174));
+
   this.menuItemIconActive = app.createImageView();
-  this.menuItemIconActive.src(path.resolve(__dirname, '..', 'assets', 'images', 'icons', `${icon}-dark.png`));
+  this.menuItemIconActive.src(path.resolve(__dirname, '..', 'assets', 'images', 'icons', `${icon}-active.png`));
   this.menuItemIconActive.w(174);
   this.menuItemIconActive.h(174);
   this.menuItemIconActive.x(dimensionsHelper.getCenterX(274, 174));
   this.menuItemIconActive.y(dimensionsHelper.getCenterY(274, 174));
 
-  if (options.active) {
-    this.menuItemIconActive.opacity(1);
+
+  if (options.selected) {
+    this.menuItemIconSelected.opacity(1);
   } else {
-    this.menuItemIconActive.opacity(0);
+    this.menuItemIconSelected.opacity(0);
   }
 
   // Create the title
@@ -51,7 +59,7 @@ function menuItemComponent(app, title, icon, options) {
   this.menuItemTitle.opacity(options.opacity);
 
   this.menuItemGroup.add(this.menuItemIcon);
-  this.menuItemGroup.add(this.menuItemIconActive);
+  this.menuItemGroup.add(this.menuItemIconSelected);
   this.menuItemGroup.add(this.menuItemTitle);
 
 }
@@ -60,16 +68,16 @@ menuItemComponent.prototype.resize = function(delay, y) {
   this.menuItemIcon.sx.anim().from(this.menuItemIcon.sx()).to(0.5).dur(250).delay(delay).start();
   this.menuItemIcon.sy.anim().from(this.menuItemIcon.sy()).to(0.5).dur(250).delay(delay).start();
   this.menuItemIcon.x.anim().from(this.menuItemIcon.x()).to(dimensionsHelper.getCenterX(274, (174 / 2))).dur(250).delay(delay).start();
-  this.menuItemIconActive.sx.anim().from(this.menuItemIcon.sx()).to(0.5).dur(250).delay(delay).start();
-  this.menuItemIconActive.sy.anim().from(this.menuItemIcon.sy()).to(0.5).dur(250).delay(delay).start();
-  this.menuItemIconActive.x.anim().from(this.menuItemIcon.x()).to(dimensionsHelper.getCenterX(274, (174 / 2))).dur(250).delay(delay).start();
+  this.menuItemIconSelected.sx.anim().from(this.menuItemIcon.sx()).to(0.5).dur(250).delay(delay).start();
+  this.menuItemIconSelected.sy.anim().from(this.menuItemIcon.sy()).to(0.5).dur(250).delay(delay).start();
+  this.menuItemIconSelected.x.anim().from(this.menuItemIcon.x()).to(dimensionsHelper.getCenterX(274, (174 / 2))).dur(250).delay(delay).start();
   this.menuItemTitle.opacity.anim().from(this.menuItemTitle.opacity()).to(0).dur(250).delay(delay).start();
   this.menuItemGroup.x.anim().from(this.menuItemGroup.x()).to(0).dur(500).start();
   this.menuItemGroup.y.anim().from(this.menuItemGroup.y()).to(y).dur(500).start();
 }
 
 menuItemComponent.prototype.activate = function(menuSmall) {
-  this.menuItemIconActive.opacity.anim().from(0).to(1).dur(250).start();
+  this.menuItemIconSelected.opacity.anim().from(0).to(1).dur(250).start();
   this.menuItemIcon.opacity.anim().from(1).to(0).dur(250).start();
 
   if (!menuSmall) {
@@ -78,7 +86,7 @@ menuItemComponent.prototype.activate = function(menuSmall) {
 }
 
 menuItemComponent.prototype.deactivate = function(menuSmall) {
-  this.menuItemIconActive.opacity.anim().from(1).to(0).dur(250).start();
+  this.menuItemIconSelected.opacity.anim().from(1).to(0).dur(250).start();
   this.menuItemIcon.opacity.anim().from(0).to(1).dur(250).start();
 
   if (!menuSmall) {

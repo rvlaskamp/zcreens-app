@@ -44,11 +44,11 @@ function menuComponent(app, mainGroup, menuItems) {
     const options = {
       x: (300 * index),
       y: 0,
-      active: false
+      selected: false
     };
 
     if (index === 0) {
-      options.active = true;
+      options.selected = true;
     }
 
     const item = new menuItemComponent(app, menuItem.title, menuItem.icon, options);
