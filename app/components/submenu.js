@@ -22,6 +22,7 @@ function submenuComponent(app, items) {
 
   this.app = app;
   this.activeMenuItem = 0;
+  this.playingMenuItem = null;
   this.menuItems = items;
 
   this.menuGroup = app.createGroup();
@@ -146,11 +147,15 @@ submenuComponent.prototype.moveDown = function() {
 submenuComponent.prototype.play = function() {
   console.log('play', this.menuItems[this.activeMenuItem].stream);
   this.omxplayer.play(this.menuItems[this.activeMenuItem].stream);
+  this.playingMenuItem = this.activeMenuItem;
+  this.menu[this.playingMenuItem].children[0].fontWeight(500);
 }
 
 submenuComponent.prototype.stop = function() {
   if(this.omxplayer.isPlaying()) {
     this.omxplayer.stop();
+    this.menu[this.playingMenuItem].children[0].fontWeight(400);
+    this.playingMenuItem = null;
   }
 }
 
