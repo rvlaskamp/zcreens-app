@@ -49,6 +49,8 @@ mainView.prototype.remotePressed = function(key) {
   function setMenuHideTimer() {
     clearTimeout(this.menuHideTimer);
 
+    console.log('hide menu');
+
     // Set timer
     this.menuHideTimer = setTimeout(() => {
       this.menuComponent.hide();
