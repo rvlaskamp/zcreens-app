@@ -25,7 +25,7 @@ function menuComponent(app, mainGroup, menuItems) {
   this.menuSmall = false;
 
   // Create submenu
-  this.mainGroup.insertAt(this.submenuGroup, 2);
+  this.mainGroup.insertAt(this.submenuGroup, 0);
 
   this.menu = [];
   this.submenus = [];
