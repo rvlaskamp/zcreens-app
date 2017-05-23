@@ -65,7 +65,6 @@ mainView.prototype.remotePressed = function(key) {
 
         if (this.menuComponent.getHidden()) {
           this.menuComponent.show();
-          this.state = state.menuSmall;
         } else {
           this.menuComponent.action('ok');
           this.menuComponent.setHideTimer();
