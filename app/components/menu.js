@@ -237,7 +237,7 @@ menuComponent.prototype.show = function() {
   // Set timer
   this.menuHideTimer = setTimeout(() => {
     this.submenus[this.activeMenuItem].hide(this.menuSmall);
-    this.mainGroup.x.anim().from(this.mainGroup.x()).to(-(dimensionsHelper.calcWidth(this.app.w(), 10))).delay(250).dur(250).start();
+    this.mainGroup.x.anim().from(this.mainGroup.x()).to(-(dimensionsHelper.calcWidth(this.app.w(), 30))).delay(250).dur(250).start();
     this.isHidden = true;
   }, 5000);
 }
