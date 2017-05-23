@@ -60,13 +60,14 @@ mainView.prototype.remotePressed = function(key) {
       }
 
       if (currentState === state.menuSmall) {
-        this.menuComponent.action('ok');
-        this.menuComponent.setHideTimer();
-      }
 
-      if (currentState === state.menuHidden) {
-        this.menuComponent.show();
-        this.state = state.menuSmall;
+        if (this.menuComponent.getHidden()) {
+          this.menuComponent.show();
+          this.state = state.menuSmall;
+        } else {
+          this.menuComponent.action('ok');
+          this.menuComponent.setHideTimer();
+        }
       }
 
       break;

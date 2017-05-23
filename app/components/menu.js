@@ -16,6 +16,7 @@ function menuComponent(app, mainGroup, menuItems) {
 
   this.activeMenuItem = 0;
   this.menuHideTimer = 0;
+  this.isHidden = false;
   this.app = app;
   this.menuItems = menuItems;
   this.mainGroup = mainGroup;
@@ -209,6 +210,7 @@ menuComponent.prototype.activateSubmenu = function() {
 menuComponent.prototype.hide = function() {
   this.submenus[this.activeMenuItem].hide(this.menuSmall);
   this.mainGroup.x.anim().from(this.mainGroup.x()).to(-(this.mainGroup.w())).delay(500).dur(250).start();
+  this.isHidden = true;
 }
 
 menuComponent.prototype.setHideTimer = function() {
@@ -218,12 +220,27 @@ menuComponent.prototype.setHideTimer = function() {
   this.menuHideTimer = setTimeout(() => {
     this.submenus[this.activeMenuItem].hide(this.menuSmall);
     this.mainGroup.x.anim().from(this.mainGroup.x()).to(-(this.mainGroup.w())).delay(500).dur(250).start();
+    this.isHidden = true;
   }, 5000);
 }
 
+menuComponent.prototype.getHidden = function() {
+  return this.isHidden;
+}
+
 menuComponent.prototype.show = function() {
+  clearTimeout(this.menuHideTimer);
+  
   this.submenus[this.activeMenuItem].show();
   this.mainGroup.x.anim().from(this.mainGroup.x()).to(0).dur(250).start();
+  this.isHidden = false;
+
+  // Set timer
+  this.menuHideTimer = setTimeout(() => {
+    this.submenus[this.activeMenuItem].hide(this.menuSmall);
+    this.mainGroup.x.anim().from(this.mainGroup.x()).to(-(this.mainGroup.w())).delay(500).dur(250).start();
+    this.isHidden = true;
+  }, 5000);
 }
 
 menuComponent.prototype.action = function(action) {
