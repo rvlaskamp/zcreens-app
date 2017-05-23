@@ -12,6 +12,8 @@ const stateHelper = require('../helpers/state');
 const dimensionsHelper = require('../helpers/dimensions');
 
 function menuComponent(app, mainGroup, menuItems) {
+  const width = menuItems.length * 300;
+
   this.activeMenuItem = 0;
   this.app = app;
   this.menuItems = menuItems;
@@ -23,10 +25,7 @@ function menuComponent(app, mainGroup, menuItems) {
   this.menuSmall = false;
 
   // Create submenu
-  // this.submenu = new submenuComponent(this.app);
-  this.mainGroup.insertAdd(this.submenuGroup, 2);
-
-  const width = menuItems.length * 300;
+  this.mainGroup.insertAt(this.submenuGroup, 2);
 
   this.menu = [];
   this.submenus = [];
