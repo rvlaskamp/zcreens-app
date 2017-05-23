@@ -235,6 +235,7 @@ menuComponent.prototype.show = function() {
   this.mainGroup.x.anim().from(this.mainGroup.x()).to(0).dur(250).start();
   this.isHidden = false;
   this.state.set(state.submenuActive);
+  
 
   // Set timer
   this.menuHideTimer = setTimeout(() => {
