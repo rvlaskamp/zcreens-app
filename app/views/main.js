@@ -66,12 +66,12 @@ mainView.prototype.remotePressed = function(key) {
         this.background.w.anim().from(this.background.w()).to(dimensionsHelper.calcWidth(this.app.w(), 10)).dur(1000).start();
         this.menuComponent.resize();
         this.logoComponent.hide();
-        setMenuHideTimer().bind(this);
+        setMenuHideTimer.bind(this);
       }
 
       if (currentState === state.menuSmall) {
         this.menuComponent.action('ok');
-        setMenuHideTimer().bind(this);
+        setMenuHideTimer.bind(this);
       }
 
       if (currentState === state.menuHidden) {
@@ -84,57 +84,57 @@ mainView.prototype.remotePressed = function(key) {
       // UP
       if (currentState === state.menuSmall) {
         this.menuComponent.changeMenuItem('up', currentState);
-        setMenuHideTimer().bind(this);
+        setMenuHideTimer.bind(this);
       }
       break;
     case 2:
       // DOWN
       if (currentState === state.menuSmall) {
         this.menuComponent.changeMenuItem('down', currentState);
-        setMenuHideTimer().bind(this);
+        setMenuHideTimer.bind(this);
       }
       break;
     case 3:
       // LEFT
       if (currentState === state.menuLarge) {
         this.menuComponent.changeMenuItem('left', currentState);
-        setMenuHideTimer().bind(this);
+        setMenuHideTimer.bind(this);
       }
 
       if (currentState === state.menuSmall) {
         this.menuComponent.activateMenu();
-        setMenuHideTimer().bind(this);
+        setMenuHideTimer.bind(this);
       }
       break;
     case 4:
       // RIGHT
       if (currentState === state.menuLarge) {
         this.menuComponent.changeMenuItem('right', currentState);
-        setMenuHideTimer().bind(this);
+        setMenuHideTimer.bind(this);
       }
 
       if (currentState === state.menuSmall) {
         this.menuComponent.activateSubmenu();
-        setMenuHideTimer().bind(this);
+        setMenuHideTimer.bind(this);
       }
       break;
     case 68:
       // PLAY
       if (currentState === state.menuSmall) {
         this.menuComponent.action('play');
-        setMenuHideTimer().bind(this);
+        setMenuHideTimer.bind(this);
       }
       break;
     case 69:
       // Stop
       if (currentState === state.menuSmall) {
         this.menuComponent.action('stop');
-        setMenuHideTimer().bind(this);
+        setMenuHideTimer.bind(this);
       }
       break;
     default:
       // Default case
-      setMenuHideTimer().bind(this);
+      setMenuHideTimer.bind(this);
   }
 }
 
