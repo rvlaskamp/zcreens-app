@@ -208,6 +208,7 @@ menuComponent.prototype.activateSubmenu = function() {
 }
 
 menuComponent.prototype.hide = function() {
+  clearTimeout(this.menuHideTimer);
   this.submenus[this.activeMenuItem].hide(this.menuSmall);
   this.mainGroup.x.anim().from(this.mainGroup.x()).to(-(dimensionsHelper.calcWidth(this.app.w(), 10))).delay(250).dur(250).start();
   this.isHidden = true;
