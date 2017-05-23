@@ -15,6 +15,7 @@ function menuComponent(app, mainGroup, menuItems) {
   const width = menuItems.length * 300;
 
   this.activeMenuItem = 0;
+  this.menuHideTimer = 0;
   this.app = app;
   this.menuItems = menuItems;
   this.mainGroup = mainGroup;
@@ -208,6 +209,16 @@ menuComponent.prototype.activateSubmenu = function() {
 menuComponent.prototype.hide = function() {
   this.submenus[this.activeMenuItem].hide(this.menuSmall);
   this.mainGroup.x.anim().from(this.mainGroup.x()).to(-(this.mainGroup.w())).delay(500).dur(250).start();
+}
+
+menuComponent.prototype.setHideTimer = function() {
+  clearTimeout(this.menuHideTimer);
+
+  // Set timer
+  this.menuHideTimer = setTimeout(() => {
+    this.submenus[this.activeMenuItem].hide(this.menuSmall);
+    this.mainGroup.x.anim().from(this.mainGroup.x()).to(-(this.mainGroup.w())).delay(500).dur(250).start();
+  }, 5000);
 }
 
 menuComponent.prototype.show = function() {
