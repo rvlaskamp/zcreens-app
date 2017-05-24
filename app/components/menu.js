@@ -202,7 +202,7 @@ menuComponent.prototype.activateSubmenu = function() {
 
   if (currentState !== state.submenuActive) {
     this.state.set(state.submenuActive);
-    this.menu[this.activeMenuItem].deactivate(this.menuSmall);
+    this.menu[this.activeMenuItem].active();
     this.submenus[this.activeMenuItem].show(this.menuSmall);
   }
 }
@@ -235,7 +235,7 @@ menuComponent.prototype.show = function() {
   this.mainGroup.x.anim().from(this.mainGroup.x()).to(0).dur(250).start();
   this.isHidden = false;
   this.state.set(state.submenuActive);
-  
+
 
   // Set timer
   this.menuHideTimer = setTimeout(() => {
@@ -252,7 +252,7 @@ menuComponent.prototype.action = function(action) {
     case 'ok':
       if (currentState === state.menuActive) {
         this.state.set(state.submenuActive);
-        this.menu[this.activeMenuItem].deactivate(this.menuSmall);
+        this.menu[this.activeMenuItem].active();
         this.submenus[this.activeMenuItem].show();
       }
 
