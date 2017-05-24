@@ -229,6 +229,10 @@ menuComponent.prototype.getHidden = function() {
   return this.isHidden;
 }
 
+menuComponent.prototype.getActiveMenu = function() {
+  return this.state.get();
+}
+
 menuComponent.prototype.show = function() {
   clearTimeout(this.menuHideTimer);
   this.submenus[this.activeMenuItem].show();

@@ -92,8 +92,12 @@ mainView.prototype.remotePressed = function(key) {
       }
 
       if (currentState === state.menuSmall) {
-        this.menuComponent.activateMenu();
-        this.menuComponent.setHideTimer();
+        if (!this.menuComponent.getHidden() && this.menuComponent.getActiveMenu === state.menuActive) {
+          this.menuComponent.hide();
+        } else {
+          this.menuComponent.activateMenu();
+          this.menuComponent.setHideTimer();
+        }
       }
       break;
     case 4:
@@ -104,8 +108,12 @@ mainView.prototype.remotePressed = function(key) {
       }
 
       if (currentState === state.menuSmall) {
-        this.menuComponent.activateSubmenu();
-        this.menuComponent.setHideTimer();
+        if (this.menuComponent.getHidden()) {
+          this.menuComponent.show();
+        } else {
+          this.menuComponent.activateSubmenu();
+          this.menuComponent.setHideTimer();
+        }
       }
       break;
     case 68:
