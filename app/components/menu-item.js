@@ -84,6 +84,7 @@ menuItemComponent.prototype.resize = function(delay, y) {
 
 menuItemComponent.prototype.active = function() {
   this.menuItemIconActive.opacity.anim().from(0).to(1).dur(250).start();
+  this.menuItemIconSelected.opacity.anim().from(1).to(0).dur(250).start();
 }
 
 menuItemComponent.prototype.inactive = function() {

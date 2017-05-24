@@ -92,7 +92,7 @@ mainView.prototype.remotePressed = function(key) {
       }
 
       if (currentState === state.menuSmall) {
-        if (!this.menuComponent.getHidden() && this.menuComponent.getActiveMenu === state.menuActive) {
+        if (!this.menuComponent.getHidden() && this.menuComponent.getActiveMenu() === state.menuActive) {
           this.menuComponent.hide();
         } else {
           this.menuComponent.activateMenu();
