@@ -74,6 +74,9 @@ menuItemComponent.prototype.resize = function(delay, y) {
   this.menuItemIconSelected.sx.anim().from(this.menuItemIcon.sx()).to(0.5).dur(250).delay(delay).start();
   this.menuItemIconSelected.sy.anim().from(this.menuItemIcon.sy()).to(0.5).dur(250).delay(delay).start();
   this.menuItemIconSelected.x.anim().from(this.menuItemIcon.x()).to(dimensionsHelper.getCenterX(274, (174 / 2))).dur(250).delay(delay).start();
+  this.menuItemIconActive.sx.anim().from(this.menuItemIcon.sx()).to(0.5).dur(250).delay(delay).start();
+  this.menuItemIconActive.sy.anim().from(this.menuItemIcon.sy()).to(0.5).dur(250).delay(delay).start();
+  this.menuItemIconActive.x.anim().from(this.menuItemIcon.x()).to(dimensionsHelper.getCenterX(274, (174 / 2))).dur(250).delay(delay).start();
   this.menuItemTitle.opacity.anim().from(this.menuItemTitle.opacity()).to(0).dur(250).delay(delay).start();
   this.menuItemGroup.x.anim().from(this.menuItemGroup.x()).to(0).dur(500).start();
   this.menuItemGroup.y.anim().from(this.menuItemGroup.y()).to(y).dur(500).start();
