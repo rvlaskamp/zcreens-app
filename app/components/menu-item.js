@@ -32,6 +32,7 @@ function menuItemComponent(app, title, icon, options) {
   this.menuItemIconSelected.h(174);
   this.menuItemIconSelected.x(dimensionsHelper.getCenterX(274, 174));
   this.menuItemIconSelected.y(dimensionsHelper.getCenterY(274, 174));
+  this.menuItemIconSelected.opacity(0);
 
   this.menuItemIconActive = app.createImageView();
   this.menuItemIconActive.src(path.resolve(__dirname, '..', 'assets', 'images', 'icons', `${icon}-active.png`));
@@ -39,6 +40,7 @@ function menuItemComponent(app, title, icon, options) {
   this.menuItemIconActive.h(174);
   this.menuItemIconActive.x(dimensionsHelper.getCenterX(274, 174));
   this.menuItemIconActive.y(dimensionsHelper.getCenterY(274, 174));
+  this.menuItemIconActive.opacity(0);
 
 
   if (options.selected) {
