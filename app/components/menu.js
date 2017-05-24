@@ -235,6 +235,7 @@ menuComponent.prototype.getActiveMenu = function() {
 
 menuComponent.prototype.show = function() {
   clearTimeout(this.menuHideTimer);
+  this.menu[this.activeMenuItem].active();
   this.submenus[this.activeMenuItem].show();
   this.mainGroup.x.anim().from(this.mainGroup.x()).to(0).dur(250).start();
   this.isHidden = false;
