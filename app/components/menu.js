@@ -85,9 +85,9 @@ menuComponent.prototype.resize = function() {
   });
 
   this.submenus[this.activeMenuItem].show();
+  this.submenus[this.activeMenuItem].activate();
+  this.menu[this.activeMenuItem].active(this.menuSmall);
   this.state.set(state.submenuActive);
-  this.menu[this.activeMenuItem].deactivate(this.menuSmall);
-  this.submenus[this.activeMenuItem].active();
 }
 
 menuComponent.prototype.changeMenuItem = function(direction) {
