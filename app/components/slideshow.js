@@ -42,15 +42,18 @@ slideshowComponent.prototype.play = function() {
 
     picture1.opacity.anim().from(1).to(0).dur(250).then(() => {
       this.group.remove(picture1);
+      picture1.destroy();
     }).start();
   }, 5000);
 }
 
 slideshowComponent.prototype.stop = function() {
   clearInterval(this.slideshowTimer);
+  const picture = this.group.children[0];
 
   this.group.opacity.anim().from(1).to(0).dur(250).then(() => {
     this.group.clear();
+    picture.destroy();
   }).start();
 }
 

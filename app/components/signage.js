@@ -41,6 +41,7 @@ signageComponent.prototype.play = function(index) {
     // Get scene
     const scene = this.scenes[index];
     scene.opacity(0);
+    this.activeScene = index;
 
     // Check if group has a scene
     if (this.group.children.length > 0) {
