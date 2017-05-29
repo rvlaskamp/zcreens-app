@@ -50,7 +50,7 @@ slideshowComponent.prototype.play = function() {
       }).start();
 
       picture2.opacity.anim().from(0).to(1).dur(250).start();
-    }, 10000);
+    }, 5000);
   }
 }
 
