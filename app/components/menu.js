@@ -15,6 +15,7 @@ function menuComponent(app, mainGroup, menuItems) {
   const width = menuItems.length * 300;
 
   this.activeMenuItem = 0;
+  this.playingMenuItem = null;
   this.menuHideTimer = 0;
   this.isHidden = false;
   this.app = app;
@@ -52,8 +53,8 @@ function menuComponent(app, mainGroup, menuItems) {
     // Create menu item
     const item = new menuItemComponent(app, menuItem.title, menuItem.icon, options);
     // Create submenu
-    const submenu = new submenuComponent(this.app, menuItem.type, menuItem.submenu);
-    
+    const submenu = new submenuComponent(this.app, this.mainGroup, menuItem.type, menuItem.submenu);
+
     this.menuGroup.add(item.menuItemGroup);
     this.submenuGroup.add(submenu.menuGroup);
 
@@ -261,16 +262,26 @@ menuComponent.prototype.action = function(action) {
       }
 
       if (currentState === state.submenuActive) {
-        this.submenus[this.activeMenuItem].play();
+        if (this.playingMenuItem !== this.activeMenuItem) {
+          this.submenus[this.playingMenuItem].stop();
+        }
+
+        this.playingMenuItem = this.activeMenuItem;
+        this.submenus[this.playingMenuItem].play();
       }
       break;
     case 'play':
       if (currentState === state.submenuActive) {
-        this.submenus[this.activeMenuItem].play();
+        if (this.playingMenuItem !== this.activeMenuItem) {
+          this.submenus[this.playingMenuItem].stop();
+        }
+
+        this.playingMenuItem = this.activeMenuItem;
+        this.submenus[this.playingMenuItem].play();
       }
     case 'stop':
       if (currentState === state.submenuActive) {
-        this.submenus[this.activeMenuItem].stop();
+        this.submenus[this.playingMenuItem].stop();
       }
   }
 }

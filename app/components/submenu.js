@@ -13,7 +13,11 @@ const omxplayerHelper = require('../helpers/omxplayer');
 const menuItemComponent = require('./menu-item');
 const submenuItemMarker = require('./submenu-item-marker');
 
-function submenuComponent(app, type, items) {
+const radioComponent = require('./radio');
+const signageComponent = require('./signage');
+const tvComponent = require('tv');
+
+function submenuComponent(app, mainGroup, type, items) {
   const width = dimensionsHelper.calcWidth(app.w(), 20);
   const totalWidth = dimensionsHelper.calcWidth(app.w(), 30);
   const menuItemSpacing = 20;
@@ -21,9 +25,11 @@ function submenuComponent(app, type, items) {
   const menuItemWidth = 320;
 
   this.app = app;
+  this.mainGroup = mainGroup;
   this.type = type;
   this.activeMenuItem = 0;
   this.playingMenuItem = null;
+  this.playingComponent = null;
   this.menuItems = items;
 
   this.menuGroup = app.createGroup();
@@ -147,20 +153,34 @@ submenuComponent.prototype.moveDown = function() {
 
 submenuComponent.prototype.play = function() {
   const type = this.type;
+  const isPlayingMenuItem = (this.playingMenuItem === this.activeMenuItem);
 
-  if (type === 'radio') {
-    // Create picture slideshow for radio
+  // Create playingComponent based on menu type
+  switch (type) {
+    case 'tv':
+      if (!this.playingComponent) {
+        this.playingComponent = new tvComponent(this.app, this.mainGroup, this.menuItems);
+      }
+      break;
+    case 'radio':
+      if (!this.playingComponent) {
+        this.playingComponent = new radioComponent(this.app, this.mainGroup, this.menuItems);
+      }
+      break;
+    case 'signage':
+      if (!this.playingComponent) {
+        this.playingComponent = new signageComponent(this.app, this.mainGroup, this.menuItems);
+      }
+      break;
+    default:
+      console.log('type not supported');
   }
 
-  if (type === 'signage') {
-    // Create Signage module and play the scenes
-  }
-
-  if (type === 'tv' || type === 'radio') {
-    console.log('play', this.menuItems[this.activeMenuItem].stream);
-    this.omxplayer.play(this.menuItems[this.activeMenuItem].stream);
+  if (!isPlayingMenuItem) {
     this.playingMenuItem = this.activeMenuItem;
+    this.playingComponent.play(this.playingMenuItem);
   }
+
 }
 
 submenuComponent.prototype.stop = function() {
