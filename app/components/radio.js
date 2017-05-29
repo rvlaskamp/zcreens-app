@@ -10,6 +10,7 @@ const omxplayerHelper = require('../helpers/omxplayer');
 const slideshowComponent = require('./slideshow');
 
 function radioComponent(app, mainGroup, menuItems) {
+
   const slideshowPictures = [
     path.resolve(__dirname, '..', 'assets', 'images', 'radio', 'radio1.jpg'),
     path.resolve(__dirname, '..', 'assets', 'images', 'radio', 'radio2.jpg'),
@@ -24,6 +25,7 @@ function radioComponent(app, mainGroup, menuItems) {
   });
 
   this.app = app;
+  this.mainGroup = mainGroup;
   this.slideshow = new slideshowComponent(this.app, slideshowPictures);
   this.omxplayer = new omxplayerHelper();
 
