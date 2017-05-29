@@ -59,9 +59,9 @@ slideshowComponent.prototype.play = function() {
 
     this.slideshowTimer = setInterval(() => {
 
-      this.group[this.slideshowCurrent].opacity.anim().from(1).to(0).dur(500).start();
+      this.group.children[this.slideshowCurrent].opacity.anim().from(1).to(0).dur(500).start();
 
-      this.group[this.slideshowNext].opacity.anim().from(0).to(1).dur(500).then(() => {
+      this.group.children[this.slideshowNext].opacity.anim().from(0).to(1).dur(500).then(() => {
         if (this.slideshowNext === 0) {
           this.slideshowNext = 1;
           this.slideshowCurrent = 0;
@@ -69,7 +69,7 @@ slideshowComponent.prototype.play = function() {
           this.slideshowNext = 0;
           this.slideshowCurrent = 1;
         }
-        this.group[this.slideshowNext].children[0].src(this.slideshow.next());
+        this.group.children[this.slideshowNext].children[0].src(this.slideshow.next());
       }).start();
     }, 10000);
   }
