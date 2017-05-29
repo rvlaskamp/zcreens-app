@@ -22,7 +22,7 @@ const slideshowComponent = function(app, images) {
   this.group.opacity(0);
 }
 
-slideshowComponent.prototype.play() {
+slideshowComponent.prototype.play = function() {
   // Create first pictures for slideshow
   const picture1 = pictureComponent(app, this.slideshow.next());
 
@@ -42,7 +42,7 @@ slideshowComponent.prototype.play() {
   }, 5000);
 }
 
-slideshowComponent.prototype.stop() {
+slideshowComponent.prototype.stop = function() {
   clearInterval(this.slideshowTimer);
 
   this.group.opacity.anim().from(1).to(0).dur(250).then(() => {

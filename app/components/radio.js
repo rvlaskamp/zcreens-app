@@ -30,17 +30,17 @@ function radioComponent(app, mainGroup, menuItems) {
   this.mainGroup.insertAt(this.slideshow.group, 0);
 }
 
-radioComponent.prototype.play(index) {
+radioComponent.prototype.play = function(index) {
   this.slideshow.play();
   this.omxplayer.play(this.streams[index], 'radio');
 }
 
-radioComponent.prototype.stop() {
+radioComponent.prototype.stop = function() {
   this.slideshow.stop();
   this.omxplayer.stop();
 }
 
-radioComponent.prototype.clear() {
+radioComponent.prototype.clear = function() {
   this.slideshow.stop();
   this.omxplayer.stop();
   this.omxplayer = null;

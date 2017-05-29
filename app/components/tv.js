@@ -18,15 +18,15 @@ function tvComponent(app, mainGroup, menuItems) {
   this.omxplayer = new omxplayerHelper();
 }
 
-tvComponent.prototype.play(index) {
+tvComponent.prototype.play = function(index) {
   this.omxplayer.play(this.streams[index], 'tv');
 }
 
-tvComponent.prototype.stop() {
+tvComponent.prototype.stop = function() {
   this.omxplayer.stop();
 }
 
-tvComponent.prototype.clear() {
+tvComponent.prototype.clear = function() {
   this.omxplayer.stop();
   this.omxplayer = null;
 }

@@ -34,7 +34,7 @@ function signageComponent(app, menuGroup, menuItems) {
   });
 }
 
-signageComponent.prototype.play(index) {
+signageComponent.prototype.play = function(index) {
   if (this.activeScene !== index) {
     // Get scene
     const scene = this.scenes[index];
@@ -55,7 +55,7 @@ signageComponent.prototype.play(index) {
   }
 }
 
-signageComponent.prototype.stop() {
+signageComponent.prototype.stop = function() {
   if (this.group.children > 0) {
     const currentChild = this.group.children[0];
 
@@ -65,7 +65,7 @@ signageComponent.prototype.stop() {
   }
 }
 
-signageComponent.prototype.clear() {
+signageComponent.prototype.clear = function() {
   if (this.group.children > 0) {
     const currentChild = this.group.children[0];
 
