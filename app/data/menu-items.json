@@ -2,6 +2,7 @@
   {
     "title": "Televisie",
     "icon": "tv",
+    "type": "tv",
     "submenu": [
       {
         "title": "Big Buck Bunny test",
@@ -46,6 +47,57 @@
       {
         "title": "NET 5",
         "stream": "udp://239.192.0.1:1234"
+      }
+    ]
+  },
+  {
+    "title": "Radio",
+    "icon": "radio",
+    "type": "radio",
+    "submenu": [
+      {
+        "title": "NPO Radio 1",
+        "stream": "http://icecast.omroep.nl/radio1-bb-mp3"
+      },
+      {
+        "title": "NPO Radio 2",
+        "stream": "http://icecast.omroep.nl/radio2-bb-mp3"
+      },
+      {
+        "title": "NPO 3FM",
+        "stream": "http://icecast.omroep.nl/3fm-bb-mp3"
+      }
+    ]
+  },
+  {
+    "title": "Signage",
+    "icon": "signage",
+    "type": "signage",
+    "submenu": [
+      {
+        "title": "Scene 1",
+        "type": "image",
+        "srcLocal": "scene1.jpg"
+      },
+      {
+        "title": "Scene 2",
+        "type": "image",
+        "srcLocal": "scene2.jpg"
+      },
+      {
+        "title": "Scene 3",
+        "type": "image",
+        "srcLocal": "scene3.jpg"
+      },
+      {
+        "title": "Scene 4",
+        "type": "image",
+        "srcLocal": "scene4.jpg"
+      },
+      {
+        "title": "Scene 5",
+        "type": "image",
+        "srcLocal": "scene5.jpg"
       }
     ]
   }

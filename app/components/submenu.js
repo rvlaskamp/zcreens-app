@@ -13,7 +13,7 @@ const omxplayerHelper = require('../helpers/omxplayer');
 const menuItemComponent = require('./menu-item');
 const submenuItemMarker = require('./submenu-item-marker');
 
-function submenuComponent(app, items) {
+function submenuComponent(app, type, items) {
   const width = dimensionsHelper.calcWidth(app.w(), 20);
   const totalWidth = dimensionsHelper.calcWidth(app.w(), 30);
   const menuItemSpacing = 20;
@@ -21,6 +21,7 @@ function submenuComponent(app, items) {
   const menuItemWidth = 320;
 
   this.app = app;
+  this.type = type;
   this.activeMenuItem = 0;
   this.playingMenuItem = null;
   this.menuItems = items;
@@ -145,17 +146,39 @@ submenuComponent.prototype.moveDown = function() {
 }
 
 submenuComponent.prototype.play = function() {
-  console.log('play', this.menuItems[this.activeMenuItem].stream);
-  this.omxplayer.play(this.menuItems[this.activeMenuItem].stream);
-  this.playingMenuItem = this.activeMenuItem;
-  this.menu[this.playingMenuItem].children[0].fontWeight(500);
+  const type = this.type;
+
+  if (type === 'radio') {
+    // Create picture slideshow for radio
+  }
+
+  if (type === 'signage') {
+    // Create Signage module and play the scenes
+  }
+
+  if (type === 'tv' || type === 'radio') {
+    console.log('play', this.menuItems[this.activeMenuItem].stream);
+    this.omxplayer.play(this.menuItems[this.activeMenuItem].stream);
+    this.playingMenuItem = this.activeMenuItem;
+  }
 }
 
 submenuComponent.prototype.stop = function() {
-  if(this.omxplayer.isPlaying()) {
-    this.omxplayer.stop();
-    this.menu[this.playingMenuItem].children[0].fontWeight(400);
-    this.playingMenuItem = null;
+  const type = this.type;
+
+  if (type === 'radio') {
+    // Remove picture slideshow for radio
+  }
+
+  if (type === 'signage') {
+    // Remove Signage module and stop the scenes
+  }
+
+  if (type === 'tv' || type === 'radio') {
+    if(this.omxplayer.isPlaying()) {
+      this.omxplayer.stop();
+      this.playingMenuItem = null;
+    }
   }
 }
 

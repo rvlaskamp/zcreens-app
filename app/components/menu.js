@@ -39,10 +39,6 @@ function menuComponent(app, mainGroup, menuItems) {
   this.menuGroup.y(dimensionsHelper.getCenterY(this.app.h(), this.menuGroup.h()));
 
   this.menuItems.forEach((menuItem, index) => {
-
-    // Create submenu
-    const submenu = new submenuComponent(this.app, menuItem.submenu);
-
     const options = {
       x: (300 * index),
       y: 0,
@@ -53,8 +49,11 @@ function menuComponent(app, mainGroup, menuItems) {
       options.selected = true;
     }
 
+    // Create menu item
     const item = new menuItemComponent(app, menuItem.title, menuItem.icon, options);
-
+    // Create submenu
+    const submenu = new submenuComponent(this.app, menuItem.type, menuItem.submenu);
+    
     this.menuGroup.add(item.menuItemGroup);
     this.submenuGroup.add(submenu.menuGroup);
 
@@ -274,7 +273,6 @@ menuComponent.prototype.action = function(action) {
         this.submenus[this.activeMenuItem].stop();
       }
   }
-
 }
 
 module.exports = menuComponent;
