@@ -24,7 +24,7 @@ function signageComponent(app, menuGroup, menuItems) {
       let src = '';
       // Check if src is local or remote
       if (menuItem.srcLocal) {
-        src = path.resolve(__dirname, '..', 'assets', 'images', 'signage', menuItem.srcLocal));
+        src = path.resolve(__dirname, '..', 'assets', 'images', 'signage', menuItem.srcLocal);
       }
 
       scene = pictureComponent(this.app, src);

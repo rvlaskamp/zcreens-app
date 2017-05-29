@@ -11,10 +11,10 @@ const slideshowComponent = require('slideshow');
 
 function radioComponent(app, mainGroup, menuItems) {
   const slideshowPictures = [
-    path.resolve(__dirname, '..', 'assets', 'images', 'radio', 'radio1.jpg')),
-    path.resolve(__dirname, '..', 'assets', 'images', 'radio', 'radio2.jpg')),
-    path.resolve(__dirname, '..', 'assets', 'images', 'radio', 'radio3.jpg')),
-    path.resolve(__dirname, '..', 'assets', 'images', 'radio', 'radio4.jpg'))
+    path.resolve(__dirname, '..', 'assets', 'images', 'radio', 'radio1.jpg'),
+    path.resolve(__dirname, '..', 'assets', 'images', 'radio', 'radio2.jpg'),
+    path.resolve(__dirname, '..', 'assets', 'images', 'radio', 'radio3.jpg'),
+    path.resolve(__dirname, '..', 'assets', 'images', 'radio', 'radio4.jpg')
   ];
 
   this.streams = [];
