@@ -93,11 +93,6 @@
         "title": "Scene 4",
         "type": "picture",
         "srcLocal": "scene4.jpg"
-      },
-      {
-        "title": "Scene 5",
-        "type": "image",
-        "srcLocal": "scene5.jpg"
       }
     ]
   }
