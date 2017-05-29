@@ -15,7 +15,7 @@ const submenuItemMarker = require('./submenu-item-marker');
 
 const radioComponent = require('./radio');
 const signageComponent = require('./signage');
-const tvComponent = require('tv');
+const tvComponent = require('./tv');
 
 function submenuComponent(app, mainGroup, type, items) {
   const width = dimensionsHelper.calcWidth(app.w(), 20);
