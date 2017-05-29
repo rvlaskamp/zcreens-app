@@ -288,6 +288,12 @@ menuComponent.prototype.action = function(action) {
               this.submenus[this.playingMenuItem].moveDown();
               this.submenus[this.playingMenuItem].play();
             }, 10000);
+          } else {
+            clearInterval(this.signageInterval);
+            this.signageInterval = setInterval(() => {
+              this.submenus[this.playingMenuItem].moveDown();
+              this.submenus[this.playingMenuItem].play();
+            }, 10000);
           }
         }
 
