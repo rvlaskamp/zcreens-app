@@ -7,7 +7,7 @@ const path = require('path');
 const omxplayerHelper = require('../helpers/omxplayer');
 
 // Components
-const slideshowComponent = require('slideshow');
+const slideshowComponent = require('./slideshow');
 
 function radioComponent(app, mainGroup, menuItems) {
   const slideshowPictures = [

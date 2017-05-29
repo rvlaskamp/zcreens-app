@@ -3,7 +3,7 @@
  */
 const path = require('path');
 
-const slideshowComponent = require('slideshow');
+const slideshowComponent = require('./slideshow');
 const pictureComponent = require('./picture');
 
 function signageComponent(app, menuGroup, menuItems) {
