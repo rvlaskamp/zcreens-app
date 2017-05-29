@@ -76,22 +76,22 @@
     "submenu": [
       {
         "title": "Scene 1",
-        "type": "image",
+        "type": "picture",
         "srcLocal": "scene1.jpg"
       },
       {
         "title": "Scene 2",
-        "type": "image",
+        "type": "picture",
         "srcLocal": "scene2.jpg"
       },
       {
         "title": "Scene 3",
-        "type": "image",
+        "type": "picture",
         "srcLocal": "scene3.jpg"
       },
       {
         "title": "Scene 4",
-        "type": "image",
+        "type": "picture",
         "srcLocal": "scene4.jpg"
       },
       {

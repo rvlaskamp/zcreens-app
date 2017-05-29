@@ -24,7 +24,7 @@ function radioComponent(app, mainGroup, menuItems) {
   });
 
   this.app = app;
-  this.slideshow = new slideshowComponent(slideshowPictures);
+  this.slideshow = new slideshowComponent(this.app, slideshowPictures);
   this.omxplayer = new omxplayerHelper();
 
   this.mainGroup.insertAt(this.slideshow.group, 0);
@@ -38,6 +38,13 @@ radioComponent.prototype.play(index) {
 radioComponent.prototype.stop() {
   this.slideshow.stop();
   this.omxplayer.stop();
+}
+
+radioComponent.prototype.clear() {
+  this.slideshow.stop();
+  this.omxplayer.stop();
+  this.omxplayer = null;
+  this.mainGroup.remove(this.slideshow.group);
 }
 
 module.exports = radioComponent;

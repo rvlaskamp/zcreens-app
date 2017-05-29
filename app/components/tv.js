@@ -1,13 +1,10 @@
 /**
- *  Radio component
+ *  TV component
  */
 const path = require('path');
 
 // Helpers
 const omxplayerHelper = require('../helpers/omxplayer');
-
-// Components
-const slideshowComponent = require('slideshow');
 
 function tvComponent(app, mainGroup, menuItems) {
 
@@ -27,6 +24,11 @@ tvComponent.prototype.play(index) {
 
 tvComponent.prototype.stop() {
   this.omxplayer.stop();
+}
+
+tvComponent.prototype.stop() {
+  this.omxplayer.stop();
+  this.omxplayer = null;
 }
 
 module.exports = tvComponent;

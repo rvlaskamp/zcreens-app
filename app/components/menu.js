@@ -263,7 +263,7 @@ menuComponent.prototype.action = function(action) {
 
       if (currentState === state.submenuActive) {
         if (this.playingMenuItem !== this.activeMenuItem) {
-          this.submenus[this.playingMenuItem].stop();
+          this.submenus[this.playingMenuItem].clear();
         }
 
         this.playingMenuItem = this.activeMenuItem;
@@ -272,10 +272,6 @@ menuComponent.prototype.action = function(action) {
       break;
     case 'play':
       if (currentState === state.submenuActive) {
-        if (this.playingMenuItem !== this.activeMenuItem) {
-          this.submenus[this.playingMenuItem].stop();
-        }
-
         this.playingMenuItem = this.activeMenuItem;
         this.submenus[this.playingMenuItem].play();
       }

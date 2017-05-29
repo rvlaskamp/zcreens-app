@@ -184,21 +184,16 @@ submenuComponent.prototype.play = function() {
 }
 
 submenuComponent.prototype.stop = function() {
-  const type = this.type;
-
-  if (type === 'radio') {
-    // Remove picture slideshow for radio
+  if (this.playingComponent) {
+    this.playingComponent.stop();
+    this.playingMenuItem = null;
   }
+}
 
-  if (type === 'signage') {
-    // Remove Signage module and stop the scenes
-  }
-
-  if (type === 'tv' || type === 'radio') {
-    if(this.omxplayer.isPlaying()) {
-      this.omxplayer.stop();
-      this.playingMenuItem = null;
-    }
+submenuComponent.prototype.clear = function() {
+  if (this.playingComponent) {
+    this.playingComponent.clear();
+    this.playingComponent = null;
   }
 }
 
