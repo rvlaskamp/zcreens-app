@@ -262,7 +262,7 @@ menuComponent.prototype.action = function(action) {
       }
 
       if (currentState === state.submenuActive) {
-        if (this.playingMenuItem !== this.activeMenuItem) {
+        if (this.playingMenuItem && this.playingMenuItem !== this.activeMenuItem) {
           this.submenus[this.playingMenuItem].clear();
         }
 
