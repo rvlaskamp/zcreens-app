@@ -82,7 +82,7 @@ menuComponent.prototype.resize = function() {
   this.menu.forEach((menuItem, index) => {
     const delay = (index * 150);
     const menuItemY = (index * menuItemHeight);
-    menuItem.resize(delay, menuItemY);
+    menuItem.resize(delay, menuItemY, this.menuGroup.w());
   });
 
   this.submenus[this.activeMenuItem].show();
