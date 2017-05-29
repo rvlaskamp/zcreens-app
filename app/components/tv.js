@@ -26,7 +26,7 @@ tvComponent.prototype.stop() {
   this.omxplayer.stop();
 }
 
-tvComponent.prototype.stop() {
+tvComponent.prototype.clear() {
   this.omxplayer.stop();
   this.omxplayer = null;
 }
