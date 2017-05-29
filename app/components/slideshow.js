@@ -35,6 +35,7 @@ slideshowComponent.prototype.play = function() {
 
   this.slideshowTimer = setInterval(() => {
     this.group.children[this.pictureIndex].opacity.anim().from(1).to(0).dur(250).then(() => {
+      console.log('slideshow next image',this.slideshow.next());
       this.group.children[this.pictureIndex].src(this.slideshow.next());
       this.pictureIndex = 0;
     }).start();
