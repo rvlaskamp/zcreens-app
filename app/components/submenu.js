@@ -179,6 +179,8 @@ submenuComponent.prototype.play = function() {
   if (!isPlayingMenuItem) {
     this.playingMenuItem = this.activeMenuItem;
     this.playingComponent.play(this.playingMenuItem);
+  } else {
+    this.playingComponent.play(this.playingMenuItem);
   }
 
 }
