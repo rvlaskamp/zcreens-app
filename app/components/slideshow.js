@@ -24,11 +24,11 @@ const slideshowComponent = function(app, images) {
 }
 
 slideshowComponent.prototype.play = function() {
-  if (this.slideshowTimer) {
-    clearInterval(this.slideshowTimer);
-  }
-
   if (!this.playing) {
+    if (this.slideshowTimer) {
+      clearInterval(this.slideshowTimer);
+    }
+
     this.playing = true;
     // Create first pictures for slideshow
     const picture1 = pictureComponent(this.app, this.slideshow.next());
@@ -50,7 +50,7 @@ slideshowComponent.prototype.play = function() {
       }).start();
 
       picture2.opacity.anim().from(0).to(1).dur(250).start();
-    }, 5000);
+    }, 10000);
   }
 }
 

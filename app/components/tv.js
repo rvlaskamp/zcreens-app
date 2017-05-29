@@ -27,6 +27,7 @@ tvComponent.prototype.stop = function() {
 }
 
 tvComponent.prototype.clear = function() {
+  console.log('clear');
   this.omxplayer.stop();
   this.omxplayer = null;
 }

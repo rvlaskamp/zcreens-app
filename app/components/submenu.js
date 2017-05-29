@@ -200,6 +200,7 @@ submenuComponent.prototype.stop = function() {
 submenuComponent.prototype.clear = function() {
   if (this.playingComponent) {
     this.playingComponent.clear();
+    this.playingMenuItem = null;
     this.playingComponent = null;
   }
 }
