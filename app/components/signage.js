@@ -36,6 +36,7 @@ function signageComponent(app, menuGroup, menuItems) {
 }
 
 signageComponent.prototype.play = function(index) {
+  console.log('signage index', index);
   if (this.activeScene !== index) {
     // Get scene
     const scene = this.scenes[index];
@@ -57,7 +58,7 @@ signageComponent.prototype.play = function(index) {
 }
 
 signageComponent.prototype.stop = function() {
-  if (this.group.children > 0) {
+  if (this.group.children.length > 0) {
     const currentChild = this.group.children[0];
 
     currentChild.opacity.anim().from(1).to(0).dur(250).then(() => {
@@ -67,7 +68,7 @@ signageComponent.prototype.stop = function() {
 }
 
 signageComponent.prototype.clear = function() {
-  if (this.group.children > 0) {
+  if (this.group.children.length > 0) {
     const currentChild = this.group.children[0];
 
     currentChild.opacity.anim().from(1).to(0).dur(250).then(() => {
