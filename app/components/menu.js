@@ -210,7 +210,7 @@ menuComponent.prototype.activateSubmenu = function() {
 menuComponent.prototype.hide = function() {
   clearTimeout(this.menuHideTimer);
   this.submenus[this.activeMenuItem].hide(this.menuSmall);
-  this.mainGroup.x.anim().from(this.mainGroup.x()).to(-(dimensionsHelper.calcWidth(this.app.w(), 10))).delay(250).dur(250).start();
+  this.menuGroup.x.anim().from(this.menuGroup.x()).to(-(dimensionsHelper.calcWidth(this.app.w(), 10))).delay(250).dur(250).start();
   this.isHidden = true;
 }
 
@@ -237,7 +237,7 @@ menuComponent.prototype.show = function() {
   clearTimeout(this.menuHideTimer);
   this.menu[this.activeMenuItem].active();
   this.submenus[this.activeMenuItem].show();
-  this.mainGroup.x.anim().from(this.mainGroup.x()).to(0).dur(250).start();
+  this.menuGroup.x.anim().from(this.menuGroup.x()).to(0).dur(250).start();
   this.isHidden = false;
   this.state.set(state.submenuActive);
 
