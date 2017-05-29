@@ -153,7 +153,7 @@ submenuComponent.prototype.moveDown = function() {
 
 submenuComponent.prototype.play = function() {
   const type = this.type;
-  const isPlayingMenuItem = (this.playingMenuItem === this.activeMenuItem);
+  const isPlayingMenuItem = (this.playingMenuItem && this.playingMenuItem === this.activeMenuItem);
 
   // Create playingComponent based on menu type
   switch (type) {

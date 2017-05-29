@@ -19,6 +19,7 @@ function signageComponent(app, menuGroup, menuItems) {
 
   // Create signage scenes
   menuItems.forEach((menuItem) => {
+    console.log(menuItem);
     let scene = {};
     if (menuItem.type === 'picture') {
       let src = '';
