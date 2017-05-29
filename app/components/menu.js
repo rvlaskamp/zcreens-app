@@ -204,6 +204,7 @@ menuComponent.prototype.activateSubmenu = function() {
     this.state.set(state.submenuActive);
     this.menu[this.activeMenuItem].active();
     this.submenus[this.activeMenuItem].show(this.menuSmall);
+    this.submenus[this.activeMenuItem].activate();
   }
 }
 
@@ -259,6 +260,7 @@ menuComponent.prototype.action = function(action) {
         this.state.set(state.submenuActive);
         this.menu[this.activeMenuItem].active();
         this.submenus[this.activeMenuItem].show();
+        this.submenus[this.activeMenuItem].activate();
       }
 
       if (currentState === state.submenuActive) {
