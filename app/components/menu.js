@@ -303,10 +303,19 @@ menuComponent.prototype.action = function(action) {
       if (currentState === state.submenuActive) {
         this.playingMenuItem = this.activeMenuItem;
         this.submenus[this.playingMenuItem].play();
+        clearInterval(this.signageInterval);
+        this.signageInterval = setInterval(() => {
+          this.submenus[this.playingMenuItem].moveDown();
+          this.submenus[this.playingMenuItem].play();
+        }, 10000);
       }
     case 'stop':
       if (currentState === state.submenuActive) {
         this.submenus[this.playingMenuItem].stop();
+        if (this.signageInterval) {
+          clearInterval(this.signageInterval);
+          this.signageInterval = null;
+        }
       }
   }
 }

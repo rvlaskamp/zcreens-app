@@ -44,7 +44,7 @@ slideshowComponent.prototype.play = function() {
 
       this.group.add(picture2);
 
-      picture2.opacity.anim().from(0).to(1).dur(500).then(() => {
+      this.group.children[1].opacity.anim().from(0).to(1).dur(500).then(() => {
         this.group.remove(picture1);
         picture1.destroy();
       }).start();
