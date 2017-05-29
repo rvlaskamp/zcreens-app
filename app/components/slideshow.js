@@ -79,13 +79,13 @@ slideshowComponent.prototype.stop = function() {
   clearInterval(this.slideshowTimer);
 
   if (this.group.children.length > 0) {
-    const picture = this.group.children[0];
 
     this.group.opacity.anim().from(1).to(0).dur(250).then(() => {
       this.group.clear();
-      if (picture) {
-        picture.destroy();
-      }
+      this.imageGroup1.clear();
+      this.imageGroup2.clear();
+      this.picture1.destroy();
+      this.picture2.destroy();
     }).start();
   }
 }
