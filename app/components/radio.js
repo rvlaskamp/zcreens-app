@@ -32,7 +32,7 @@ function radioComponent(app, mainGroup, menuItems) {
 
 radioComponent.prototype.play(index) {
   this.slideshow.play();
-  this.omxplayer.play(this.streams[index]);
+  this.omxplayer.play(this.streams[index], 'radio');
 }
 
 radioComponent.prototype.stop() {

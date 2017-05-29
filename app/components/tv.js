@@ -19,7 +19,7 @@ function tvComponent(app, mainGroup, menuItems) {
 }
 
 tvComponent.prototype.play(index) {
-  this.omxplayer.play(this.streams[index]);
+  this.omxplayer.play(this.streams[index], 'tv');
 }
 
 tvComponent.prototype.stop() {

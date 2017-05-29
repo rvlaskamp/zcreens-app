@@ -6,11 +6,14 @@ function omxplayer() {
   this.playing = false;
 }
 
-omxplayer.prototype.play = function(url) {
-  const playerOptions = {
-    '--live': true,
-    '--deinterlace': true
+omxplayer.prototype.play = function(url, type) {
+  let playerOptions = {
+    '--live': true
   };
+
+  if (type === 'tv') {
+    playerOptions['--deinterlace'] = true;
+  }
 
   if (this.player) {
     this.player.stop();
