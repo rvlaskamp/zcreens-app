@@ -6,17 +6,19 @@ const path = require('path');
 const slideshowComponent = require('./slideshow');
 const pictureComponent = require('./picture');
 
-function signageComponent(app, menuGroup, menuItems) {
+function signageComponent(app, mainGroup, menuItems) {
   this.app = app;
-  this.menuGroup = menuGroup;
+  this.mainGroup = mainGroup;
+  this.menuItems = menuItems;
   this.scenes = [];
-  this.activeScene = 0;
+  this.activeScene = null;
   this.group = app.createGroup();
   this.group.w(app.w());
   this.group.h(app.h());
 
-  this.menuGroup.insertAt(this.group, 0);
+  this.mainGroup.insertAt(this.group, 0);
 
+  /*
   // Create signage scenes
   menuItems.forEach((menuItem) => {
     console.log(menuItem);
@@ -32,15 +34,30 @@ function signageComponent(app, menuGroup, menuItems) {
     }
 
     this.scenes.push(scene);
-  });
+  });*/
 }
 
 signageComponent.prototype.play = function(index) {
   console.log('signage index', index);
+
   if (this.activeScene !== index) {
-    // Get scene
-    const scene = this.scenes[index];
-    scene.opacity(0);
+    const sceneType = this.menuItems[index].type;
+    const srcLocal = this.menuItems[index].srcLocal;
+
+    // Create scene
+    let scene = {};
+
+    if (sceneType === 'picture') {
+      let src = '';
+      // Check if src is local or remote
+      if (srcLocal) {
+        src = path.resolve(__dirname, '..', 'assets', 'images', 'signage', srcLocal);
+      }
+
+      scene = pictureComponent(this.app, src);
+      scene.opacity(0);
+    }
+
     this.activeScene = index;
 
     // Check if group has a scene
@@ -50,6 +67,7 @@ signageComponent.prototype.play = function(index) {
 
       scene.opacity.anim().from(0).to(1).dur(250).then(() => {
         this.group.remove(currentChild);
+        currentChild.destroy();
       }).start();
     } else {
       this.group.add(scene);
