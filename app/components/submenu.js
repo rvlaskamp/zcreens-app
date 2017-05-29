@@ -187,7 +187,10 @@ submenuComponent.prototype.play = function() {
   } else {
     this.playingComponent.play(this.playingMenuItem);
   }
+}
 
+submenuComponent.prototype.getType = function() {
+  return this.type;
 }
 
 submenuComponent.prototype.stop = function() {

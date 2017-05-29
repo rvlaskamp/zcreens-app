@@ -27,6 +27,7 @@ function menuComponent(app, mainGroup, menuItems) {
   this.state.set(state.menuActive);
   this.menuSmall = false;
   this.background = this.mainGroup.children[0];
+  this.signageInterval = null;
 
   // Create submenu
   this.mainGroup.insertAt(this.submenuGroup, 0);
@@ -270,11 +271,26 @@ menuComponent.prototype.action = function(action) {
 
       if (currentState === state.submenuActive) {
         if (this.playingMenuItem && this.playingMenuItem !== this.activeMenuItem) {
+          if (this.signageInterval) {
+            clearInterval(this.signageInterval);
+            this.signageInterval = null;
+          }
+
           this.submenus[this.playingMenuItem].clear();
         }
 
         this.playingMenuItem = this.activeMenuItem;
         this.submenus[this.playingMenuItem].play();
+
+        if (this.submenus[this.playingMenuItem].getType() === 'signage') {
+          if (!this.signageInterval) {
+            this.signageInterval = setInterval(() => {
+              this.submenus[this.playingMenuItem].moveDown();
+              this.submenus[this.playingMenuItem].play();
+            }, 10000);
+          }
+        }
+
       }
       break;
     case 'play':
