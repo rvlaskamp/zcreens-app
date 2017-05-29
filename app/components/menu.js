@@ -26,6 +26,7 @@ function menuComponent(app, mainGroup, menuItems) {
   this.state = new stateHelper();
   this.state.set(state.menuActive);
   this.menuSmall = false;
+  this.background = this.mainGroup.children[0];
 
   // Create submenu
   this.mainGroup.insertAt(this.submenuGroup, 0);
@@ -75,8 +76,8 @@ menuComponent.prototype.resize = function() {
   const menuHeight = this.menu.length * menuItemHeight;
   const menuY = dimensionsHelper.getCenterY(this.app.h(), menuHeight);
 
-  this.menuGroup.w.anim().from(this.menuGroup.w()).to(87).dur(500).start();
-  this.menuGroup.x.anim().from(this.menuGroup.x()).to(-25).dur(500).start();
+  this.menuGroup.w.anim().from(this.menuGroup.w()).to(dimensionsHelper.calcWidth(this.app.w(), 10)).dur(500).start();
+  this.menuGroup.x.anim().from(this.menuGroup.x()).to(0).dur(500).start();
   this.menuGroup.y.anim().from(this.menuGroup.y()).to(menuY).dur(500).start();
   this.menu.forEach((menuItem, index) => {
     const delay = (index * 150);
@@ -211,6 +212,7 @@ menuComponent.prototype.activateSubmenu = function() {
 menuComponent.prototype.hide = function() {
   clearTimeout(this.menuHideTimer);
   this.submenus[this.activeMenuItem].hide(this.menuSmall);
+  this.background.x.anim().from(this.background.x()).to(-(dimensionsHelper.calcWidth(this.app.w(), 10))).delay(250).dur(250).start();
   this.menuGroup.x.anim().from(this.menuGroup.x()).to(-(dimensionsHelper.calcWidth(this.app.w(), 10))).delay(250).dur(250).start();
   this.isHidden = true;
 }
@@ -221,6 +223,7 @@ menuComponent.prototype.setHideTimer = function() {
   // Set timer
   this.menuHideTimer = setTimeout(() => {
     this.submenus[this.activeMenuItem].hide(this.menuSmall);
+    this.background.x.anim().from(this.background.x()).to(-(dimensionsHelper.calcWidth(this.app.w(), 10))).delay(250).dur(250).start();
     this.menuGroup.x.anim().from(this.menuGroup.x()).to(-(dimensionsHelper.calcWidth(this.app.w(), 10))).delay(250).dur(250).start();
     this.isHidden = true;
   }, 5000);
@@ -238,6 +241,7 @@ menuComponent.prototype.show = function() {
   clearTimeout(this.menuHideTimer);
   this.menu[this.activeMenuItem].active();
   this.submenus[this.activeMenuItem].show();
+  this.background.x.anim().from(this.menuGroup.x()).to(0).dur(250).start();
   this.menuGroup.x.anim().from(this.menuGroup.x()).to(0).dur(250).start();
   this.isHidden = false;
   this.state.set(state.submenuActive);
@@ -246,6 +250,7 @@ menuComponent.prototype.show = function() {
   // Set timer
   this.menuHideTimer = setTimeout(() => {
     this.submenus[this.activeMenuItem].hide(this.menuSmall);
+    this.background.x.anim().from(this.background.x()).to(-(dimensionsHelper.calcWidth(this.app.w(), 10))).delay(250).dur(250).start();
     this.menuGroup.x.anim().from(this.menuGroup.x()).to(-(dimensionsHelper.calcWidth(this.app.w(), 10))).delay(250).dur(250).start();
     this.isHidden = true;
   }, 5000);

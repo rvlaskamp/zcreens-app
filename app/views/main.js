@@ -26,6 +26,7 @@ function mainView(app) {
   this.background.h.bindTo(app.h);
   this.background.fill(colors.background);
   this.background.opacity(1);
+  this.background.id('background');
 
   // Create logo Component
   this.logoComponent = new logoComponent(app);

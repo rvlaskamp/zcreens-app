@@ -44,6 +44,8 @@ signageComponent.prototype.play = function(index) {
     const sceneType = this.menuItems[index].type;
     const srcLocal = this.menuItems[index].srcLocal;
 
+    console.log(srcLocal);
+
     // Create scene
     let scene = {};
 
