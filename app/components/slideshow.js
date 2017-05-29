@@ -24,7 +24,7 @@ const slideshowComponent = function(app, images) {
 
 slideshowComponent.prototype.play = function() {
   // Create first pictures for slideshow
-  const picture1 = pictureComponent(app, this.slideshow.next());
+  const picture1 = pictureComponent(this.app, this.slideshow.next());
 
   this.group.add(picture1);
 
@@ -32,7 +32,7 @@ slideshowComponent.prototype.play = function() {
 
   this.slideshowTimer = setInterval(() => {
     const picture1 = this.group.children[0];
-    const picture2 = pictureComponent(app, this.slideshow.next());
+    const picture2 = pictureComponent(this.app, this.slideshow.next());
 
     this.group.insertAt(picture2, 0);
 
