@@ -44,12 +44,10 @@ slideshowComponent.prototype.play = function() {
 
       this.group.add(picture2);
 
-      picture1.opacity.anim().from(1).to(0).dur(250).then(() => {
+      picture2.opacity.anim().from(0).to(1).dur(500).then(() => {
         this.group.remove(picture1);
         picture1.destroy();
       }).start();
-
-      picture2.opacity.anim().from(0).to(1).dur(250).start();
     }, 10000);
   }
 }
