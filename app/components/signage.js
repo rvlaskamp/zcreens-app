@@ -45,7 +45,7 @@ signageComponent.prototype.play = function(index) {
       const currentChild = this.group.children[0];
       this.group.add(scene);
 
-      scene.opacity.anim().from(0).to(1).dur(250).then(() {
+      scene.opacity.anim().from(0).to(1).dur(250).then(() => {
         this.group.remove(currentChild);
       }).start();
     } else {
@@ -59,7 +59,7 @@ signageComponent.prototype.stop = function() {
   if (this.group.children > 0) {
     const currentChild = this.group.children[0];
 
-    currentChild.opacity.anim().from(1).to(0).dur(250).then(() {
+    currentChild.opacity.anim().from(1).to(0).dur(250).then(() => {
       this.group.remove(currentChild);
     }).start();
   }
@@ -69,7 +69,7 @@ signageComponent.prototype.clear = function() {
   if (this.group.children > 0) {
     const currentChild = this.group.children[0];
 
-    currentChild.opacity.anim().from(1).to(0).dur(250).then(() {
+    currentChild.opacity.anim().from(1).to(0).dur(250).then(() => {
       this.group.remove(currentChild);
       this.mainGroup.remove(this.group);
     }).start();
