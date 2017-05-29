@@ -75,7 +75,11 @@ signageComponent.prototype.clear = function() {
     currentChild.opacity.anim().from(1).to(0).dur(250).then(() => {
       this.group.remove(currentChild);
       this.mainGroup.remove(this.group);
+      this.group.destroy();
     }).start();
+  } else {
+    this.mainGroup.remove(this.group);
+    this.group.destroy();
   }
 }
 

@@ -43,10 +43,11 @@ radioComponent.prototype.stop = function() {
 }
 
 radioComponent.prototype.clear = function() {
-  this.slideshow.stop();
   this.omxplayer.stop();
   this.omxplayer = null;
+  this.slideshow.stop();
   this.mainGroup.remove(this.slideshow.group);
+  this.slideshow.group.destroy();
 }
 
 module.exports = radioComponent;

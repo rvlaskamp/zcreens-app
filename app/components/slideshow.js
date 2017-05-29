@@ -49,12 +49,17 @@ slideshowComponent.prototype.play = function() {
 
 slideshowComponent.prototype.stop = function() {
   clearInterval(this.slideshowTimer);
-  const picture = this.group.children[0];
 
-  this.group.opacity.anim().from(1).to(0).dur(250).then(() => {
-    this.group.clear();
-    picture.destroy();
-  }).start();
+  if (this.group.children.length > 0) {
+    const picture = this.group.children[0];
+
+    this.group.opacity.anim().from(1).to(0).dur(250).then(() => {
+      this.group.clear();
+      if (picture) {
+        picture.destroy();
+      }
+    }).start();
+  }
 }
 
 module.exports = slideshowComponent;
